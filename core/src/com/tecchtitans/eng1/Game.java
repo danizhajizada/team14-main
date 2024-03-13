@@ -20,8 +20,6 @@ public class Game extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 
-		player = createPlayer();
-
 		MovementSystem movementSystem = new MovementSystem();
 		engine.addSystem(movementSystem);
 
@@ -30,6 +28,8 @@ public class Game extends ApplicationAdapter {
 
 		PlayerSystem playerSystem = new PlayerSystem();
 		engine.addSystem(playerSystem);
+
+		player = createPlayer();
 	}
 
 	private Entity createPlayer() {
@@ -42,6 +42,8 @@ public class Game extends ApplicationAdapter {
 		player.add(new TextureComponent());
 
 		player.getComponent(TextureComponent.class).texture = new Texture("badlogic.jpg");
+
+		engine.addEntity(player);
 
 		return player;
 	}

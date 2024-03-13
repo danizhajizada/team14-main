@@ -6,8 +6,12 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 
+import java.security.PublicKey;
+
 public class PlayerSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
+
+    public PlayerSystem() {};
 
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(PlayerComponent.class, VelocityComponent.class, InputComponent.class).get());
@@ -24,16 +28,16 @@ public class PlayerSystem extends EntitySystem {
             velocity.y = 0.0f;
 
             if ((input.keysPressed & InputKeys.UP) != 0) {
-                velocity.y = 1;
+                velocity.y += 100;
             }
             if ((input.keysPressed & InputKeys.DOWN) != 0) {
-                velocity.y = -1;
+                velocity.y += -100;
             }
             if ((input.keysPressed & InputKeys.LEFT) != 0) {
-                velocity.x = 1;
+                velocity.x += -100;
             }
             if ((input.keysPressed & InputKeys.RIGHT) != 0) {
-                velocity.x = -1;
+                velocity.x += 100;
             }
 
             //System.out.println("dfj");

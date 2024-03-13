@@ -11,6 +11,8 @@ import com.badlogic.gdx.Input;
 public class InputSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
 
+    public InputSystem() {};
+
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(InputComponent.class).get());
     }
@@ -34,7 +36,7 @@ public class InputSystem extends EntitySystem {
                 input.keysPressed |= InputKeys.RIGHT;
             }
 
-            System.out.println(input.keysPressed);
+            //System.out.println(input.keysPressed);
         }
     }
 }

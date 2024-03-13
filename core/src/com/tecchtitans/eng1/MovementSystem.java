@@ -6,6 +6,8 @@ import com.badlogic.ashley.utils.ImmutableArray;
 public class MovementSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
 
+    public MovementSystem() {};
+
     public void addedToEngine(Engine engine)
     {
         entities = engine.getEntitiesFor(Family.all(PositionComponent.class, VelocityComponent.class).get());
