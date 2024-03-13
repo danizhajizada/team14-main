@@ -23,8 +23,8 @@ public class Game extends ApplicationAdapter {
 	public void create () {
 
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 100, 100);
-		map = new TmxMapLoader().load("testmap2.tmx");
+		camera.setToOrtho(false, 1024, 1024);
+		map = new TmxMapLoader().load("testmap3.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map);
 
 	}
