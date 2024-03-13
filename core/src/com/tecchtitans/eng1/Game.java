@@ -39,9 +39,7 @@ public class Game extends ApplicationAdapter {
 		player.add(new PositionComponent());
 		player.add(new VelocityComponent());
 		player.add(new InputComponent());
-		player.add(new TextureComponent());
-
-		player.getComponent(TextureComponent.class).texture = new Texture("badlogic.jpg");
+		player.add(new TextureComponent("spacesoldier.png"));
 
 		engine.addEntity(player);
 
@@ -56,7 +54,7 @@ public class Game extends ApplicationAdapter {
 		PositionComponent playerPosition = player.getComponent(PositionComponent.class);
 
 		batch.begin();
-		batch.draw(player.getComponent(TextureComponent.class).texture, playerPosition.x, playerPosition.y);
+		batch.draw(player.getComponent(TextureComponent.class).texture, playerPosition.x, playerPosition.y, 8, 11, 50, 50);
 		batch.end();
 
 		engine.update(Gdx.graphics.getDeltaTime());

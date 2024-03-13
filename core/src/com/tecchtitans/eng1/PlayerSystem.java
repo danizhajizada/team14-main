@@ -28,19 +28,17 @@ public class PlayerSystem extends EntitySystem {
             velocity.y = 0.0f;
 
             if ((input.keysPressed & InputKeys.UP) != 0) {
-                velocity.y += 100;
+                velocity.y += player.movementSpeed;
             }
             if ((input.keysPressed & InputKeys.DOWN) != 0) {
-                velocity.y += -100;
+                velocity.y += -player.movementSpeed;
             }
             if ((input.keysPressed & InputKeys.LEFT) != 0) {
-                velocity.x += -100;
+                velocity.x += -player.movementSpeed;
             }
             if ((input.keysPressed & InputKeys.RIGHT) != 0) {
-                velocity.x += 100;
+                velocity.x += player.movementSpeed;
             }
-
-            //System.out.println("dfj");
         }
     }
 }
