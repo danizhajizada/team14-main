@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.tecchtitans.eng1.components.*;
 
 public class InputSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;

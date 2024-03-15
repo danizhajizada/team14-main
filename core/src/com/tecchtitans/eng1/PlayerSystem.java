@@ -5,8 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-
-import java.security.PublicKey;
+import com.tecchtitans.eng1.components.*;
 
 public class PlayerSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;

@@ -2,6 +2,7 @@ package com.tecchtitans.eng1;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.tecchtitans.eng1.components.*;
 
 public class MovementSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
