@@ -55,7 +55,9 @@ public class ENGGame extends Game {
 
 		//mapRenderer.setView(camera);
 
-		setScreen(new MainMenu(this));
+		setScreen(new PlayScreen(this));
+
+		//Gdx.graphics.wait();
 	}
 
 	private Entity createPlayer() {
@@ -65,7 +67,7 @@ public class ENGGame extends Game {
 		player.add(new PositionComponent());
 		player.add(new VelocityComponent());
 		player.add(new InputComponent());
-		player.add(new TextureComponent("spacesoldier.png"));
+		//player.add(new TextureComponent("spacesoldier.png"));
 
 		engine.addEntity(player);
 
