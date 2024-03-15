@@ -23,6 +23,11 @@ public class MovementSystem extends EntitySystem {
 
             position.x += velocity.x * deltaTime;
             position.y += velocity.y * deltaTime;
+
+            CollisionRectangleComponent rectangleComponent = ComponentMappers.collisionRectangle.get(entity);
+
+            rectangleComponent.collisionRectangle.x = position.x;
+            rectangleComponent.collisionRectangle.y = position.y;
         }
     }
 }
