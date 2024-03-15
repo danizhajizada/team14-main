@@ -20,7 +20,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class ENGGame extends Game {
 	Engine engine = new Engine();
-
 	OrthographicCamera camera;
 	FitViewport viewport;
 	TiledMap map;
@@ -46,11 +45,13 @@ public class ENGGame extends Game {
 
 		//setScreen(new MainMenu(this));
 
-		camera = new OrthographicCamera(10, 10);
+		//camera = new OrthographicCamera(2320, 1280);
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false, 2320, 1280);
 
 		map = new TmxMapLoader().load("mainmenu_sample.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map);
-		viewport = new FitViewport(500, 500, camera);
+		//viewport = new FitViewport(2320, 1280, camera);
 
 		//mapRenderer.setView(camera);
 	}
@@ -71,6 +72,7 @@ public class ENGGame extends Game {
 
 	@Override
 	public void render () {
+		//ScreenUtils.clear(0, 0, 0.2f, 1);
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glBlendFunc(Gdx.gl20.GL_SRC_ALPHA, Gdx.gl20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(Gdx.gl20.GL_COLOR_BUFFER_BIT);
