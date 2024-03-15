@@ -1,4 +1,4 @@
-package com.tecchtitans.eng1;
+package com.tecchtitans.eng1.systems;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
@@ -6,7 +6,9 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Rectangle;
-import com.tecchtitans.eng1.components.*;
+import com.tecchtitans.eng1.components.CollisionComponent;
+import com.tecchtitans.eng1.components.CollisionRectangleComponent;
+import com.tecchtitans.eng1.components.ComponentMappers;
 
 public class CollisionSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
@@ -36,7 +38,7 @@ public class CollisionSystem extends EntitySystem {
                     ComponentMappers.collision.get(entity1).currentCollision = entity2;
                     ComponentMappers.collision.get(entity2).currentCollision = entity1;
 
-                    System.out.println("Collide!");
+                    //System.out.println("Collide!");
                 }
             }
         }

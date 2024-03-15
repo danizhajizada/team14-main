@@ -1,8 +1,14 @@
-package com.tecchtitans.eng1;
+package com.tecchtitans.eng1.systems;
 
-import com.badlogic.ashley.core.*;
+import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.EntitySystem;
+import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.tecchtitans.eng1.components.*;
+import com.tecchtitans.eng1.components.CollisionRectangleComponent;
+import com.tecchtitans.eng1.components.ComponentMappers;
+import com.tecchtitans.eng1.components.PositionComponent;
+import com.tecchtitans.eng1.components.VelocityComponent;
 
 public class MovementSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
