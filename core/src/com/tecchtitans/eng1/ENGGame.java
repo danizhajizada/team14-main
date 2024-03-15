@@ -82,7 +82,7 @@ public class ENGGame extends Game {
 		player.add(engine.createComponent(VelocityComponent.class));
 		player.add(engine.createComponent(InputComponent.class));
 		TextureComponent textureComponent = engine.createComponent(TextureComponent.class);
-		textureComponent.texture = new Texture("spacesolder.png");
+		textureComponent.texture = new Texture("spacesoldier.png");
 		player.add(textureComponent);
 
 		engine.addEntity(player);
