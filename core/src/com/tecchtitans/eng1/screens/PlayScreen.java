@@ -9,13 +9,12 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.tecchtitans.eng1.*;
+import com.tecchtitans.eng1.components.*;
 import com.badlogic.ashley.core.Entity;
 
 public class PlayScreen implements Screen {
     ENGGame game;
-    TiledMap map;
-    OrthographicCamera camera;
-    OrthogonalTiledMapRenderer renderer;
+    Map map;
     SpriteBatch batch;
 
     Entity player;
@@ -26,26 +25,34 @@ public class PlayScreen implements Screen {
 
     @Override
     public void show() {
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, 1024, 1024);
-
-        map = new TmxMapLoader().load("testmap3.tmx");
-
-        renderer = new OrthogonalTiledMapRenderer(map);
+        map = new Map("testmap3.tmx", 1024, 1024);
 
         batch = new SpriteBatch();
 
-        player = createPlayer();
+        player = createPlayer(0, 0);
     }
 
-    private Entity createPlayer() {
+    private Entity createPlayer(int spawnX, int spawnY) {
         Entity player = new Entity();
 
         player.add(new PlayerComponent());
-        player.add(new PositionComponent());
+
+        PositionComponent positionComponent = new PositionComponent();
+        positionComponent.x = spawnX;
+        positionComponent.y = spawnY;
+        player.add(positionComponent);
+
         player.add(new VelocityComponent());
         player.add(new InputComponent());
-        player.add(new TextureComponent("spacesoldier.png"));
+
+        TextureComponent playerTexture = new TextureComponent();
+        playerTexture.texture = new Texture("spacesoldier.png");
+        playerTexture.srcStartX = 8;
+        playerTexture.srcStartY = 11;
+        playerTexture.width = 50;
+        playerTexture.height = 50;
+
+        player.add(playerTexture);
 
         game.getEngine().addEntity(player);
 
@@ -54,20 +61,19 @@ public class PlayScreen implements Screen {
 
     @Override
     public void render(float v) {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glBlendFunc(Gdx.gl20.GL_SRC_ALPHA, Gdx.gl20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(Gdx.gl20.GL_COLOR_BUFFER_BIT);
 
-        camera.update();
-        renderer.setView(camera);
-        renderer.render();
+        map.render();
 
         // Draw player
-        Texture playerTexture = player.getComponent(TextureComponent.class).texture;
+        TextureComponent playerTexture = player.getComponent(TextureComponent.class);
         PositionComponent playerPosition = player.getComponent(PositionComponent.class);
 
         batch.begin();
-        batch.draw(playerTexture, playerPosition.x, playerPosition.y, 8, 11, 50, 50);
+        batch.draw(playerTexture.texture, playerPosition.x, playerPosition.y, playerTexture.srcStartX, playerTexture.srcStartY,
+                playerTexture.width, playerTexture.height);
         batch.end();
 
         game.getEngine().update(v);

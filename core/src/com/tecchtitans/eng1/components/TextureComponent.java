@@ -1,13 +1,10 @@
-package com.tecchtitans.eng1;
+package com.tecchtitans.eng1.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.utils.Null;
 
 public class TextureComponent implements Component {
     public Texture texture;
-
-    public TextureComponent(String path) {
-        texture = new Texture(path);
-    }
+    public int srcStartX, srcStartY;
+    public int width, height;
 }

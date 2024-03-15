@@ -1,4 +1,4 @@
-package com.tecchtitans.eng1;
+package com.tecchtitans.eng1.components;
 
 import com.badlogic.ashley.core.ComponentMapper;
 
