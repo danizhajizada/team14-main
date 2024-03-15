@@ -22,9 +22,6 @@ import com.tecchtitans.eng1.screens.MainMenu;
 
 public class ENGGame extends Game {
 	Engine engine = new Engine();
-	TiledMap map;
-	OrthographicCamera camera;
-	OrthogonalTiledMapRenderer renderer;
 
 	public Engine getEngine()
 	{
@@ -41,6 +38,9 @@ public class ENGGame extends Game {
 
 		PlayerSystem playerSystem = new PlayerSystem();
 		engine.addSystem(playerSystem);
+
+		CollisionSystem collisionSystem = new CollisionSystem();
+		engine.addSystem(collisionSystem);
 
 		//player = createPlayer();
 
