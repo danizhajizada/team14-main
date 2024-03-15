@@ -22,7 +22,6 @@ import com.tecchtitans.eng1.screens.MainMenu;
 
 public class ENGGame extends Game {
 	Engine engine = new Engine();
-
 	TiledMap map;
 	OrthographicCamera camera;
 	OrthogonalTiledMapRenderer renderer;
@@ -61,20 +60,6 @@ public class ENGGame extends Game {
 		//Gdx.graphics.wait();
 	}
 
-	private Entity createPlayer() {
-		Entity player = new Entity();
-
-		player.add(new PlayerComponent());
-		player.add(new PositionComponent());
-		player.add(new VelocityComponent());
-		player.add(new InputComponent());
-		//player.add(new TextureComponent("spacesoldier.png"));
-
-		engine.addEntity(player);
-
-		return player;
-	}
-
 	@Override
 	public void render () {
 		//Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -86,7 +71,7 @@ public class ENGGame extends Game {
 
 		super.render();
 
-		engine.update(Gdx.graphics.getDeltaTime());
+		//engine.update(Gdx.graphics.getDeltaTime());
 	}
 	
 	@Override

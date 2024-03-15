@@ -14,15 +14,10 @@ import com.badlogic.gdx.utils.Array;
 import com.tecchtitans.eng1.ENGGame;
 
 public class MainMenu implements Screen {
-
     ENGGame game;
-
     TiledMap map;
     OrthographicCamera camera;
     OrthogonalTiledMapRenderer renderer;
-
-    float xRatio;
-    float yRatio;
 
     public MainMenu(ENGGame game) {
         this.game = game;
@@ -36,8 +31,6 @@ public class MainMenu implements Screen {
         map = new TmxMapLoader().load("mainmenu_sample.tmx");
 
         renderer = new OrthogonalTiledMapRenderer(map);
-
-        //game.setScreen(new PlayScreen(game));
     }
 
     @Override
@@ -76,8 +69,6 @@ public class MainMenu implements Screen {
                 }
             }
         }
-
-        //game.getEngine().update(Gdx.graphics.getDeltaTime());
     }
 
     @Override
