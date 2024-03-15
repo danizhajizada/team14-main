@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="145" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="145" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="8">
  <tileset firstgid="1" source="Teksturi/6.tsx"/>
  <tileset firstgid="11665" source="Teksturi/pxArt.tsx"/>
  <tileset firstgid="14255" source="Teksturi/box.tsx"/>
@@ -341,4 +341,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="5" name="button">
+  <object id="5" name="start" x="1056" y="560" width="288" height="64"/>
+  <object id="6" name="options" x="1056" y="656" width="288" height="64"/>
+  <object id="7" name="exit" x="1056" y="752" width="288" height="64"/>
+ </objectgroup>
 </map>

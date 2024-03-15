@@ -18,6 +18,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.tecchtitans.eng1.screens.MainMenu;
 
 public class ENGGame extends Game {
 	Engine engine = new Engine();
@@ -55,7 +56,7 @@ public class ENGGame extends Game {
 
 		//mapRenderer.setView(camera);
 
-		setScreen(new PlayScreen(this));
+		setScreen(new MainMenu(this));
 
 		//Gdx.graphics.wait();
 	}
