@@ -6,8 +6,6 @@ import com.badlogic.gdx.utils.Null;
 
 public class TextureComponent implements Component {
     public Texture texture;
-
-    public TextureComponent(String path) {
-        texture = new Texture(path);
-    }
+    public int srcStartX, srcStartY;
+    public int width, height;
 }

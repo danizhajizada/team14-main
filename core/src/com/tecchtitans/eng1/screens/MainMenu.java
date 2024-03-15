@@ -12,12 +12,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.tecchtitans.eng1.ENGGame;
+import com.tecchtitans.eng1.Map;
 
 public class MainMenu implements Screen {
     ENGGame game;
-    TiledMap map;
-    OrthographicCamera camera;
-    OrthogonalTiledMapRenderer renderer;
+    Map map;
 
     public MainMenu(ENGGame game) {
         this.game = game;
@@ -25,12 +24,7 @@ public class MainMenu implements Screen {
 
     @Override
     public void show() {
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, 2268, 1200);
-
-        map = new TmxMapLoader().load("mainmenu_sample.tmx");
-
-        renderer = new OrthogonalTiledMapRenderer(map);
+        map = new Map("mainmenu_sample.tmx", 2288, 1200);
     }
 
     @Override
@@ -39,17 +33,15 @@ public class MainMenu implements Screen {
         Gdx.gl.glBlendFunc(Gdx.gl20.GL_SRC_ALPHA, Gdx.gl20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(Gdx.gl20.GL_COLOR_BUFFER_BIT);
 
-        camera.update();
-        renderer.setView(camera);
-        renderer.render();
+        map.render();
 
-        MapLayer buttonLayer = map.getLayers().get("button");
+        MapLayer buttonLayer = map.getTiledMap().getLayers().get("button");
 
         Array<RectangleMapObject> buttons = buttonLayer.getObjects().getByType(RectangleMapObject.class);
 
         if (Gdx.input.justTouched()) {
             Vector3 touch = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-            Vector3 relMouseLoc = camera.unproject(touch);
+            Vector3 relMouseLoc = map.getCamera().unproject(touch);
 
             for (RectangleMapObject button : buttons) {
                 if (button.getRectangle().contains(relMouseLoc.x, relMouseLoc.y)) {
