@@ -46,14 +46,16 @@ public class ENGGame extends Game {
 
 		//setScreen(new MainMenu(this));
 
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 2268, 1200);
+		//camera = new OrthographicCamera();
+		//camera.setToOrtho(false, 2268, 1200);
 
-		map = new TmxMapLoader().load("mainmenu_sample.tmx");
+		//map = new TmxMapLoader().load("mainmenu_sample.tmx");
 
-		renderer = new OrthogonalTiledMapRenderer(map);
+		//renderer = new OrthogonalTiledMapRenderer(map);
 
 		//mapRenderer.setView(camera);
+
+		setScreen(new MainMenu(this));
 	}
 
 	private Entity createPlayer() {
@@ -72,12 +74,14 @@ public class ENGGame extends Game {
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glBlendFunc(Gdx.gl20.GL_SRC_ALPHA, Gdx.gl20.GL_ONE_MINUS_SRC_ALPHA);
-		Gdx.gl.glClear(Gdx.gl20.GL_COLOR_BUFFER_BIT);
-		camera.update();
-		renderer.setView(camera);
-		renderer.render();
+		//Gdx.gl.glClearColor(1, 0, 0, 1);
+		//Gdx.gl.glBlendFunc(Gdx.gl20.GL_SRC_ALPHA, Gdx.gl20.GL_ONE_MINUS_SRC_ALPHA);
+		//Gdx.gl.glClear(Gdx.gl20.GL_COLOR_BUFFER_BIT);
+		//camera.update();
+		//renderer.setView(camera);
+		//renderer.render();
+
+		super.render();
 
 		engine.update(Gdx.graphics.getDeltaTime());
 	}
