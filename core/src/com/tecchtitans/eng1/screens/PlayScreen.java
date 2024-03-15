@@ -1,55 +1,51 @@
-package com.tecchtitans.eng1;
+package com.tecchtitans.eng1.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.tecchtitans.eng1.ENGGame;
 
-public class MainMenu implements Screen {
+public class PlayScreen implements Screen {
 
     ENGGame game;
-    TiledMap map;
-    OrthogonalTiledMapRenderer mapRenderer;
-    OrthographicCamera camera;
 
-    public MainMenu(ENGGame game) {
+    TiledMap map;
+    OrthographicCamera camera;
+    OrthogonalTiledMapRenderer renderer;
+
+    public PlayScreen(ENGGame game) {
         this.game = game;
     }
 
     @Override
     public void show() {
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 10, 10);
-        camera.update();
+        camera.setToOrtho(false, 1024, 1024);
 
-        map = new TmxMapLoader().load("mainmenu_sample.tmx");
-        mapRenderer = new OrthogonalTiledMapRenderer(map);
+        map = new TmxMapLoader().load("testmap3.tmx");
 
-        mapRenderer.setView(camera);
+        renderer = new OrthogonalTiledMapRenderer(map);
     }
 
     @Override
     public void render(float v) {
-        Gdx.gl.glClearColor(0, 1, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glBlendFunc(Gdx.gl20.GL_SRC_ALPHA, Gdx.gl20.GL_ONE_MINUS_SRC_ALPHA);
+        Gdx.gl.glClear(Gdx.gl20.GL_COLOR_BUFFER_BIT);
 
         camera.update();
-        mapRenderer.setView(camera);
-        mapRenderer.render();
+        renderer.setView(camera);
+        renderer.render();
 
         game.getEngine().update(Gdx.graphics.getDeltaTime());
     }
 
     @Override
     public void resize(int i, int i1) {
-        camera.viewportWidth = i;
-        camera.viewportHeight = i1;
-        camera.update();
+
     }
 
     @Override
@@ -69,7 +65,6 @@ public class MainMenu implements Screen {
 
     @Override
     public void dispose() {
-        map.dispose();
-        mapRenderer.dispose();
+
     }
 }
