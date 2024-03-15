@@ -19,11 +19,20 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class ENGGame extends Game {
-	Engine engine = new Engine();
+	Engine engine;
 	OrthographicCamera camera;
 	FitViewport viewport;
 	TiledMap map;
 	OrthogonalTiledMapRenderer mapRenderer;
+
+	// Systems
+	MovementSystem movementSystem;
+	InputSystem inputSystem;
+	PlayerSystem playerSystem;
+
+	// Entities
+	Entity player;
+
 
 	public Engine getEngine()
 	{
@@ -32,16 +41,18 @@ public class ENGGame extends Game {
 
 	@Override
 	public void create () {
-		MovementSystem movementSystem = new MovementSystem();
+		engine = new Engine();
+
+		movementSystem = new MovementSystem();
 		engine.addSystem(movementSystem);
 
-		InputSystem inputSystem = new InputSystem();
+		inputSystem = new InputSystem();
 		engine.addSystem(inputSystem);
 
-		PlayerSystem playerSystem = new PlayerSystem();
+		playerSystem = new PlayerSystem();
 		engine.addSystem(playerSystem);
 
-		//player = createPlayer();
+		player = createPlayer();
 
 		//setScreen(new MainMenu(this));
 
@@ -59,11 +70,20 @@ public class ENGGame extends Game {
 	private Entity createPlayer() {
 		Entity player = new Entity();
 
-		player.add(new PlayerComponent());
+
+		/*player.add(new PlayerComponent());
 		player.add(new PositionComponent());
 		player.add(new VelocityComponent());
 		player.add(new InputComponent());
-		player.add(new TextureComponent("spacesoldier.png"));
+		player.add(new TextureComponent("spacesoldier.png"));*/
+
+		player.add(engine.createComponent(PlayerComponent.class));
+		player.add(engine.createComponent(PositionComponent.class));
+		player.add(engine.createComponent(VelocityComponent.class));
+		player.add(engine.createComponent(InputComponent.class));
+		TextureComponent textureComponent = engine.createComponent(TextureComponent.class);
+		textureComponent.texture = new Texture("spacesolder.png");
+		player.add(textureComponent);
 
 		engine.addEntity(player);
 

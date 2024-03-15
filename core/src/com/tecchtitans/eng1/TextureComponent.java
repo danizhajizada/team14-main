@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Null;
 public class TextureComponent implements Component {
     public Texture texture;
 
-    public TextureComponent(String path) {
+    /*public TextureComponent(String path) {
         texture = new Texture(path);
-    }
+    }*/
 }
