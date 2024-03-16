@@ -42,13 +42,13 @@ public class PlayerCameraSystem extends EntitySystem {
             float viewportWidth = currentCamera.viewportWidth;
             float viewportHeight = currentCamera.viewportHeight;
 
-            Rectangle newCameraViewRectangle = new Rectangle(position.x + viewportWidth / 2,
-                                                            position.y + viewportHeight / 2,
+            Rectangle newCameraViewRectangle = new Rectangle(position.x,
+                                                            position.y,
                                                             viewportWidth, viewportHeight);
 
             if (cameraBorder.contains(newCameraViewRectangle)) {
-                currentCamera.position.x = newCameraViewRectangle.x;
-                currentCamera.position.y = newCameraViewRectangle.y;
+                currentCamera.position.x = newCameraViewRectangle.x + viewportWidth / 2;
+                currentCamera.position.y = newCameraViewRectangle.y + viewportHeight / 2;
                 currentCamera.update();
             }
         }
