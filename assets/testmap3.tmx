@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="9">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="10">
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="1" name="Tile Layer 1" width="32" height="32">
   <data encoding="csv">
@@ -38,7 +38,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="collisionLayer">
-  <object id="3" name="worldBorder" x="0" y="0" width="1024" height="1024"/>
+  <object id="9" name="worldBorder" x="64" y="64" width="896" height="896"/>
  </objectgroup>
  <objectgroup id="3" name="cameraLayer">
   <object id="8" name="cameraBorder" x="0" y="0" width="1024" height="1024"/>

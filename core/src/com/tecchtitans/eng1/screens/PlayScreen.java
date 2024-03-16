@@ -32,7 +32,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void show() {
-        map = new Map("testmap3.tmx", 1024, 1024);
+        map = new Map("testmap4.tmx", 1728, 1728);
 
         batch = new SpriteBatch();
 
