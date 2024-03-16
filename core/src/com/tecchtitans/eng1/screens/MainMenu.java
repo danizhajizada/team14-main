@@ -1,5 +1,6 @@
 package com.tecchtitans.eng1.screens;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -14,10 +15,7 @@ import com.badlogic.gdx.utils.Array;
 import com.tecchtitans.eng1.ENGGame;
 import com.tecchtitans.eng1.Map;
 
-public class MainMenu implements Screen {
-    ENGGame game;
-    Map map;
-
+public class MainMenu extends GameScreen {
     public MainMenu(ENGGame game) {
         this.game = game;
     }

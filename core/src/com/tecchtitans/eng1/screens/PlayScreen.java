@@ -17,7 +17,9 @@ import com.tecchtitans.eng1.systems.PlayerCollisionSystem;
 import com.tecchtitans.eng1.systems.PlayerMovementSystem;
 
 public class PlayScreen implements Screen {
+    //may be worth having reference to game engine rather than having to fetch it from game object each time
     ENGGame game;
+    ECSEngine engine;
     Map map;
     SpriteBatch batch;
 
@@ -28,6 +30,7 @@ public class PlayScreen implements Screen {
 
     public PlayScreen(ENGGame game) {
         this.game = game;
+        this.engine = game.getEngine();
     }
 
     @Override
@@ -38,10 +41,10 @@ public class PlayScreen implements Screen {
 
         player = createPlayer(100, 100);
 
-        game.getEngine().getSystem(PlayerMovementSystem.class).updateMap(map);
-        game.getEngine().getSystem(PlayerCameraSystem.class).updateCamera(map.getCamera());
+        engine.getSystem(PlayerMovementSystem.class).updateMap(map);
+        engine.getSystem(PlayerCameraSystem.class).updateCamera(map.getCamera());
 
-        game.getEngine().getSystem(PlayerCameraSystem.class).updateCameraBorder(map.getCameraBorder());
+        engine.getSystem(PlayerCameraSystem.class).updateCameraBorder(map.getCameraBorder());
 
         map.getCamera().setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         //building = createBuilding(100, 100, 50, 50);
@@ -51,22 +54,22 @@ public class PlayScreen implements Screen {
     }
 
     private Entity createBuilding(int spawnX, int spawnY, int width, int height) {
-        Entity building = new Entity();
+        Entity building = engine.createEntity();
 
-        building.add(new PositionComponent());
+        building.add(engine.createComponent(PositionComponent.class));
 
-        CollisionComponent collisionComponent = new CollisionComponent();
+        CollisionComponent collisionComponent = engine.createComponent(CollisionComponent.class);
         collisionComponent.collisionRectangle.x = spawnX;
         collisionComponent.collisionRectangle.y = spawnY;
         collisionComponent.collisionRectangle.width = width;
         collisionComponent.collisionRectangle.height = height;
         building.add(collisionComponent);
 
-        GameObjectComponent gameObjectComponent = new GameObjectComponent();
+        GameObjectComponent gameObjectComponent = engine.createComponent(GameObjectComponent.class);
         gameObjectComponent.type = ObjectType.BUILDING;
         building.add(gameObjectComponent);
 
-        game.getEngine().addEntity(building);
+        engine.addEntity(building);
 
         return building;
     }
@@ -74,17 +77,17 @@ public class PlayScreen implements Screen {
     private Entity createPlayer(int spawnX, int spawnY) {
         Entity player = new Entity();
 
-        player.add(new PlayerComponent());
+        player.add(engine.createComponent(PlayerComponent.class));
 
-        PositionComponent positionComponent = new PositionComponent();
+        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
         positionComponent.x = spawnX;
         positionComponent.y = spawnY;
         player.add(positionComponent);
 
-        player.add(new VelocityComponent());
-        player.add(new InputComponent());
+        player.add(engine.createComponent(VelocityComponent.class));
+        player.add(engine.createComponent(InputComponent.class));
 
-        TextureComponent playerTexture = new TextureComponent();
+        TextureComponent playerTexture = engine.createComponent(TextureComponent.class);
         playerTexture.texture = new Texture("spacesoldier.png");
         playerTexture.srcStartX = 8;
         playerTexture.srcStartY = 11;
@@ -93,14 +96,14 @@ public class PlayScreen implements Screen {
 
         player.add(playerTexture);
 
-        CollisionComponent collisionComponent = new CollisionComponent();
+        CollisionComponent collisionComponent = engine.createComponent(CollisionComponent.class);
         collisionComponent.collisionRectangle.x = spawnX;
         collisionComponent.collisionRectangle.y = spawnY;
         collisionComponent.collisionRectangle.width = 50;
         collisionComponent.collisionRectangle.height = 50;
         player.add(collisionComponent);
 
-        game.getEngine().addEntity(player);
+        engine.addEntity(player);
 
         return player;
     }
@@ -122,7 +125,7 @@ public class PlayScreen implements Screen {
                 (int)(playerTexture.width * xRatio), (int)(playerTexture.height * yRatio));
         batch.end();
 
-        game.getEngine().update(v);
+        engine.update(v);
     }
 
     @Override
