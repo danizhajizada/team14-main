@@ -37,7 +37,7 @@
 79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,200,201,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79
 </data>
  </layer>
- <objectgroup id="2" name="collision layer">
+ <objectgroup id="2" name="collision-layer">
   <object id="2" name="worldBorder" x="0" y="0">
    <polygon points="0,0 0,1024 1024,1024 1024,0"/>
   </object>

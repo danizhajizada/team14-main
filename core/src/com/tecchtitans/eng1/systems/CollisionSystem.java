@@ -7,7 +7,6 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Rectangle;
 import com.tecchtitans.eng1.components.CollisionComponent;
-import com.tecchtitans.eng1.components.CollisionRectangleComponent;
 import com.tecchtitans.eng1.components.ComponentMappers;
 
 public class CollisionSystem extends EntitySystem {
@@ -17,7 +16,7 @@ public class CollisionSystem extends EntitySystem {
 
     public void addedToEngine(Engine engine)
     {
-        entities = engine.getEntitiesFor(Family.all(CollisionRectangleComponent.class, CollisionComponent.class).get());
+        entities = engine.getEntitiesFor(Family.all(CollisionComponent.class).get());
     }
 
     public void update(float deltaTime) {
@@ -31,8 +30,8 @@ public class CollisionSystem extends EntitySystem {
                 Entity entity1 = entities.get(i);
                 Entity entity2 = entities.get(j);
 
-                Rectangle entity1CollisionRectangle = ComponentMappers.collisionRectangle.get(entity1).collisionRectangle;
-                Rectangle entity2CollisionRectangle = ComponentMappers.collisionRectangle.get(entity2).collisionRectangle;
+                Rectangle entity1CollisionRectangle = ComponentMappers.collision.get(entity1).collisionRectangle;
+                Rectangle entity2CollisionRectangle = ComponentMappers.collision.get(entity2).collisionRectangle;
 
                 if (entity1CollisionRectangle.overlaps(entity2CollisionRectangle)) {
                     ComponentMappers.collision.get(entity1).currentCollision = entity2;

@@ -22,15 +22,17 @@ import com.tecchtitans.eng1.screens.MainMenu;
 import com.tecchtitans.eng1.systems.*;
 
 public class ENGGame extends Game {
-	Engine engine = new Engine();
+	ECSEngine engine;
 
-	public Engine getEngine()
+	public ECSEngine getEngine()
 	{
 		return engine;
 	}
 
 	@Override
 	public void create () {
+		engine = new ECSEngine();
+
 		MovementSystem movementSystem = new MovementSystem();
 		engine.addSystem(movementSystem);
 
@@ -42,6 +44,12 @@ public class ENGGame extends Game {
 
 		CollisionSystem collisionSystem = new CollisionSystem();
 		engine.addSystem(collisionSystem);
+
+		PlayerCollisionSystem playerCollisionSystem =  new PlayerCollisionSystem();
+		engine.addSystem(playerCollisionSystem);
+
+		PlayerMovementSystem playerMovementSystem = new PlayerMovementSystem();
+		engine.addSystem(playerMovementSystem);
 
 		//player = createPlayer();
 

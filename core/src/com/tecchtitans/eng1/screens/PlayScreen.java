@@ -11,13 +11,15 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.tecchtitans.eng1.*;
 import com.tecchtitans.eng1.components.*;
 import com.badlogic.ashley.core.Entity;
+import com.tecchtitans.eng1.components.GameObjectComponent.ObjectType;
+import com.tecchtitans.eng1.systems.PlayerCollisionSystem;
 
 public class PlayScreen implements Screen {
     ENGGame game;
     Map map;
     SpriteBatch batch;
 
-    Entity player, player2;
+    Entity player;
 
     public PlayScreen(ENGGame game) {
         this.game = game;
@@ -31,9 +33,28 @@ public class PlayScreen implements Screen {
 
         player = createPlayer(0, 0);
 
-        player2 = createPlayer(100, 100);
+        //building = createBuilding(100, 100, 50, 50);
+    }
 
-        player2.remove(InputComponent.class);
+    private Entity createBuilding(int spawnX, int spawnY, int width, int height) {
+        Entity building = new Entity();
+
+        building.add(new PositionComponent());
+
+        CollisionComponent collisionComponent = new CollisionComponent();
+        collisionComponent.collisionRectangle.x = spawnX;
+        collisionComponent.collisionRectangle.y = spawnY;
+        collisionComponent.collisionRectangle.width = width;
+        collisionComponent.collisionRectangle.height = height;
+        building.add(collisionComponent);
+
+        GameObjectComponent gameObjectComponent = new GameObjectComponent();
+        gameObjectComponent.type = ObjectType.BUILDING;
+        building.add(gameObjectComponent);
+
+        game.getEngine().addEntity(building);
+
+        return building;
     }
 
     private Entity createPlayer(int spawnX, int spawnY) {
@@ -58,15 +79,12 @@ public class PlayScreen implements Screen {
 
         player.add(playerTexture);
 
-        CollisionRectangleComponent collisionRectangle = new CollisionRectangleComponent();
-        collisionRectangle.collisionRectangle.x = spawnX;
-        collisionRectangle.collisionRectangle.y = spawnY;
-        collisionRectangle.collisionRectangle.width = 50;
-        collisionRectangle.collisionRectangle.height = 50;
-
-        player.add(collisionRectangle);
-
-        player.add(new CollisionComponent());
+        CollisionComponent collisionComponent = new CollisionComponent();
+        collisionComponent.collisionRectangle.x = spawnX;
+        collisionComponent.collisionRectangle.y = spawnY;
+        collisionComponent.collisionRectangle.width = 50;
+        collisionComponent.collisionRectangle.height = 50;
+        player.add(collisionComponent);
 
         game.getEngine().addEntity(player);
 
@@ -85,14 +103,9 @@ public class PlayScreen implements Screen {
         TextureComponent playerTexture = player.getComponent(TextureComponent.class);
         PositionComponent playerPosition = player.getComponent(PositionComponent.class);
 
-        TextureComponent player2Texture = player2.getComponent(TextureComponent.class);
-        PositionComponent player2Position = player2.getComponent(PositionComponent.class);
-
         batch.begin();
         batch.draw(playerTexture.texture, playerPosition.x, playerPosition.y, playerTexture.srcStartX, playerTexture.srcStartY,
                 playerTexture.width, playerTexture.height);
-        batch.draw(player2Texture.texture, player2Position.x, player2Position.y, player2Texture.srcStartX, player2Texture.srcStartY,
-                player2Texture.width, player2Texture.height);
         batch.end();
 
         game.getEngine().update(v);
