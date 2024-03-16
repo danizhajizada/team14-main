@@ -1,14 +1,8 @@
-package com.tecchtitans.eng1.systems;
+package com.tecchtitans.eng1;
 
-import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntitySystem;
-import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.tecchtitans.eng1.components.CollisionComponent;
-import com.tecchtitans.eng1.components.ComponentMappers;
-import com.tecchtitans.eng1.components.PositionComponent;
-import com.tecchtitans.eng1.components.VelocityComponent;
+import com.tecchtitans.eng1.components.*;
 
 public class MovementSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
@@ -30,7 +24,7 @@ public class MovementSystem extends EntitySystem {
             position.x += velocity.x * deltaTime;
             position.y += velocity.y * deltaTime;
 
-            CollisionComponent rectangleComponent = ComponentMappers.collision.get(entity);
+            CollisionRectangleComponent rectangleComponent = ComponentMappers.collisionRectangle.get(entity);
 
             rectangleComponent.collisionRectangle.x = position.x;
             rectangleComponent.collisionRectangle.y = position.y;

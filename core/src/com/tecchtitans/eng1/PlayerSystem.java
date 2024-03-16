@@ -1,15 +1,11 @@
-package com.tecchtitans.eng1.systems;
+package com.tecchtitans.eng1;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.tecchtitans.eng1.InputKeys;
-import com.tecchtitans.eng1.components.ComponentMappers;
-import com.tecchtitans.eng1.components.InputComponent;
-import com.tecchtitans.eng1.components.PlayerComponent;
-import com.tecchtitans.eng1.components.VelocityComponent;
+import com.tecchtitans.eng1.components.*;
 
 public class PlayerSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
