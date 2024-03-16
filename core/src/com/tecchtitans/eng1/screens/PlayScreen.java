@@ -37,6 +37,10 @@ public class PlayScreen implements Screen {
 
         game.getEngine().getSystem(PlayerMovementSystem.class).updateMap(map);
         game.getEngine().getSystem(PlayerCameraSystem.class).updateCamera(map.getCamera());
+
+        game.getEngine().getSystem(PlayerCameraSystem.class).updateCameraBorder(map.getCameraBorder());
+
+        //map.getCamera().setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         //building = createBuilding(100, 100, 50, 50);
     }
 

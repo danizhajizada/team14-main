@@ -21,6 +21,8 @@ public class Map {
     OrthogonalTiledMapRenderer mapRenderer;
     Rectangle worldBorder;
 
+    Rectangle cameraBorder;
+
     public Map(String path, int width, int height) {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, width, height);
@@ -29,6 +31,7 @@ public class Map {
         mapRenderer = new OrthogonalTiledMapRenderer(map);
 
         processCollisionLayer();
+        processCameraLayer();
     }
 
     private void processCollisionLayer() {
@@ -46,6 +49,27 @@ public class Map {
                 }
             }
         }
+    }
+
+    private void processCameraLayer() {
+        MapLayer cameraLayer = map.getLayers().get("cameraLayer");
+
+        if (cameraLayer == null) {
+            return;
+        }
+
+        for (MapObject obj : cameraLayer.getObjects()) {
+            //System.out.println(obj.getOpacity());
+            if (obj.getName().equals("cameraBorder")) {
+                if (obj instanceof RectangleMapObject) {
+                    cameraBorder = ((RectangleMapObject) obj).getRectangle();
+                }
+            }
+        }
+    }
+
+    public Rectangle getCameraBorder() {
+        return cameraBorder;
     }
 
     public Rectangle getWorldBorder() {
