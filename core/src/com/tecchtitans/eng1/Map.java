@@ -6,18 +6,20 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Polyline;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 public class Map {
     TiledMap map;
     OrthographicCamera camera;
     OrthogonalTiledMapRenderer mapRenderer;
-    Polygon worldBorder;
+    Rectangle worldBorder;
 
     public Map(String path, int width, int height) {
         camera = new OrthographicCamera();
@@ -30,19 +32,23 @@ public class Map {
     }
 
     private void processCollisionLayer() {
-        MapLayer collisionLayer = map.getLayers().get(1);
+        MapLayer collisionLayer = map.getLayers().get("collisionLayer");
+
+        if (collisionLayer == null) {
+            return;
+        }
 
         for (MapObject obj : collisionLayer.getObjects()) {
             //System.out.println(obj.getOpacity());
             if (obj.getName().equals("worldBorder")) {
-                if (obj instanceof PolygonMapObject) {
-                    worldBorder = ((PolygonMapObject) obj).getPolygon();
+                if (obj instanceof RectangleMapObject) {
+                    worldBorder = ((RectangleMapObject) obj).getRectangle();
                 }
             }
         }
     }
 
-    public Polygon getWorldBorder() {
+    public Rectangle getWorldBorder() {
         return worldBorder;
     }
 

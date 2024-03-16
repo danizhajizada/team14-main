@@ -13,6 +13,7 @@ import com.tecchtitans.eng1.components.*;
 import com.badlogic.ashley.core.Entity;
 import com.tecchtitans.eng1.components.GameObjectComponent.ObjectType;
 import com.tecchtitans.eng1.systems.PlayerCollisionSystem;
+import com.tecchtitans.eng1.systems.PlayerMovementSystem;
 
 public class PlayScreen implements Screen {
     ENGGame game;
@@ -32,6 +33,8 @@ public class PlayScreen implements Screen {
         batch = new SpriteBatch();
 
         player = createPlayer(0, 0);
+
+        game.getEngine().getSystem(PlayerMovementSystem.class).updateMap(map);
 
         //building = createBuilding(100, 100, 50, 50);
     }

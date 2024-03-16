@@ -5,27 +5,34 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.tecchtitans.eng1.Map;
 import com.tecchtitans.eng1.components.*;
 
 public class PlayerMovementSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
 
+    private Map currentMap;
+
     public PlayerMovementSystem() {};
 
     public void addedToEngine(Engine engine)
     {
-        entities = engine.getEntitiesFor(Family.all(PlayerComponent.class, PositionComponent.class).get());
+        entities = engine.getEntitiesFor(Family.all(PlayerComponent.class, CollisionComponent.class).get());
+    }
+
+    public void updateMap(Map map) {
+        this.currentMap = map;
     }
 
     public void update(float deltaTime) {
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
 
-            PositionComponent position = ComponentMappers.position.get(entity);
-            CollisionComponent rectangleComponent = ComponentMappers.collision.get(entity);
+            CollisionComponent collisionComponent = ComponentMappers.collision.get(entity);
 
-            rectangleComponent.collisionRectangle.x = position.x;
-            rectangleComponent.collisionRectangle.y = position.y;
+            if (!currentMap.getWorldBorder().contains(collisionComponent.collisionRectangle)) {
+                System.out.println("out");
+            }
         }
     }
 }
