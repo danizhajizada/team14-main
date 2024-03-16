@@ -33,8 +33,8 @@ public class ENGGame extends Game {
 	public void create () {
 		engine = new ECSEngine();
 
-		MovementSystem movementSystem = new MovementSystem();
-		engine.addSystem(movementSystem);
+		//MovementSystem movementSystem = new MovementSystem();
+		//engine.addSystem(movementSystem);
 
 		InputSystem inputSystem = new InputSystem();
 		engine.addSystem(inputSystem);

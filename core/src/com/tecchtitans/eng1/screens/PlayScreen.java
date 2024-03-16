@@ -23,6 +23,9 @@ public class PlayScreen implements Screen {
 
     Entity player;
 
+    float xRatio;
+    float yRatio;
+
     public PlayScreen(ENGGame game) {
         this.game = game;
     }
@@ -33,7 +36,7 @@ public class PlayScreen implements Screen {
 
         batch = new SpriteBatch();
 
-        player = createPlayer(0, 0);
+        player = createPlayer(100, 100);
 
         game.getEngine().getSystem(PlayerMovementSystem.class).updateMap(map);
         game.getEngine().getSystem(PlayerCameraSystem.class).updateCamera(map.getCamera());
@@ -42,6 +45,9 @@ public class PlayScreen implements Screen {
 
         map.getCamera().setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         //building = createBuilding(100, 100, 50, 50);
+
+        xRatio =  (float)Gdx.graphics.getWidth() / (float)map.getWidth();
+        yRatio =  (float)Gdx.graphics.getHeight() / (float)map.getHeight();
     }
 
     private Entity createBuilding(int spawnX, int spawnY, int width, int height) {
@@ -112,8 +118,8 @@ public class PlayScreen implements Screen {
         PositionComponent playerPosition = player.getComponent(PositionComponent.class);
 
         batch.begin();
-        batch.draw(playerTexture.texture, playerPosition.x, playerPosition.y, playerTexture.srcStartX, playerTexture.srcStartY,
-                playerTexture.width, playerTexture.height);
+        batch.draw(playerTexture.texture, playerPosition.x * xRatio, playerPosition.y * yRatio, playerTexture.srcStartX, playerTexture.srcStartY,
+                (int)(playerTexture.width * xRatio), (int)(playerTexture.height * yRatio));
         batch.end();
 
         game.getEngine().update(v);
@@ -121,7 +127,9 @@ public class PlayScreen implements Screen {
 
     @Override
     public void resize(int i, int i1) {
-
+        if (i < map.getWidth() && i1 < map.getHeight()) {
+            map.getCamera().setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
     }
 
     @Override

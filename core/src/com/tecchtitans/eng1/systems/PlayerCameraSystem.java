@@ -44,7 +44,7 @@ public class PlayerCameraSystem extends EntitySystem {
 
             Rectangle newCameraViewRectangle = new Rectangle(position.x,
                                                             position.y,
-                                                            viewportWidth, viewportHeight);
+                                                            viewportWidth - 1f, viewportHeight - 1f);
 
             if (cameraBorder.contains(newCameraViewRectangle)) {
                 currentCamera.position.x = newCameraViewRectangle.x + viewportWidth / 2;

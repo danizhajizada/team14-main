@@ -20,10 +20,14 @@ public class Map {
     OrthographicCamera camera;
     OrthogonalTiledMapRenderer mapRenderer;
     Rectangle worldBorder;
-
     Rectangle cameraBorder;
 
+    int width, height;
+
     public Map(String path, int width, int height) {
+        this.width = width;
+        this.height = height;
+
         camera = new OrthographicCamera();
         camera.setToOrtho(false, width, height);
 
@@ -33,6 +37,7 @@ public class Map {
         processCollisionLayer();
         processCameraLayer();
     }
+
 
     private void processCollisionLayer() {
         MapLayer collisionLayer = map.getLayers().get("collisionLayer");
@@ -66,6 +71,14 @@ public class Map {
                 }
             }
         }
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public Rectangle getCameraBorder() {
