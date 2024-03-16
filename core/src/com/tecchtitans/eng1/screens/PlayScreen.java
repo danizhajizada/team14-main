@@ -12,6 +12,7 @@ import com.tecchtitans.eng1.*;
 import com.tecchtitans.eng1.components.*;
 import com.badlogic.ashley.core.Entity;
 import com.tecchtitans.eng1.components.GameObjectComponent.ObjectType;
+import com.tecchtitans.eng1.systems.PlayerCameraSystem;
 import com.tecchtitans.eng1.systems.PlayerCollisionSystem;
 import com.tecchtitans.eng1.systems.PlayerMovementSystem;
 
@@ -35,7 +36,7 @@ public class PlayScreen implements Screen {
         player = createPlayer(0, 0);
 
         game.getEngine().getSystem(PlayerMovementSystem.class).updateMap(map);
-
+        game.getEngine().getSystem(PlayerCameraSystem.class).updateCamera(map.getCamera());
         //building = createBuilding(100, 100, 50, 50);
     }
 

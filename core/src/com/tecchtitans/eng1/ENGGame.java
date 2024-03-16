@@ -51,6 +51,9 @@ public class ENGGame extends Game {
 		PlayerMovementSystem playerMovementSystem = new PlayerMovementSystem();
 		engine.addSystem(playerMovementSystem);
 
+		PlayerCameraSystem playerCameraSystem = new PlayerCameraSystem();
+		engine.addSystem(playerCameraSystem);
+
 		//player = createPlayer();
 
 		//setScreen(new MainMenu(this));

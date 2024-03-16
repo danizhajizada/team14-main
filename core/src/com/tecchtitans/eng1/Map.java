@@ -56,7 +56,7 @@ public class Map {
         return map;
     }
 
-    public Camera getCamera() {
+    public OrthographicCamera getCamera() {
         return camera;
     }
 
