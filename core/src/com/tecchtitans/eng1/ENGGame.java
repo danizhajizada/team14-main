@@ -1,24 +1,11 @@
 package com.tecchtitans.eng1;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g3d.utils.FirstPersonCameraController;
-import com.badlogic.gdx.maps.tiled.TideMapLoader;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.tecchtitans.eng1.screens.MainMenu;
+import com.tecchtitans.eng1.systems.CollisionSystem;
+import com.tecchtitans.eng1.systems.InputSystem;
+import com.tecchtitans.eng1.systems.MovementSystem;
 
 public class ENGGame extends Game {
 	Engine engine = new Engine();
@@ -30,8 +17,15 @@ public class ENGGame extends Game {
 
 	@Override
 	public void create () {
+<<<<<<< HEAD
 		MovementSystem movementSystem = new MovementSystem();
 		engine.addSystem(movementSystem);
+=======
+		engine = new ECSEngine();
+
+		//MovementSystem movementSystem = new MovementSystem();
+		//engine.addSystem(movementSystem);
+>>>>>>> joel-worldborder
 
 		InputSystem inputSystem = new InputSystem();
 		engine.addSystem(inputSystem);
@@ -42,6 +36,18 @@ public class ENGGame extends Game {
 		CollisionSystem collisionSystem = new CollisionSystem();
 		engine.addSystem(collisionSystem);
 
+<<<<<<< HEAD
+=======
+		PlayerCollisionSystem playerCollisionSystem =  new PlayerCollisionSystem();
+		engine.addSystem(playerCollisionSystem);
+
+		PlayerMovementSystem playerMovementSystem = new PlayerMovementSystem();
+		engine.addSystem(playerMovementSystem);
+
+		PlayerCameraSystem playerCameraSystem = new PlayerCameraSystem();
+		engine.addSystem(playerCameraSystem);
+
+>>>>>>> joel-worldborder
 		//player = createPlayer();
 
 		//setScreen(new MainMenu(this));

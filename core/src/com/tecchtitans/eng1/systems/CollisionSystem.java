@@ -1,4 +1,4 @@
-package com.tecchtitans.eng1;
+package com.tecchtitans.eng1.systems;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;

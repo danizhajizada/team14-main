@@ -11,6 +11,13 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.tecchtitans.eng1.*;
 import com.tecchtitans.eng1.components.*;
 import com.badlogic.ashley.core.Entity;
+<<<<<<< HEAD
+=======
+import com.tecchtitans.eng1.components.GameObjectComponent.ObjectType;
+import com.tecchtitans.eng1.systems.PlayerCameraSystem;
+import com.tecchtitans.eng1.systems.PlayerCollisionSystem;
+import com.tecchtitans.eng1.systems.PlayerMovementSystem;
+>>>>>>> joel-worldborder
 
 public class PlayScreen implements Screen {
     ENGGame game;
@@ -19,21 +26,58 @@ public class PlayScreen implements Screen {
 
     Entity player, player2;
 
+    float xRatio;
+    float yRatio;
+
     public PlayScreen(ENGGame game) {
         this.game = game;
     }
 
     @Override
     public void show() {
-        map = new Map("testmap3.tmx", 1024, 1024);
+        map = new Map("testmap4.tmx", 1728, 1728);
 
         batch = new SpriteBatch();
 
-        player = createPlayer(0, 0);
+        player = createPlayer(100, 100);
 
+<<<<<<< HEAD
         player2 = createPlayer(100, 100);
 
         player2.remove(InputComponent.class);
+=======
+        game.getEngine().getSystem(PlayerMovementSystem.class).updateMap(map);
+        game.getEngine().getSystem(PlayerCameraSystem.class).updateCamera(map.getCamera());
+
+        game.getEngine().getSystem(PlayerCameraSystem.class).updateCameraBorder(map.getCameraBorder());
+
+        map.getCamera().setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //building = createBuilding(100, 100, 50, 50);
+
+        xRatio =  (float)Gdx.graphics.getWidth() / (float)map.getWidth();
+        yRatio =  (float)Gdx.graphics.getHeight() / (float)map.getHeight();
+    }
+
+    private Entity createBuilding(int spawnX, int spawnY, int width, int height) {
+        Entity building = new Entity();
+
+        building.add(new PositionComponent());
+
+        CollisionComponent collisionComponent = new CollisionComponent();
+        collisionComponent.collisionRectangle.x = spawnX;
+        collisionComponent.collisionRectangle.y = spawnY;
+        collisionComponent.collisionRectangle.width = width;
+        collisionComponent.collisionRectangle.height = height;
+        building.add(collisionComponent);
+
+        GameObjectComponent gameObjectComponent = new GameObjectComponent();
+        gameObjectComponent.type = ObjectType.BUILDING;
+        building.add(gameObjectComponent);
+
+        game.getEngine().addEntity(building);
+
+        return building;
+>>>>>>> joel-worldborder
     }
 
     private Entity createPlayer(int spawnX, int spawnY) {
@@ -89,10 +133,15 @@ public class PlayScreen implements Screen {
         PositionComponent player2Position = player2.getComponent(PositionComponent.class);
 
         batch.begin();
+<<<<<<< HEAD
         batch.draw(playerTexture.texture, playerPosition.x, playerPosition.y, playerTexture.srcStartX, playerTexture.srcStartY,
                 playerTexture.width, playerTexture.height);
         batch.draw(player2Texture.texture, player2Position.x, player2Position.y, player2Texture.srcStartX, player2Texture.srcStartY,
                 player2Texture.width, player2Texture.height);
+=======
+        batch.draw(playerTexture.texture, playerPosition.x * xRatio, playerPosition.y * yRatio, playerTexture.srcStartX, playerTexture.srcStartY,
+                (int)(playerTexture.width * xRatio), (int)(playerTexture.height * yRatio));
+>>>>>>> joel-worldborder
         batch.end();
 
         game.getEngine().update(v);
@@ -100,7 +149,9 @@ public class PlayScreen implements Screen {
 
     @Override
     public void resize(int i, int i1) {
-
+        if (i < map.getWidth() && i1 < map.getHeight()) {
+            map.getCamera().setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
     }
 
     @Override
