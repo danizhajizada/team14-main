@@ -1,4 +1,4 @@
-package com.tecchtitans.eng1;
+package com.tecchtitans.eng1.systems;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
@@ -7,7 +7,9 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.tecchtitans.eng1.components.*;
+import com.tecchtitans.eng1.InputKeys;
+import com.tecchtitans.eng1.components.ComponentMappers;
+import com.tecchtitans.eng1.components.InputComponent;
 
 public class InputSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
