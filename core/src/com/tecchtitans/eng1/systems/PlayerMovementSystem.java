@@ -61,8 +61,6 @@ public class PlayerMovementSystem extends EntitySystem {
 
                 collisionComponent.collisionRectangle.x = position.positionVector.x;
                 //collisionComponent.collisionRectangle.y = position.y;
-            } else {
-                System.out.println("x out" + " " + position.positionVector.x);
             }
 
             if (currentMap.getWorldBorder().contains(newYCollisionRectangle)) {
