@@ -17,7 +17,7 @@ public class MovementSystem extends EntitySystem {
 
     public void addedToEngine(Engine engine)
     {
-        entities = engine.getEntitiesFor(Family.all(PositionComponent.class, VelocityComponent.class).get());
+        entities = engine.getEntitiesFor(Family.all(PositionComponent.class, VelocityComponent.class, CollisionComponent.class).get());
     }
 
     public void update(float deltaTime) {
