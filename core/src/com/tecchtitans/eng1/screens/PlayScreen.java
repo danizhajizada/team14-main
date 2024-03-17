@@ -27,7 +27,7 @@ public class PlayScreen implements Screen {
     Entity player;
     ArrayList<Entity> buildings;
 
-    float level;
+    //Entity
 
     public PlayScreen(ENGGame game) {
         this.game = game;
@@ -56,7 +56,8 @@ public class PlayScreen implements Screen {
         //building = createBuilding(100, 100, 50, 50);
 
         game.getAudioManager().playMusic("audio/bgmusic.mp3");
-        level = 0.5f;
+
+        statsTexure = new Texture("stats.png");
     }
 
     private Entity createBuilding(int spawnX, int spawnY, int width, int height) {
@@ -196,8 +197,6 @@ public class PlayScreen implements Screen {
             yRenderPosition += playerPosition.positionVector.y - (map.getCameraBorder().height - camera.viewportHeight / 2) + playerTexture.width / 2.0f;
         }
 
-        Texture barTexture = new Texture("greenbar.png");
-
         //System.out.println(camera.position.x + map.getCameraBorder().width - camera.viewportWidth / 2);
         //System.out.println(playerPosition.positionVector.x);
 
@@ -205,10 +204,8 @@ public class PlayScreen implements Screen {
         batch.begin();
         batch.draw(playerTexture.texture, xRenderPosition, yRenderPosition, playerTexture.srcStartX, playerTexture.srcStartY,
                    playerTexture.width, playerTexture.height);
-        batch.draw(barTexture, 10, Gdx.graphics.getHeight() - 50, (int)(200 * level), 20, 10, 22, 8 + (int)(99 * level), 8, false, false);
+        //batch.draw(statsTexure, 10, 10, 200, 200, 0, 0, 109, 56, false, false);
         batch.end();
-
-        if (level < 1) { level += 0.001f; }
 
         engine.update(v);
     }
