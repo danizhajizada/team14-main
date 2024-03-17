@@ -45,9 +45,6 @@ public class ENGGame extends Game {
 		CollisionSystem collisionSystem = new CollisionSystem();
 		engine.addSystem(collisionSystem);
 
-		PlayerCollisionSystem playerCollisionSystem =  new PlayerCollisionSystem();
-		engine.addSystem(playerCollisionSystem);
-
 		PlayerMovementSystem playerMovementSystem = new PlayerMovementSystem();
 		engine.addSystem(playerMovementSystem);
 
