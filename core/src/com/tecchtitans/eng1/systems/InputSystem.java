@@ -39,6 +39,9 @@ public class InputSystem extends EntitySystem {
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
                 input.keysPressed |= InputKeys.RIGHT;
             }
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+                input.keysPressed |= InputKeys.SPACE;
+            }
 
             //System.out.println(input.keysPressed);
         }

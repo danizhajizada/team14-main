@@ -42,6 +42,9 @@ public class PlayerSystem extends EntitySystem {
             if ((input.keysPressed & InputKeys.RIGHT) != 0) {
                 velocity.velocityUnitVector.x = 1;
             }
+            if ((input.keysPressed & InputKeys.SPACE) != 0) {
+
+            }
         }
     }
 }
