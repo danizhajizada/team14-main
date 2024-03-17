@@ -13,5 +13,5 @@ public class PlayerComponent implements Component {
     public int study;
     //not sure whether an enummap or an array is more appropriate here
     //public EnumMap<ActivityType, Integer> activityCount;
-    public ActivityType[] activityCount;
+    public int[] activityCount;
 }

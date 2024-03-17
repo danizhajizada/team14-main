@@ -4,12 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.tecchtitans.eng1.*;
 import com.tecchtitans.eng1.components.*;
 import com.badlogic.ashley.core.Entity;
 import com.tecchtitans.eng1.components.GameObjectComponent.ObjectType;
 import com.tecchtitans.eng1.systems.PlayerCameraSystem;
 import com.tecchtitans.eng1.systems.PlayerMovementSystem;
+
+import java.io.ObjectInput;
+import java.util.ArrayList;
 
 public class PlayScreen implements Screen {
     //may be worth having reference to game engine rather than having to fetch it from game object each time
@@ -19,6 +23,7 @@ public class PlayScreen implements Screen {
     SpriteBatch batch;
 
     Entity player;
+    ArrayList<Entity> buildings;
 
     float xRatio;
     float yRatio;
@@ -30,11 +35,16 @@ public class PlayScreen implements Screen {
 
     @Override
     public void show() {
-        map = new Map("testmap4.tmx", 1728, 1728);
+        map = new Map("testmap5.tmx", 1728, 1728);
 
         batch = new SpriteBatch();
 
         player = createPlayer(100, 100);
+
+        buildings = new ArrayList<>();
+        for(RectangleMapObject building : map.getBuildingObjects()) {
+            buildings.add(createBuilding(building));
+        }
 
         engine.getSystem(PlayerMovementSystem.class).updateMap(map);
         engine.getSystem(PlayerCameraSystem.class).updateCamera(map.getCamera());
@@ -69,6 +79,47 @@ public class PlayScreen implements Screen {
         return building;
     }
 
+    // adding entity assuming building already on map
+    private Entity createBuilding(RectangleMapObject buildingObject) {
+        Entity building = engine.createEntity();
+
+        CollisionComponent collisionComponent = engine.createComponent(CollisionComponent.class);
+        collisionComponent.collisionRectangle = buildingObject.getRectangle();
+        building.add(collisionComponent);
+
+        ActivityComponent activityComponent = engine.createComponent(ActivityComponent.class);
+        String test = (String)buildingObject.getProperties().get("type");
+        activityComponent.type = ActivityType.valueOf((String)buildingObject.getProperties().get("type"));
+        switch(activityComponent.type) {
+            case EAT:
+                activityComponent.energyChange = 0;
+                activityComponent.studyChange = 0;
+                break;
+            case REC:
+                activityComponent.energyChange = -10;
+                activityComponent.studyChange = 0;
+                break;
+            case SLEEP:
+                activityComponent.energyChange = 0;
+                activityComponent.studyChange = 0;
+                break;
+            case STUDY:
+                activityComponent.energyChange = -10;
+                activityComponent.studyChange = 10;
+                break;
+        }
+        building.add(activityComponent);
+
+        //unsure if this is needed so commented out
+        /*GameObjectComponent gameObjectComponent = engine.createComponent(GameObjectComponent.class);
+        gameObjectComponent.type = ObjectType.BUILDING;
+        building.add(gameObjectComponent);*/
+
+        engine.addEntity(building);
+
+        return building;
+    }
+
     private Entity createPlayer(int spawnX, int spawnY) {
         Entity player = new Entity();
 
@@ -97,6 +148,12 @@ public class PlayScreen implements Screen {
         collisionComponent.collisionRectangle.width = 50;
         collisionComponent.collisionRectangle.height = 50;
         player.add(collisionComponent);
+
+        PlayerComponent playerComponent = engine.createComponent(PlayerComponent.class);
+        playerComponent.activityCount = new int[ActivityType.values().length];
+        playerComponent.energy = 100;
+        playerComponent.study = 0;
+        player.add(playerComponent);
 
         engine.addEntity(player);
 
