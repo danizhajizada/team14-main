@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.tecchtitans.eng1.Map;
 import com.tecchtitans.eng1.components.*;
 
@@ -34,26 +35,47 @@ public class PlayerMovementSystem extends EntitySystem {
             CollisionComponent collisionComponent = ComponentMappers.collision.get(entity);
             VelocityComponent velocity = ComponentMappers.velocity.get(entity);
             PositionComponent position = ComponentMappers.position.get(entity);
+            PlayerComponent playerComponent = ComponentMappers.player.get(entity);
 
-            float newPositionX = position.x + velocity.x * deltaTime;
-            float newPositionY = position.y + velocity.y * deltaTime;
+            Vector2 velocityToAdd = velocity.velocityUnitVector.scl(velocity.movementSpeed * deltaTime);
 
-            Rectangle newCollisionRectangle = new Rectangle(newPositionX, newPositionY,
+            Vector2 newPosition = position.positionVector.add(velocityToAdd);
+
+            Rectangle newXCollisionRectangle = new Rectangle(newPosition.x, position.positionVector.x,
                                                             collisionComponent.collisionRectangle.width,
                                                             collisionComponent.collisionRectangle.height);
 
-            if (currentMap.getWorldBorder().contains(newCollisionRectangle)) {
+            Rectangle newYCollisionRectangle = new Rectangle(position.positionVector.y, newPosition.y,
+                    collisionComponent.collisionRectangle.width,
+                    collisionComponent.collisionRectangle.height);
+
+            if (currentMap.getWorldBorder().contains(newXCollisionRectangle)) {
                 //System.out.println(currentMap.getWorldBorder().width + " " + currentMap.getWorldBorder().height);
                 //System.out.println(collisionComponent.collisionRectangle.x + " " + collisionComponent.collisionRectangle.y);
                 //System.out.println(collisionComponent.collisionRectangle.width + " " + collisionComponent.collisionRectangle.height);
                 //System.out.println("out");
 
-                position.x += velocity.x * deltaTime;
-                position.y += velocity.y * deltaTime;
+                position.positionVector.x = newPosition.x;
+                //position.y += velocity.y * deltaTime;
 
-                collisionComponent.collisionRectangle.x = position.x;
-                collisionComponent.collisionRectangle.y = position.y;
+                collisionComponent.collisionRectangle.x = position.positionVector.x;
+                //collisionComponent.collisionRectangle.y = position.y;
             }
+
+            if (currentMap.getWorldBorder().contains(newYCollisionRectangle)) {
+                //System.out.println(currentMap.getWorldBorder().width + " " + currentMap.getWorldBorder().height);
+                //System.out.println(collisionComponent.collisionRectangle.x + " " + collisionComponent.collisionRectangle.y);
+                //System.out.println(collisionComponent.collisionRectangle.width + " " + collisionComponent.collisionRectangle.height);
+                //System.out.println("out");
+
+                //position.x += velocity.x * deltaTime;
+                position.positionVector.y = newPosition.y;
+
+                //collisionComponent.collisionRectangle.x = position.x;
+                collisionComponent.collisionRectangle.y = position.positionVector.y;
+            }
+
+            System.out.println(position.positionVector.x + " " + position.positionVector.y);
         }
     }
 }

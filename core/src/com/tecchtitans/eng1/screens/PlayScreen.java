@@ -2,18 +2,13 @@ package com.tecchtitans.eng1.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.tecchtitans.eng1.*;
 import com.tecchtitans.eng1.components.*;
 import com.badlogic.ashley.core.Entity;
 import com.tecchtitans.eng1.components.GameObjectComponent.ObjectType;
 import com.tecchtitans.eng1.systems.PlayerCameraSystem;
-import com.tecchtitans.eng1.systems.PlayerCollisionSystem;
 import com.tecchtitans.eng1.systems.PlayerMovementSystem;
 
 public class PlayScreen implements Screen {
@@ -77,11 +72,11 @@ public class PlayScreen implements Screen {
         player.add(new PlayerComponent());
 
         PositionComponent positionComponent = new PositionComponent();
-        positionComponent.x = spawnX;
-        positionComponent.y = spawnY;
+        positionComponent.positionVector.x = spawnX;
+        positionComponent.positionVector.y = spawnY;
         player.add(positionComponent);
 
-        player.add(new VelocityComponent());
+        player.add(game.getEngine().createComponent(VelocityComponent.class));
         player.add(new InputComponent());
 
         TextureComponent playerTexture = new TextureComponent();
@@ -118,8 +113,8 @@ public class PlayScreen implements Screen {
         PositionComponent playerPosition = player.getComponent(PositionComponent.class);
 
         batch.begin();
-        batch.draw(playerTexture.texture, playerPosition.x * xRatio, playerPosition.y * yRatio, playerTexture.srcStartX, playerTexture.srcStartY,
-                (int)(playerTexture.width * xRatio), (int)(playerTexture.height * yRatio));
+        batch.draw(playerTexture.texture, playerPosition.positionVector.x, playerPosition.positionVector.y, playerTexture.srcStartX, playerTexture.srcStartY,
+                   playerTexture.width, playerTexture.height);
         batch.end();
 
         game.getEngine().update(v);
@@ -129,6 +124,7 @@ public class PlayScreen implements Screen {
     public void resize(int i, int i1) {
         if (i < map.getWidth() && i1 < map.getHeight()) {
             map.getCamera().setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            //map.getCamera().update();
         }
     }
 
