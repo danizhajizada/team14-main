@@ -37,15 +37,16 @@ public class PlayerMovementSystem extends EntitySystem {
             PositionComponent position = ComponentMappers.position.get(entity);
             PlayerComponent playerComponent = ComponentMappers.player.get(entity);
 
-            Vector2 velocityToAdd = velocity.velocityUnitVector.scl(velocity.movementSpeed * deltaTime);
+            Vector2 newVelocity = velocity.velocityUnitVector.scl(velocity.movementSpeed * deltaTime);
 
-            Vector2 newPosition = position.positionVector.add(velocityToAdd);
+            float newXPosition = position.positionVector.x + newVelocity.x;
+            float newYPosition = position.positionVector.y + newVelocity.y;
 
-            Rectangle newXCollisionRectangle = new Rectangle(newPosition.x, position.positionVector.x,
+            Rectangle newXCollisionRectangle = new Rectangle(newXPosition, position.positionVector.y,
                                                             collisionComponent.collisionRectangle.width,
                                                             collisionComponent.collisionRectangle.height);
 
-            Rectangle newYCollisionRectangle = new Rectangle(position.positionVector.y, newPosition.y,
+            Rectangle newYCollisionRectangle = new Rectangle(position.positionVector.x, newYPosition,
                     collisionComponent.collisionRectangle.width,
                     collisionComponent.collisionRectangle.height);
 
@@ -55,7 +56,7 @@ public class PlayerMovementSystem extends EntitySystem {
                 //System.out.println(collisionComponent.collisionRectangle.width + " " + collisionComponent.collisionRectangle.height);
                 //System.out.println("out");
 
-                position.positionVector.x = newPosition.x;
+                position.positionVector.x = newXPosition;
                 //position.y += velocity.y * deltaTime;
 
                 collisionComponent.collisionRectangle.x = position.positionVector.x;
@@ -69,13 +70,13 @@ public class PlayerMovementSystem extends EntitySystem {
                 //System.out.println("out");
 
                 //position.x += velocity.x * deltaTime;
-                position.positionVector.y = newPosition.y;
+                position.positionVector.y = newYPosition;
 
                 //collisionComponent.collisionRectangle.x = position.x;
                 collisionComponent.collisionRectangle.y = position.positionVector.y;
             }
 
-            System.out.println(position.positionVector.x + " " + position.positionVector.y);
+            //System.out.println(position.positionVector.x + " " + position.positionVector.y);
         }
     }
 }
