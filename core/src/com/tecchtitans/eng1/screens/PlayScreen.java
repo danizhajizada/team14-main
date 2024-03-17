@@ -16,6 +16,7 @@ import com.tecchtitans.eng1.systems.PlayerMovementSystem;
 
 import java.io.ObjectInput;
 import java.util.ArrayList;
+import java.util.EnumMap;
 
 public class PlayScreen implements Screen {
     //may be worth having reference to game engine rather than having to fetch it from game object each time
@@ -95,18 +96,22 @@ public class PlayScreen implements Screen {
             case EAT:
                 activityComponent.energyChange = 0;
                 activityComponent.studyChange = 0;
+                activityComponent.timeChange = 1;
                 break;
             case REC:
                 activityComponent.energyChange = -10;
                 activityComponent.studyChange = 0;
+                activityComponent.timeChange = 1;
                 break;
             case SLEEP:
                 activityComponent.energyChange = 0;
                 activityComponent.studyChange = 0;
+                activityComponent.timeChange = 0;
                 break;
             case STUDY:
                 activityComponent.energyChange = -10;
                 activityComponent.studyChange = 10;
+                activityComponent.timeChange = 1;
                 break;
         }
         building.add(activityComponent);
@@ -151,7 +156,12 @@ public class PlayScreen implements Screen {
         player.add(collisionComponent);
 
         PlayerComponent playerComponent = engine.createComponent(PlayerComponent.class);
-        playerComponent.activityCount = new int[ActivityType.values().length];
+        //playerComponent.activityCount = new int[ActivityType.values().length];
+        playerComponent.activityCount = new EnumMap<>(ActivityType.class);
+        for(ActivityType type : ActivityType.values()) {
+            playerComponent.activityCount.put(type, 0);
+        }
+
         playerComponent.energy = 100;
         playerComponent.study = 0;
         playerComponent.currentActivity = null;

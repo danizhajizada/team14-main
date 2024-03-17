@@ -13,6 +13,6 @@ public class PlayerComponent implements Component {
     public int study;
     //not sure whether an enummap or an array is more appropriate here
     //public EnumMap<ActivityType, Integer> activityCount;
-    public int[] activityCount;
-    public ActivityType currentActivity;
+    public EnumMap<ActivityType, Integer> activityCount;
+    public ActivityComponent currentActivity;
 }
