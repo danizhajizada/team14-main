@@ -7,10 +7,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Vector2;
 import com.tecchtitans.eng1.InputKeys;
-import com.tecchtitans.eng1.components.ComponentMappers;
-import com.tecchtitans.eng1.components.InputComponent;
-import com.tecchtitans.eng1.components.PlayerComponent;
-import com.tecchtitans.eng1.components.VelocityComponent;
+import com.tecchtitans.eng1.components.*;
 
 public class PlayerSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
@@ -27,6 +24,7 @@ public class PlayerSystem extends EntitySystem {
             //PlayerComponent player = ComponentMappers.player.get(entity);
             VelocityComponent velocity = ComponentMappers.velocity.get(entity);
             InputComponent input = ComponentMappers.input.get(entity);
+            Entity currentCollision = ComponentMappers.collision.get(entity).currentCollision;
 
             velocity.velocityUnitVector = new Vector2();
 
@@ -43,7 +41,13 @@ public class PlayerSystem extends EntitySystem {
                 velocity.velocityUnitVector.x = 1;
             }
             if ((input.keysPressed & InputKeys.SPACE) != 0) {
-
+                if(currentCollision != null) {
+                    if(ComponentMappers.gameObject.get(currentCollision) != null) {
+                        if(ComponentMappers.gameObject.get(currentCollision).type == GameObjectComponent.ObjectType.BUILDING) {
+                            System.out.println(ComponentMappers.activity.get(currentCollision).type);
+                        }
+                    }
+                }
             }
         }
     }

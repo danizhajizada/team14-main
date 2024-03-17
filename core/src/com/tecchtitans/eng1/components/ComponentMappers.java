@@ -8,4 +8,6 @@ public class ComponentMappers {
     public static final ComponentMapper<InputComponent> input = ComponentMapper.getFor(InputComponent.class);
     public static final ComponentMapper<PlayerComponent> player = ComponentMapper.getFor(PlayerComponent.class);
     public static final ComponentMapper<CollisionComponent> collision = ComponentMapper.getFor(CollisionComponent.class);
+    public static final ComponentMapper<GameObjectComponent> gameObject = ComponentMapper.getFor(GameObjectComponent.class);
+    public static final ComponentMapper<ActivityComponent> activity = ComponentMapper.getFor(ActivityComponent.class);
 }
