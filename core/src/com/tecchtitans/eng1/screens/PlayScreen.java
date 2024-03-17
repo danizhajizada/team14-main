@@ -206,7 +206,7 @@ public class PlayScreen implements Screen {
         batch.draw(barTexture, 10, Gdx.graphics.getHeight() - 50, (int)(200 * level), 20, 10, 22, 8 + (int)(99 * level), 8, false, false);
         batch.end();
 
-        if (level < 1){ level += 0.001f;}
+        if (level < 1) { level += 0.001f; }
 
         engine.update(v);
     }
