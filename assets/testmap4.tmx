@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="9">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="12">
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="1" name="Tile Layer 1" width="60" height="60">
   <data encoding="csv">
@@ -65,10 +65,10 @@
 79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79
 </data>
  </layer>
- <objectgroup id="2" name="collisionLayer">
-  <object id="8" name="worldBorder" x="96" y="96" width="1760" height="1728"/>
+ <objectgroup id="5" name="cameraLayer">
+  <object id="10" name="cameraBorder" x="0" y="0" width="1920" height="1920"/>
  </objectgroup>
- <objectgroup id="3" name="cameraLayer">
-  <object id="1" name="cameraBorder" x="0" y="0" width="1920" height="1920"/>
+ <objectgroup id="6" name="collisionLayer">
+  <object id="11" name="worldBorder" x="0" y="0" width="1920" height="1920"/>
  </objectgroup>
 </map>

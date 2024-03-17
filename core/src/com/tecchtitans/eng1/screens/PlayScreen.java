@@ -2,8 +2,10 @@ package com.tecchtitans.eng1.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.tecchtitans.eng1.*;
 import com.tecchtitans.eng1.components.*;
 import com.badlogic.ashley.core.Entity;
@@ -115,8 +117,32 @@ public class PlayScreen implements Screen {
         TextureComponent playerTexture = player.getComponent(TextureComponent.class);
         PositionComponent playerPosition = player.getComponent(PositionComponent.class);
 
+        Camera camera = map.getCamera();
+
+        float xRenderPosition = camera.viewportWidth / 2;
+        float yRenderPosition = camera.viewportHeight / 2;
+
+        float cameraXCenter = camera.position.x - camera.viewportWidth / 2;
+
+        if (playerPosition.positionVector.x < map.getCameraBorder().x + camera.viewportWidth / 2) {
+            xRenderPosition -= map.getCameraBorder().x + camera.viewportWidth / 2 - playerPosition.positionVector.x;
+        }
+        if (playerPosition.positionVector.x > map.getCameraBorder().width - camera.viewportWidth / 2) {
+            xRenderPosition += playerPosition.positionVector.x - (map.getCameraBorder().width - camera.viewportWidth / 2);
+        }
+
+        if (playerPosition.positionVector.y < map.getCameraBorder().x + camera.viewportHeight / 2) {
+            yRenderPosition -= map.getCameraBorder().x + camera.viewportHeight / 2 - playerPosition.positionVector.y;
+        }
+        if (playerPosition.positionVector.y > map.getCameraBorder().height - camera.viewportHeight / 2) {
+            yRenderPosition += playerPosition.positionVector.y - (map.getCameraBorder().height - camera.viewportHeight / 2);
+        }
+
+        //System.out.println(camera.position.x + map.getCameraBorder().width - camera.viewportWidth / 2);
+        //System.out.println(playerPosition.positionVector.x);
+
         batch.begin();
-        batch.draw(playerTexture.texture, playerPosition.positionVector.x, playerPosition.positionVector.y, playerTexture.srcStartX, playerTexture.srcStartY,
+        batch.draw(playerTexture.texture, xRenderPosition, yRenderPosition, playerTexture.srcStartX, playerTexture.srcStartY,
                    playerTexture.width, playerTexture.height);
         batch.end();
 
