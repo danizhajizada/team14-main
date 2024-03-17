@@ -11,6 +11,7 @@ import com.tecchtitans.eng1.InputKeys;
 import com.tecchtitans.eng1.components.ComponentMappers;
 import com.tecchtitans.eng1.components.InputComponent;
 
+//checks for key input
 public class InputSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
 
