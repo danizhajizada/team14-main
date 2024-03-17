@@ -53,6 +53,9 @@ public class ENGGame extends Game {
 		PlayerCameraSystem playerCameraSystem = new PlayerCameraSystem();
 		engine.addSystem(playerCameraSystem);
 
+		GameSystem gameSystem = new GameSystem();
+		engine.addSystem(gameSystem);
+
 		//initialize audio manager
 
 		audioManager = new AudioManager();
