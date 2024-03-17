@@ -58,6 +58,8 @@ public class PlayScreen implements Screen {
 
         xRatio =  (float)Gdx.graphics.getWidth() / (float)map.getWidth();
         yRatio =  (float)Gdx.graphics.getHeight() / (float)map.getHeight();
+
+        game.getAudioManager().playMusic("audio/bgmusic.mp3");
     }
 
     private Entity createBuilding(int spawnX, int spawnY, int width, int height) {
@@ -228,7 +230,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void hide() {
-
+        game.getAudioManager().stopMusic();
     }
 
     @Override

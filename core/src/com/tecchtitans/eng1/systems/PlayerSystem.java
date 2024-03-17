@@ -45,6 +45,7 @@ public class PlayerSystem extends EntitySystem {
                     if(ComponentMappers.gameObject.get(currentCollision) != null) {
                         if(ComponentMappers.gameObject.get(currentCollision).type == GameObjectComponent.ObjectType.BUILDING) {
                             System.out.println(ComponentMappers.activity.get(currentCollision).type);
+
                         }
                     }
                 }

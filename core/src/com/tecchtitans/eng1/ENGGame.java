@@ -23,11 +23,13 @@ import com.tecchtitans.eng1.systems.*;
 
 public class ENGGame extends Game {
 	ECSEngine engine;
+	AudioManager audioManager;
 
 	public ECSEngine getEngine()
 	{
 		return engine;
 	}
+	public AudioManager getAudioManager() { return audioManager; }
 
 	@Override
 	public void create () {
@@ -50,6 +52,10 @@ public class ENGGame extends Game {
 
 		PlayerCameraSystem playerCameraSystem = new PlayerCameraSystem();
 		engine.addSystem(playerCameraSystem);
+
+		//initialize audio manager
+
+		audioManager = new AudioManager();
 
 		//player = createPlayer();
 
