@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="17">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="18">
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="1" name="backdrop" width="60" height="60">
   <data encoding="csv">
@@ -129,14 +129,17 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="2" name="collisionLayer" visible="0">
+ <objectgroup id="2" name="collisionLayerOld" visible="0">
   <object id="8" name="worldBorder" x="96" y="96" width="1760" height="1728"/>
+ </objectgroup>
+ <objectgroup id="7" name="collisionLayer">
+  <object id="17" name="worldBorder" x="0" y="0" width="1920" height="1920"/>
  </objectgroup>
  <objectgroup id="5" name="buildingLayer">
   <object id="12" name="piazza" type="STUDY" x="171.667" y="1474.33" width="42.6667" height="61.3333"/>
   <object id="16" name="bed" type="SLEEP" x="256.333" y="1472" width="32" height="32.3333"/>
  </objectgroup>
- <objectgroup id="3" name="cameraLayer" visible="0">
-  <object id="1" name="cameraBorder" x="0" y="0" width="1920" height="1920"/>
+ <objectgroup id="3" name="cameraLayer">
+  <object id="1" name="cameraBorder" x="0" y="0" width="1920" height="1920" visible="0"/>
  </objectgroup>
 </map>

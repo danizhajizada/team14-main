@@ -176,6 +176,8 @@ public class PlayScreen implements Screen {
 
         Camera camera = map.getCamera();
 
+        //float xRenderPosition = camera.viewportWidth / 2 - playerTexture.width / 2.0f;
+        //float yRenderPosition = camera.viewportHeight / 2 - playerTexture.height / 2.0f;
         float xRenderPosition = camera.viewportWidth / 2;
         float yRenderPosition = camera.viewportHeight / 2;
 
