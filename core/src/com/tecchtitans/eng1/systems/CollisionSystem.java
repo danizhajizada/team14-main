@@ -38,6 +38,9 @@ public class CollisionSystem extends EntitySystem {
                     ComponentMappers.collision.get(entity2).currentCollision = entity1;
 
                     //System.out.println("Collide!");
+                } else {
+                    ComponentMappers.collision.get(entity1).currentCollision = null;
+                    ComponentMappers.collision.get(entity2).currentCollision = null;
                 }
             }
         }
