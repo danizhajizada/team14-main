@@ -41,7 +41,7 @@ public class PlayScreen implements Screen {
 
         batch = new SpriteBatch();
 
-        player = createPlayer(100, 100);
+        player = createPlayer(100, 100, 50, 50);
 
         buildings = new ArrayList<>();
         for(RectangleMapObject building : map.getBuildingObjects()) {
@@ -122,14 +122,14 @@ public class PlayScreen implements Screen {
         return building;
     }
 
-    private Entity createPlayer(int spawnX, int spawnY) {
+    private Entity createPlayer(int spawnX, int spawnY, int width, int height) {
         Entity player = new Entity();
 
         player.add(engine.createComponent(PlayerComponent.class));
 
         PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
-        positionComponent.positionVector.x = spawnX;
-        positionComponent.positionVector.y = spawnY;
+        positionComponent.positionVector.x = spawnX - width / 2.0f;
+        positionComponent.positionVector.y = spawnY - width / 2.0f;
         player.add(positionComponent);
 
         player.add(engine.createComponent(VelocityComponent.class));
@@ -139,16 +139,16 @@ public class PlayScreen implements Screen {
         playerTexture.texture = new Texture("spacesoldier.png");
         playerTexture.srcStartX = 8;
         playerTexture.srcStartY = 11;
-        playerTexture.width = 50;
-        playerTexture.height = 50;
+        playerTexture.width = width;
+        playerTexture.height = height;
 
         player.add(playerTexture);
 
         CollisionComponent collisionComponent = engine.createComponent(CollisionComponent.class);
-        collisionComponent.collisionRectangle.x = spawnX;
-        collisionComponent.collisionRectangle.y = spawnY;
-        collisionComponent.collisionRectangle.width = 50;
-        collisionComponent.collisionRectangle.height = 50;
+        collisionComponent.collisionRectangle.x = spawnX - width / 2.0f;
+        collisionComponent.collisionRectangle.y = spawnY - width / 2.0f;
+        collisionComponent.collisionRectangle.width = width;
+        collisionComponent.collisionRectangle.height = height;
         player.add(collisionComponent);
 
         PlayerComponent playerComponent = engine.createComponent(PlayerComponent.class);
