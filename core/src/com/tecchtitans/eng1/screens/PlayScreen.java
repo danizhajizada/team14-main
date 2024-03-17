@@ -154,7 +154,9 @@ public class PlayScreen implements Screen {
         playerComponent.activityCount = new int[ActivityType.values().length];
         playerComponent.energy = 100;
         playerComponent.study = 0;
+        playerComponent.currentActivity = null;
         player.add(playerComponent);
+
 
         engine.addEntity(player);
 
