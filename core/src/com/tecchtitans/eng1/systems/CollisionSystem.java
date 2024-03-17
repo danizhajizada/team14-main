@@ -22,6 +22,15 @@ public class CollisionSystem extends EntitySystem {
     public void update(float deltaTime) {
         for (int i = 0; i < entities.size(); i++) {
             for (int j = 0; j < entities.size(); j++) {
+                Entity entity1 = entities.get(i);
+                Entity entity2 = entities.get(j);
+
+                ComponentMappers.collision.get(entity1).currentCollision = null;
+                ComponentMappers.collision.get(entity2).currentCollision = null;
+            }
+        }
+        for (int i = 0; i < entities.size(); i++) {
+            for (int j = 0; j < entities.size(); j++) {
 
                 if (i == j) {
                     continue;
@@ -37,11 +46,11 @@ public class CollisionSystem extends EntitySystem {
                     ComponentMappers.collision.get(entity1).currentCollision = entity2;
                     ComponentMappers.collision.get(entity2).currentCollision = entity1;
 
-                    System.out.println("Collide!");
-                } else {
+                    //System.out.println("Collide!");
+                } /*else {
                     ComponentMappers.collision.get(entity1).currentCollision = null;
                     ComponentMappers.collision.get(entity2).currentCollision = null;
-                }
+                }*/
             }
         }
     }

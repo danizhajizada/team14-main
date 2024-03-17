@@ -113,9 +113,9 @@ public class PlayScreen implements Screen {
         building.add(activityComponent);
 
         //unsure if this is needed so commented out
-        /*GameObjectComponent gameObjectComponent = engine.createComponent(GameObjectComponent.class);
+        GameObjectComponent gameObjectComponent = engine.createComponent(GameObjectComponent.class);
         gameObjectComponent.type = ObjectType.BUILDING;
-        building.add(gameObjectComponent);*/
+        building.add(gameObjectComponent);
 
         engine.addEntity(building);
 
