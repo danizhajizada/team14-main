@@ -39,14 +39,16 @@ public class PlayerCameraSystem extends EntitySystem {
 
             PositionComponent position = ComponentMappers.position.get(entity);
 
+            TextureComponent playerTextureComponent = ComponentMappers.texture.get(entity);
+
             Rectangle playerCameraRectangle = new Rectangle(position.positionVector.x - currentCamera.viewportWidth / 2,
                     position.positionVector.y - currentCamera.viewportHeight / 2, currentCamera.viewportWidth, currentCamera.viewportHeight);
 
             //System.out.println(cameraBorder.x);
 
             //currentCamera.position.x = cameraBorder.x + currentCamera.viewportWidth / 2;
-            currentCamera.position.x = MathUtils.clamp(position.positionVector.x, cameraBorder.x + currentCamera.viewportWidth / 2, cameraBorder.x + cameraBorder.width - currentCamera.viewportWidth / 2) ;
-            currentCamera.position.y = MathUtils.clamp(position.positionVector.y, cameraBorder.y + currentCamera.viewportHeight / 2, cameraBorder.y + cameraBorder.height - currentCamera.viewportHeight / 2) ;
+            currentCamera.position.x = MathUtils.clamp(position.positionVector.x + playerTextureComponent.width / 2.0f, cameraBorder.x + currentCamera.viewportWidth / 2, cameraBorder.x + cameraBorder.width - currentCamera.viewportWidth / 2) ;
+            currentCamera.position.y = MathUtils.clamp(position.positionVector.y + playerTextureComponent.height / 2.0f, cameraBorder.y + currentCamera.viewportHeight / 2, cameraBorder.y + cameraBorder.height - currentCamera.viewportHeight / 2) ;
 
             /*
             float viewportWidth = currentCamera.viewportWidth;

@@ -128,8 +128,8 @@ public class PlayScreen implements Screen {
         player.add(engine.createComponent(PlayerComponent.class));
 
         PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
-        positionComponent.positionVector.x = spawnX - width / 2.0f;
-        positionComponent.positionVector.y = spawnY - width / 2.0f;
+        positionComponent.positionVector.x = spawnX;
+        positionComponent.positionVector.y = spawnY;
         player.add(positionComponent);
 
         player.add(engine.createComponent(VelocityComponent.class));
@@ -145,8 +145,8 @@ public class PlayScreen implements Screen {
         player.add(playerTexture);
 
         CollisionComponent collisionComponent = engine.createComponent(CollisionComponent.class);
-        collisionComponent.collisionRectangle.x = spawnX - width / 2.0f;
-        collisionComponent.collisionRectangle.y = spawnY - width / 2.0f;
+        collisionComponent.collisionRectangle.x = spawnX;
+        collisionComponent.collisionRectangle.y = spawnY;
         collisionComponent.collisionRectangle.width = width;
         collisionComponent.collisionRectangle.height = height;
         player.add(collisionComponent);
@@ -176,25 +176,25 @@ public class PlayScreen implements Screen {
 
         Camera camera = map.getCamera();
 
-        //float xRenderPosition = camera.viewportWidth / 2 - playerTexture.width / 2.0f;
-        //float yRenderPosition = camera.viewportHeight / 2 - playerTexture.height / 2.0f;
-        float xRenderPosition = camera.viewportWidth / 2;
-        float yRenderPosition = camera.viewportHeight / 2;
+        float xRenderPosition = camera.viewportWidth / 2 - playerTexture.width / 2.0f;
+        float yRenderPosition = camera.viewportHeight / 2 - playerTexture.height / 2.0f;
+        //float xRenderPosition = camera.viewportWidth / 2;
+        //float yRenderPosition = camera.viewportHeight / 2;
 
         float cameraXCenter = camera.position.x - camera.viewportWidth / 2;
 
         if (playerPosition.positionVector.x < map.getCameraBorder().x + camera.viewportWidth / 2) {
-            xRenderPosition -= map.getCameraBorder().x + camera.viewportWidth / 2 - playerPosition.positionVector.x;
+            xRenderPosition -= map.getCameraBorder().x + camera.viewportWidth / 2 - playerPosition.positionVector.x - playerTexture.width / 2.0f;
         }
         if (playerPosition.positionVector.x > map.getCameraBorder().width - camera.viewportWidth / 2) {
-            xRenderPosition += playerPosition.positionVector.x - (map.getCameraBorder().width - camera.viewportWidth / 2);
+            xRenderPosition += playerPosition.positionVector.x - (map.getCameraBorder().width - camera.viewportWidth / 2) + playerTexture.width / 2.0f;
         }
 
         if (playerPosition.positionVector.y < map.getCameraBorder().x + camera.viewportHeight / 2) {
-            yRenderPosition -= map.getCameraBorder().x + camera.viewportHeight / 2 - playerPosition.positionVector.y;
+            yRenderPosition -= map.getCameraBorder().x + camera.viewportHeight / 2 - playerPosition.positionVector.y - playerTexture.width / 2.0f;
         }
         if (playerPosition.positionVector.y > map.getCameraBorder().height - camera.viewportHeight / 2) {
-            yRenderPosition += playerPosition.positionVector.y - (map.getCameraBorder().height - camera.viewportHeight / 2);
+            yRenderPosition += playerPosition.positionVector.y - (map.getCameraBorder().height - camera.viewportHeight / 2) + playerTexture.width / 2.0f;
         }
 
         //System.out.println(camera.position.x + map.getCameraBorder().width - camera.viewportWidth / 2);
