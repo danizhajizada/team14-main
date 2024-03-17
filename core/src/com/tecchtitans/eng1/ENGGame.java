@@ -52,11 +52,14 @@ public class ENGGame extends Game {
 
 		PlayerCameraSystem playerCameraSystem = new PlayerCameraSystem();
 		engine.addSystem(playerCameraSystem);
-
+		
 		// This engine will be called when needed so processing is not needed.
 		UIRenderSystem uiRenderSystem = new UIRenderSystem();
 		uiRenderSystem.setProcessing(false);
 		engine.addSystem(uiRenderSystem);
+
+		GameSystem gameSystem = new GameSystem();
+		engine.addSystem(gameSystem);
 
 		//initialize audio manager
 
