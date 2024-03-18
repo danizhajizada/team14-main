@@ -78,14 +78,14 @@ public class UIRenderSystem extends EntitySystem {
                 int innerSrcX = statBarComponent.innerPartSrcX;
                 int innerSrcY = statBarComponent.innerPartSrcY;
 
-                int innerXOffset = (int)(statBarComponent.innerPartXOffset * totalWidthRatio);
-                int innerYOffset = (int)(statBarComponent.innerPartYOffset * totalHeightRatio);
+                int innerXOffset = Math.round(statBarComponent.innerPartXOffset * totalWidthRatio);
+                int innerYOffset = Math.round(statBarComponent.innerPartYOffset * totalHeightRatio);
 
                 int innerSrcWidth = statBarComponent.innerPartSrcWidth;
                 int innerSrcHeight = statBarComponent.innerPartSrcHeight;
 
-                int innerRenderWidth = (int)(innerSrcWidth * totalWidthRatio * progress);
-                int innerRenderHeight = (int)(innerSrcHeight * totalHeightRatio);
+                int innerRenderWidth = Math.round(innerSrcWidth * totalWidthRatio * progress);
+                int innerRenderHeight = Math.round(innerSrcHeight * totalHeightRatio);
 
                 // Draw inner bar
                 batch.draw(texture, renderLocationX + innerXOffset, renderLocationY + innerYOffset, innerRenderWidth, innerRenderHeight, innerSrcX, innerSrcY, innerSrcWidth, innerSrcHeight, false, false);

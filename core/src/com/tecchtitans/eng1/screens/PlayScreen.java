@@ -73,8 +73,8 @@ public class PlayScreen implements Screen {
         textureComponent.texture = new Texture("stats.png");
         textureComponent.srcStartX = 0;
         textureComponent.srcStartY = 0;
-        textureComponent.width = 109;
-        textureComponent.height = 19;
+        textureComponent.width = 300;
+        textureComponent.height = 50;
         statBar.add(textureComponent);
 
         StatBarComponent statBarComponent = engine.createComponent(StatBarComponent.class);
@@ -94,7 +94,7 @@ public class PlayScreen implements Screen {
 
         PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
         positionComponent.positionVector.x = 50;
-        positionComponent.positionVector.y = 50;
+        positionComponent.positionVector.y = Gdx.graphics.getHeight() - textureComponent.height - 50;
         statBar.add(positionComponent);
 
         engine.addEntity(statBar);
