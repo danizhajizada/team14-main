@@ -11,9 +11,11 @@ import com.tecchtitans.eng1.*;
 import com.tecchtitans.eng1.components.*;
 import com.badlogic.ashley.core.Entity;
 import com.tecchtitans.eng1.components.GameObjectComponent.ObjectType;
+import com.tecchtitans.eng1.systems.GameSystem;
 import com.tecchtitans.eng1.systems.PlayerCameraSystem;
 import com.tecchtitans.eng1.systems.PlayerMovementSystem;
 import com.tecchtitans.eng1.systems.UIRenderSystem;
+import sun.jvm.hotspot.debugger.cdbg.EnumType;
 
 import java.io.ObjectInput;
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ public class PlayScreen implements Screen {
     ArrayList<Entity> buildings;
 
     Entity energyBar;
+    Entity timeUI;
 
     public PlayScreen(ENGGame game) {
         this.game = game;
@@ -59,10 +62,65 @@ public class PlayScreen implements Screen {
 
         game.getAudioManager().playMusic("audio/bgmusic.mp3");
 
-        energyBar = createStatBar();
+        energyBar = createStatBar(50, Gdx.graphics.getHeight() - 100, 150, 50);
+        timeUI = createUIClock(300, Gdx.graphics.getHeight() - 100, 150, 50);
     }
 
-    private Entity createStatBar() {
+    private Entity createUIClock(int renderX, int renderY, int width, int height) {
+        Entity clock = new Entity();
+
+        UIComponent uiComponent = engine.createComponent(UIComponent.class);
+        uiComponent.type = UIComponentType.TIME;
+        clock.add(uiComponent);
+
+        TextureComponent textureComponent = engine.createComponent(TextureComponent.class);
+        textureComponent.texture = new Texture("stats.png");
+        textureComponent.srcStartX = 0;
+        textureComponent.srcStartY = 38;
+        textureComponent.width = width;
+        textureComponent.height = height;
+        //textureComponent.width = 100;
+        //textureComponent.height = 100;
+        clock.add(textureComponent);
+
+        UITimeComponent uiTimeComponent = engine.createComponent(UITimeComponent.class);
+        uiTimeComponent.outerPartSrcX = 0;
+        uiTimeComponent.outerPartSrcY = 38;
+        uiTimeComponent.outerPartSrcWidth = 54;
+        uiTimeComponent.outerPartSrcHeight = 11;
+
+        uiTimeComponent.numbersSrcX = 0;
+        uiTimeComponent.numbersSrcY = 50;
+        uiTimeComponent.numbersSrcWidth = 5;
+        uiTimeComponent.numbersSrcHeight = 7;
+
+        uiTimeComponent.amSrcX = 0;
+        uiTimeComponent.amSrcY = 58;
+        uiTimeComponent.amSrcWidth = 11;
+        uiTimeComponent.amSrcHeight = 7;
+
+        uiTimeComponent.pmSrcX = 0;
+        uiTimeComponent.pmSrcY = 66;
+        uiTimeComponent.pmSrcWidth = 11;
+        uiTimeComponent.pmSrcHeight = 7;
+
+        uiTimeComponent.numbersXOffset = 29;
+        uiTimeComponent.numbersYOffset = 2;
+
+        uiTimeComponent.currentHour = 0;
+        clock.add(uiTimeComponent);
+
+        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
+        positionComponent.positionVector.x = renderX;
+        positionComponent.positionVector.y = renderY;
+        clock.add(positionComponent);
+
+        engine.addEntity(clock);
+
+        return clock;
+    }
+
+    private Entity createStatBar(int renderX, int renderY, int width, int height) {
         Entity statBar = new Entity();
 
         UIComponent uiComponent = engine.createComponent(UIComponent.class);
@@ -73,8 +131,8 @@ public class PlayScreen implements Screen {
         textureComponent.texture = new Texture("stats.png");
         textureComponent.srcStartX = 0;
         textureComponent.srcStartY = 0;
-        textureComponent.width = 300;
-        textureComponent.height = 50;
+        textureComponent.width = width;
+        textureComponent.height = height;
         statBar.add(textureComponent);
 
         StatBarComponent statBarComponent = engine.createComponent(StatBarComponent.class);
@@ -90,11 +148,13 @@ public class PlayScreen implements Screen {
 
         statBarComponent.innerPartXOffset = 14;
         statBarComponent.innerPartYOffset = 1;
+
+        statBarComponent.progress = 1;
         statBar.add(statBarComponent);
 
         PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
-        positionComponent.positionVector.x = 50;
-        positionComponent.positionVector.y = Gdx.graphics.getHeight() - textureComponent.height - 50;
+        positionComponent.positionVector.x = renderX;
+        positionComponent.positionVector.y = renderY;
         statBar.add(positionComponent);
 
         engine.addEntity(statBar);
@@ -255,6 +315,8 @@ public class PlayScreen implements Screen {
 
 
         energyBar.getComponent(StatBarComponent.class).progress = player.getComponent(PlayerComponent.class).energy / 100f;
+
+        timeUI.getComponent(UITimeComponent.class).currentHour = engine.getSystem(GameSystem.class).getHour();
 
         //energyBar.getComponent(TextureComponent.class).width++;
         //energyBar.getComponent(TextureComponent.class).height++;

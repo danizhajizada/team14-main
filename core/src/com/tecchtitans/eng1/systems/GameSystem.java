@@ -20,6 +20,10 @@ public class GameSystem extends EntitySystem {
         entities = engine.getEntitiesFor(Family.all(PlayerComponent.class).get());
     }
 
+    public int getHour() {
+        return hour;
+    }
+
     public void update(float deltaTime) {
         for (Entity entity : entities) {
             PlayerComponent playerComponent = ComponentMappers.player.get(entity);
