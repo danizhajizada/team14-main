@@ -61,7 +61,7 @@ public class GameSystem extends EntitySystem {
                             day++;
                             hour = 0;
                             playerComponent.energy = 100;
-                            if(day >=  7) {
+                            if(day >  7) {
                                 gameComplete = true;
                             }
                         }
