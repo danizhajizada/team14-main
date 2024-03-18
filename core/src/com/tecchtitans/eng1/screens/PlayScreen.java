@@ -31,6 +31,7 @@ public class PlayScreen implements Screen {
     Entity energyBar;
     Entity timeUI;
     Entity dayCounter;
+    Entity activityCounter;
 
     public PlayScreen(ENGGame game) {
         this.game = game;
@@ -61,9 +62,59 @@ public class PlayScreen implements Screen {
         game.getAudioManager().playMusic("audio/bgmusic.mp3");
 
         // Create UI entities
-        energyBar = createStatBar(50, Gdx.graphics.getHeight() - 100, 150, 50);
-        timeUI = createUIClock(300, Gdx.graphics.getHeight() - 100, 150, 50);
-        dayCounter = createUIDayCounter(500, Gdx.graphics.getHeight() - 100, 150, 50);
+        energyBar = createStatBar(50, Gdx.graphics.getHeight() - 100, 250, 50);
+        timeUI = createUIClock(350, Gdx.graphics.getHeight() - 100, 150, 50);
+        dayCounter = createUIDayCounter(550, Gdx.graphics.getHeight() - 100, 150, 50);
+        activityCounter = createUIActivityCounter(50, 50, 100, 100);
+    }
+
+    private Entity createUIActivityCounter(int renderX, int renderY, int width, int height) {
+        Entity activityCounter = new Entity();
+
+        UIComponent uiComponent = engine.createComponent(UIComponent.class);
+        uiComponent.type = UIComponentType.ACTCOUNT;
+        activityCounter.add(uiComponent);
+
+        TextureComponent textureComponent = engine.createComponent(TextureComponent.class);
+        textureComponent.texture = new Texture("stats.png");
+        textureComponent.srcStartX = 0;
+        textureComponent.srcStartY = 86;
+        textureComponent.width = width;
+        textureComponent.height = height;
+        activityCounter.add(textureComponent);
+
+        UIActivityCountComponent uiActivityCountComponent = engine.createComponent(UIActivityCountComponent.class);
+        uiActivityCountComponent.outerPartSrcX = 0;
+        uiActivityCountComponent.outerPartSrcY = 86;
+        uiActivityCountComponent.outerPartSrcWidth = 43;
+        uiActivityCountComponent.outerPartSrcHeight = 49;
+
+        uiActivityCountComponent.numbersSrcX = 0;
+        uiActivityCountComponent.numbersSrcY = 50;
+        uiActivityCountComponent.numbersSrcWidth = 5;
+        uiActivityCountComponent.numbersSrcHeight = 7;
+
+        uiActivityCountComponent.sleepNumberXOffset = 36;
+        uiActivityCountComponent.sleepNumberYOffset = 39;
+
+        uiActivityCountComponent.studyNumberXOffset = 36;
+        uiActivityCountComponent.studyNumberYOffset = 27;
+
+        uiActivityCountComponent.eatNumberXOffset = 36;
+        uiActivityCountComponent.eatNumberYOffset = 15;
+
+        uiActivityCountComponent.recNumberXOffset = 36;
+        uiActivityCountComponent.recNumberYOffset = 3;
+        activityCounter.add(uiActivityCountComponent);
+
+        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
+        positionComponent.positionVector.x = renderX;
+        positionComponent.positionVector.y = renderY;
+        activityCounter.add(positionComponent);
+
+        engine.addEntity(activityCounter);
+
+        return activityCounter;
     }
 
     private Entity createUIDayCounter(int renderX, int renderY, int width, int height) {
@@ -367,6 +418,12 @@ public class PlayScreen implements Screen {
         energyBar.getComponent(StatBarComponent.class).progress = player.getComponent(PlayerComponent.class).energy / 100f;
         timeUI.getComponent(UITimeComponent.class).currentHour = engine.getSystem(GameSystem.class).getHour() + 7;
         dayCounter.getComponent(UIDayComponent.class).currentDay = engine.getSystem(GameSystem.class).getDay();
+
+        activityCounter.getComponent(UIActivityCountComponent.class).sleepCount = player.getComponent(PlayerComponent.class).activityCount.get(ActivityType.SLEEP);
+        activityCounter.getComponent(UIActivityCountComponent.class).studyCount = player.getComponent(PlayerComponent.class).activityCount.get(ActivityType.STUDY);
+        activityCounter.getComponent(UIActivityCountComponent.class).eatCount = player.getComponent(PlayerComponent.class).activityCount.get(ActivityType.EAT);
+        activityCounter.getComponent(UIActivityCountComponent.class).recCount = player.getComponent(PlayerComponent.class).activityCount.get(ActivityType.REC);
+
 
         //energyBar.getComponent(TextureComponent.class).width++;
         //energyBar.getComponent(TextureComponent.class).height++;
