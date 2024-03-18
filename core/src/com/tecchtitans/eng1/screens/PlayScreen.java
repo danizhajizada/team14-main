@@ -44,7 +44,7 @@ public class PlayScreen implements Screen {
 
         batch = new SpriteBatch();
 
-        player = createPlayer(100, 100, 50, 50);
+        player = createPlayer(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 50, 50);
 
         // Find building objects from the map, then create entities for them and add ti the engine.
         buildings = new ArrayList<>();

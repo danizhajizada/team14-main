@@ -218,6 +218,30 @@ public class UIRenderSystem extends EntitySystem {
             } else if (uiComponent.type == UIComponentType.ACTCOUNT) {
                 UIActivityCountComponent uiActivityCountComponent = ComponentMappers.activityCount.get(entity);
 
+                int sleepCount = uiActivityCountComponent.sleepCount;
+                if (sleepCount > 99) { sleepCount = 99; }
+
+                int sleepCountFirstNum = sleepCount / 10;
+                int sleepCountSecondNum = sleepCount % 10;
+
+                int studyCount = uiActivityCountComponent.studyCount;
+                if (studyCount > 99) { studyCount = 99; }
+
+                int studyCountFirstNum = studyCount / 10;
+                int studyCountSecondNum = studyCount % 10;
+
+                int eatCount = uiActivityCountComponent.eatCount;
+                if (eatCount > 99) { eatCount = 99; }
+
+                int eatCountFirstNum = eatCount / 10;
+                int eatCountSecondNum = eatCount % 10;
+
+                int recCount = uiActivityCountComponent.recCount;
+                if (recCount > 99) { recCount = 99; }
+
+                int recCountFirstNum = recCount / 10;
+                int recCountSecondNum = recCount % 10;
+
                 int outerSrcX = uiActivityCountComponent.outerPartSrcX;
                 int outerSrcY = uiActivityCountComponent.outerPartSrcY;
 
@@ -230,8 +254,7 @@ public class UIRenderSystem extends EntitySystem {
                 // Draw outer part
                 batch.draw(texture, renderLocationX, renderLocationY, renderWidth, renderHeight, outerSrcX, outerSrcY, outerSrcWidth, outerSrcHeight, false, false);
 
-                int sleepCountFirstNum = uiActivityCountComponent.sleepCount / 10;
-                int sleepCountSecondNum = uiActivityCountComponent.sleepCount % 10;
+
 
                 int numbersSrcWidth = uiActivityCountComponent.numbersSrcWidth;
                 int numbersSrcHeight = uiActivityCountComponent.numbersSrcHeight;
@@ -255,8 +278,7 @@ public class UIRenderSystem extends EntitySystem {
                 batch.draw(texture, renderLocationX + sleepFirstNumberXOffset, renderLocationY + sleepFirstNumberYOffset, sleepNumberRenderWidth, sleepNumberRenderHeight, sleepFirstNumberSrcX, sleepFirstNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
                 batch.draw(texture, renderLocationX + sleepSecondNumberXOffset, renderLocationY + sleepSecondNumberYOffset, sleepNumberRenderWidth, sleepNumberRenderHeight, sleepSecondNumberSrcX, sleepSecondNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
 
-                int studyCountFirstNum = uiActivityCountComponent.studyCount / 10;
-                int studyCountSecondNum = uiActivityCountComponent.studyCount % 10;
+
 
                 int studyFirstNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * studyCountFirstNum);
                 int studyFirstNumberSrcY = uiActivityCountComponent.numbersSrcY;
@@ -277,8 +299,7 @@ public class UIRenderSystem extends EntitySystem {
                 batch.draw(texture, renderLocationX + studyFirstNumberXOffset, renderLocationY + studyFirstNumberYOffset, studyNumberRenderWidth, studyNumberRenderHeight, studyFirstNumberSrcX, studyFirstNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
                 batch.draw(texture, renderLocationX + studySecondNumberXOffset, renderLocationY + studySecondNumberYOffset, studyNumberRenderWidth, studyNumberRenderHeight, studySecondNumberSrcX, studySecondNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
 
-                int eatCountFirstNum = uiActivityCountComponent.eatCount / 10;
-                int eatCountSecondNum = uiActivityCountComponent.eatCount % 10;
+
 
                 int eatFirstNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * eatCountFirstNum);
                 int eatFirstNumberSrcY = uiActivityCountComponent.numbersSrcY;
@@ -299,8 +320,7 @@ public class UIRenderSystem extends EntitySystem {
                 batch.draw(texture, renderLocationX + eatFirstNumberXOffset, renderLocationY + eatFirstNumberYOffset, eatNumberRenderWidth, eatNumberRenderHeight, eatFirstNumberSrcX, eatFirstNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
                 batch.draw(texture, renderLocationX + eatSecondNumberXOffset, renderLocationY + eatSecondNumberYOffset, eatNumberRenderWidth, eatNumberRenderHeight, eatSecondNumberSrcX, eatSecondNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
 
-                int recCountFirstNum = uiActivityCountComponent.recCount / 10;
-                int recCountSecondNum = uiActivityCountComponent.recCount % 10;
+
 
                 int recFirstNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * recCountFirstNum);
                 int recFirstNumberSrcY = uiActivityCountComponent.numbersSrcY;
