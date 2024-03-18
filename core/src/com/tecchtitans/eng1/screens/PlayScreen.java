@@ -86,7 +86,7 @@ public class PlayScreen implements Screen {
         UIActivityCountComponent uiActivityCountComponent = engine.createComponent(UIActivityCountComponent.class);
         uiActivityCountComponent.outerPartSrcX = 0;
         uiActivityCountComponent.outerPartSrcY = 86;
-        uiActivityCountComponent.outerPartSrcWidth = 43;
+        uiActivityCountComponent.outerPartSrcWidth = 49;
         uiActivityCountComponent.outerPartSrcHeight = 49;
 
         uiActivityCountComponent.numbersSrcX = 0;

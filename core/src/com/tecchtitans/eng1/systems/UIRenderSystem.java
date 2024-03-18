@@ -230,64 +230,96 @@ public class UIRenderSystem extends EntitySystem {
                 // Draw outer part
                 batch.draw(texture, renderLocationX, renderLocationY, renderWidth, renderHeight, outerSrcX, outerSrcY, outerSrcWidth, outerSrcHeight, false, false);
 
-                int sleepCount = uiActivityCountComponent.sleepCount;
+                int sleepCountFirstNum = uiActivityCountComponent.sleepCount / 10;
+                int sleepCountSecondNum = uiActivityCountComponent.sleepCount % 10;
 
                 int numbersSrcWidth = uiActivityCountComponent.numbersSrcWidth;
                 int numbersSrcHeight = uiActivityCountComponent.numbersSrcHeight;
 
-                int sleepNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * sleepCount);
-                int sleepNumberSrcY = uiActivityCountComponent.numbersSrcY;
+                int sleepFirstNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * sleepCountFirstNum);
+                int sleepFirstNumberSrcY = uiActivityCountComponent.numbersSrcY;
 
-                int sleepNumberXOffset = Math.round(uiActivityCountComponent.sleepNumberXOffset * totalWidthRatio);
-                int sleepNumberYOffset = Math.round(uiActivityCountComponent.sleepNumberYOffset * totalHeightRatio);
+                int sleepSecondNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * sleepCountSecondNum);
+                int sleepSecondNumberSrcY = uiActivityCountComponent.numbersSrcY;
+
+                int sleepFirstNumberXOffset = Math.round(uiActivityCountComponent.sleepNumberXOffset * totalWidthRatio);
+                int sleepFirstNumberYOffset = Math.round(uiActivityCountComponent.sleepNumberYOffset * totalHeightRatio);
+
+                int sleepSecondNumberXOffset = Math.round((uiActivityCountComponent.sleepNumberXOffset + numbersSrcWidth + 1) * totalWidthRatio);
+                int sleepSecondNumberYOffset = Math.round(uiActivityCountComponent.sleepNumberYOffset * totalHeightRatio);
 
                 int sleepNumberRenderWidth = Math.round(numbersSrcWidth * totalWidthRatio);
                 int sleepNumberRenderHeight = Math.round(numbersSrcHeight * totalHeightRatio);
 
-                // Draw sleep number
-                batch.draw(texture, renderLocationX + sleepNumberXOffset, renderLocationY + sleepNumberYOffset, sleepNumberRenderWidth, sleepNumberRenderHeight, sleepNumberSrcX, sleepNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
+                // Draw sleep numbers
+                batch.draw(texture, renderLocationX + sleepFirstNumberXOffset, renderLocationY + sleepFirstNumberYOffset, sleepNumberRenderWidth, sleepNumberRenderHeight, sleepFirstNumberSrcX, sleepFirstNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
+                batch.draw(texture, renderLocationX + sleepSecondNumberXOffset, renderLocationY + sleepSecondNumberYOffset, sleepNumberRenderWidth, sleepNumberRenderHeight, sleepSecondNumberSrcX, sleepSecondNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
 
-                int studyCount = uiActivityCountComponent.studyCount;
+                int studyCountFirstNum = uiActivityCountComponent.studyCount / 10;
+                int studyCountSecondNum = uiActivityCountComponent.studyCount % 10;
 
-                int studyNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * studyCount);
-                int studyNumberSrcY = uiActivityCountComponent.numbersSrcY;
+                int studyFirstNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * studyCountFirstNum);
+                int studyFirstNumberSrcY = uiActivityCountComponent.numbersSrcY;
 
-                int studyNumberXOffset = Math.round(uiActivityCountComponent.studyNumberXOffset * totalWidthRatio);
-                int studyNumberYOffset = Math.round(uiActivityCountComponent.studyNumberYOffset * totalHeightRatio);
+                int studySecondNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * studyCountSecondNum);
+                int studySecondNumberSrcY = uiActivityCountComponent.numbersSrcY;
+
+                int studyFirstNumberXOffset = Math.round(uiActivityCountComponent.studyNumberXOffset * totalWidthRatio);
+                int studyFirstNumberYOffset = Math.round(uiActivityCountComponent.studyNumberYOffset * totalHeightRatio);
+
+                int studySecondNumberXOffset = Math.round((uiActivityCountComponent.studyNumberXOffset + numbersSrcWidth + 1) * totalWidthRatio);
+                int studySecondNumberYOffset = Math.round(uiActivityCountComponent.studyNumberYOffset * totalHeightRatio);
 
                 int studyNumberRenderWidth = Math.round(numbersSrcWidth * totalWidthRatio);
                 int studyNumberRenderHeight = Math.round(numbersSrcHeight * totalHeightRatio);
 
-                // Draw study number
-                batch.draw(texture, renderLocationX + studyNumberXOffset, renderLocationY + studyNumberYOffset, studyNumberRenderWidth, studyNumberRenderHeight, studyNumberSrcX, studyNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
+                // Draw study numbers
+                batch.draw(texture, renderLocationX + studyFirstNumberXOffset, renderLocationY + studyFirstNumberYOffset, studyNumberRenderWidth, studyNumberRenderHeight, studyFirstNumberSrcX, studyFirstNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
+                batch.draw(texture, renderLocationX + studySecondNumberXOffset, renderLocationY + studySecondNumberYOffset, studyNumberRenderWidth, studyNumberRenderHeight, studySecondNumberSrcX, studySecondNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
 
-                int eatCount = uiActivityCountComponent.eatCount;
+                int eatCountFirstNum = uiActivityCountComponent.eatCount / 10;
+                int eatCountSecondNum = uiActivityCountComponent.eatCount % 10;
 
-                int eatNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * eatCount);
-                int eatNumberSrcY = uiActivityCountComponent.numbersSrcY;
+                int eatFirstNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * eatCountFirstNum);
+                int eatFirstNumberSrcY = uiActivityCountComponent.numbersSrcY;
 
-                int eatNumberXOffset = Math.round(uiActivityCountComponent.eatNumberXOffset * totalWidthRatio);
-                int eatNumberYOffset = Math.round(uiActivityCountComponent.eatNumberYOffset * totalHeightRatio);
+                int eatSecondNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * eatCountSecondNum);
+                int eatSecondNumberSrcY = uiActivityCountComponent.numbersSrcY;
+
+                int eatFirstNumberXOffset = Math.round(uiActivityCountComponent.eatNumberXOffset * totalWidthRatio);
+                int eatFirstNumberYOffset = Math.round(uiActivityCountComponent.eatNumberYOffset * totalHeightRatio);
+
+                int eatSecondNumberXOffset = Math.round((uiActivityCountComponent.eatNumberXOffset + numbersSrcWidth + 1) * totalWidthRatio);
+                int eatSecondNumberYOffset = Math.round(uiActivityCountComponent.eatNumberYOffset * totalHeightRatio);
 
                 int eatNumberRenderWidth = Math.round(numbersSrcWidth * totalWidthRatio);
                 int eatNumberRenderHeight = Math.round(numbersSrcHeight * totalHeightRatio);
 
-                // Draw eat number
-                batch.draw(texture, renderLocationX + eatNumberXOffset, renderLocationY + eatNumberYOffset, eatNumberRenderWidth, eatNumberRenderHeight, eatNumberSrcX, eatNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
+                // Draw eat numbers
+                batch.draw(texture, renderLocationX + eatFirstNumberXOffset, renderLocationY + eatFirstNumberYOffset, eatNumberRenderWidth, eatNumberRenderHeight, eatFirstNumberSrcX, eatFirstNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
+                batch.draw(texture, renderLocationX + eatSecondNumberXOffset, renderLocationY + eatSecondNumberYOffset, eatNumberRenderWidth, eatNumberRenderHeight, eatSecondNumberSrcX, eatSecondNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
 
-                int recCount = uiActivityCountComponent.recCount;
+                int recCountFirstNum = uiActivityCountComponent.recCount / 10;
+                int recCountSecondNum = uiActivityCountComponent.recCount % 10;
 
-                int recNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * recCount);
-                int recNumberSrcY = uiActivityCountComponent.numbersSrcY;
+                int recFirstNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * recCountFirstNum);
+                int recFirstNumberSrcY = uiActivityCountComponent.numbersSrcY;
 
-                int recNumberXOffset = Math.round(uiActivityCountComponent.recNumberXOffset * totalWidthRatio);
-                int recNumberYOffset = Math.round(uiActivityCountComponent.recNumberYOffset * totalHeightRatio);
+                int recSecondNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * recCountSecondNum);
+                int recSecondNumberSrcY = uiActivityCountComponent.numbersSrcY;
+
+                int recFirstNumberXOffset = Math.round(uiActivityCountComponent.recNumberXOffset * totalWidthRatio);
+                int recFirstNumberYOffset = Math.round(uiActivityCountComponent.recNumberYOffset * totalHeightRatio);
+
+                int recSecondNumberXOffset = Math.round((uiActivityCountComponent.recNumberXOffset + numbersSrcWidth + 1) * totalWidthRatio);
+                int recSecondNumberYOffset = Math.round(uiActivityCountComponent.recNumberYOffset * totalHeightRatio);
 
                 int recNumberRenderWidth = Math.round(numbersSrcWidth * totalWidthRatio);
                 int recNumberRenderHeight = Math.round(numbersSrcHeight * totalHeightRatio);
 
-                // Draw rec number
-                batch.draw(texture, renderLocationX + recNumberXOffset, renderLocationY + recNumberYOffset, recNumberRenderWidth, recNumberRenderHeight, recNumberSrcX, recNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
+                // Draw rec numbers
+                batch.draw(texture, renderLocationX + recFirstNumberXOffset, renderLocationY + recFirstNumberYOffset, recNumberRenderWidth, recNumberRenderHeight, recFirstNumberSrcX, recFirstNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
+                batch.draw(texture, renderLocationX + recSecondNumberXOffset, renderLocationY + recSecondNumberYOffset, recNumberRenderWidth, recNumberRenderHeight, recSecondNumberSrcX, recSecondNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
             }
         }
     }
