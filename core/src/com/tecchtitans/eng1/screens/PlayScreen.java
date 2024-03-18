@@ -73,7 +73,7 @@ public class PlayScreen implements Screen {
         textureComponent.texture = new Texture("stats.png");
         textureComponent.srcStartX = 0;
         textureComponent.srcStartY = 0;
-        textureComponent.width = 200;
+        textureComponent.width = 109;
         textureComponent.height = 19;
         statBar.add(textureComponent);
 
@@ -88,8 +88,8 @@ public class PlayScreen implements Screen {
         statBarComponent.innerPartSrcWidth = 94;
         statBarComponent.innerPartSrcHeight = 17;
 
-        statBarComponent.intersectSrcX = 14;
-        statBarComponent.intersectSrcY = 1;
+        statBarComponent.innerPartXOffset = 14;
+        statBarComponent.innerPartYOffset = 1;
         statBar.add(statBarComponent);
 
         PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
@@ -255,6 +255,9 @@ public class PlayScreen implements Screen {
 
 
         energyBar.getComponent(StatBarComponent.class).progress = player.getComponent(PlayerComponent.class).energy / 100f;
+
+        //energyBar.getComponent(TextureComponent.class).width++;
+        //energyBar.getComponent(TextureComponent.class).height++;
 
         batch.begin();
         batch.draw(playerTexture.texture, xRenderPosition, yRenderPosition, playerTexture.srcStartX, playerTexture.srcStartY,

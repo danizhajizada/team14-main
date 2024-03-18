@@ -34,6 +34,10 @@ public class UIRenderSystem extends EntitySystem {
                 int renderWidth = textureComponent.width;
                 int renderHeight = textureComponent.height;
 
+                /*
+                float outerWidthRatio = renderWidth / (float)statBarComponent.outerPartSrcWidth;
+                float outerHeightRatio = renderHeight / (float)statBarComponent.outerPartSrcHeight;
+
                 int innerSrcWidth = (int)(statBarComponent.innerPartSrcWidth * statBarComponent.progress);
                 int innerRenderWidth = (int)(renderWidth * statBarComponent.progress);
 
@@ -42,13 +46,49 @@ public class UIRenderSystem extends EntitySystem {
                         statBarComponent.outerPartSrcWidth, statBarComponent.outerPartSrcHeight,
                         false, false);
 
-                batch.draw(texture, positionComponent.positionVector.x + statBarComponent.intersectSrcX,
-                        positionComponent.positionVector.y - statBarComponent.intersectSrcY, innerRenderWidth, renderHeight,
+                batch.draw(texture, positionComponent.positionVector.x + statBarComponent.innerPartXOffset,
+                        positionComponent.positionVector.y + statBarComponent.innerPartYOffset, innerRenderWidth * outerWidthRatio - statBarComponent.innerPartXOffset - 1, statBarComponent.innerPartSrcHeight,
                         statBarComponent.innerPartSrcX, statBarComponent.innerPartSrcY,
                         innerSrcWidth, statBarComponent.innerPartSrcHeight,
                         false, false);
 
-                
+
+
+                 */
+
+
+
+                int renderLocationX = (int)positionComponent.positionVector.x;
+                int renderLocationY = (int)positionComponent.positionVector.y;
+
+                int outerSrcX = statBarComponent.outerPartSrcX;
+                int outerSrcY = statBarComponent.outerPartSrcY;
+
+                int outerSrcWidth = statBarComponent.outerPartSrcWidth;
+                int outerSrcHeight = statBarComponent.outerPartSrcHeight;
+
+                // Draw outer part of bar.
+                batch.draw(texture, renderLocationX, renderLocationY, renderWidth, renderHeight, outerSrcX, outerSrcY, outerSrcWidth, outerSrcHeight, false, false);
+
+                float progress = statBarComponent.progress;
+
+                float totalWidthRatio = textureComponent.width / (float)outerSrcWidth;
+                float totalHeightRatio = textureComponent.height / (float)outerSrcHeight;
+
+                int innerSrcX = statBarComponent.innerPartSrcX;
+                int innerSrcY = statBarComponent.innerPartSrcY;
+
+                int innerXOffset = (int)(statBarComponent.innerPartXOffset * totalWidthRatio);
+                int innerYOffset = (int)(statBarComponent.innerPartYOffset * totalHeightRatio);
+
+                int innerSrcWidth = statBarComponent.innerPartSrcWidth;
+                int innerSrcHeight = statBarComponent.innerPartSrcHeight;
+
+                int innerRenderWidth = (int)(innerSrcWidth * totalWidthRatio * progress);
+                int innerRenderHeight = (int)(innerSrcHeight * totalHeightRatio);
+
+                // Draw inner bar
+                batch.draw(texture, renderLocationX + innerXOffset, renderLocationY + innerYOffset, innerRenderWidth, innerRenderHeight, innerSrcX, innerSrcY, innerSrcWidth, innerSrcHeight, false, false);
             }
         }
     }
