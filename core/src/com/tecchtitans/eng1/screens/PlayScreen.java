@@ -63,9 +63,9 @@ public class PlayScreen implements Screen {
 
         game.getAudioManager().playMusic("audio/bgmusic.mp3");
 
-        energyBar = createStatBar(50, Gdx.graphics.getHeight() - 100, 150, 50);
-        timeUI = createUIClock(300, Gdx.graphics.getHeight() - 100, 150, 50);
-        dayCounter = createUIDayCounter(500, Gdx.graphics.getHeight() - 100, 150, 50);
+        energyBar = createStatBar(50, Gdx.graphics.getHeight() - 100, 250, 50);
+        timeUI = createUIClock(350, Gdx.graphics.getHeight() - 100, 150, 50);
+        dayCounter = createUIDayCounter(550, Gdx.graphics.getHeight() - 100, 150, 50);
     }
 
     private Entity createUIDayCounter(int renderX, int renderY, int width, int height) {
