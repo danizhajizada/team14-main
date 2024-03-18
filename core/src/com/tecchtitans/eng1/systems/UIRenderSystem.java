@@ -183,7 +183,18 @@ public class UIRenderSystem extends EntitySystem {
                 int numberYOffset = Math.round(uiDayComponent.numberYOffset * totalHeightRatio);
 
                 // Draw outer
-                batch.draw(texture, renderLocationX, renderLocationY, renderWidth, renderHeight, outerSrcX, outerSrcY, outerSrcWidth, outerSrcHeight, false, false);
+                batch.draw(texture,
+                        renderLocationX,
+                        renderLocationY,
+                        renderWidth,
+                        renderHeight,
+                        outerSrcX,
+                        outerSrcY,
+                        outerSrcWidth,
+                        outerSrcHeight,
+                        false,
+                        false
+                );
 
                 int numberRenderWidth = Math.round(numbersSrcWidth * totalWidthRatio);
                 int numberRenderHeight = Math.round(numbersSrcHeight * totalHeightRatio);
@@ -191,7 +202,19 @@ public class UIRenderSystem extends EntitySystem {
                 int numberSrcX = uiDayComponent.numbersSrcX + ((numbersSrcWidth + 1) * currentDay);
 
                 // Draw number
-                batch.draw(texture, renderLocationX + numberXOffset, renderLocationY + numberYOffset, numberRenderWidth, numberRenderHeight, numberSrcX, numbersSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
+                batch.draw(
+                        texture,
+                        renderLocationX + numberXOffset,
+                        renderLocationY + numberYOffset,
+                        numberRenderWidth,
+                        numberRenderHeight,
+                        numberSrcX,
+                        numbersSrcY,
+                        numbersSrcWidth,
+                        numbersSrcHeight,
+                        false,
+                        false
+                );
             }
         }
     }

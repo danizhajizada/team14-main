@@ -41,52 +41,16 @@ public class PlayerCameraSystem extends EntitySystem {
 
             TextureComponent playerTextureComponent = ComponentMappers.texture.get(entity);
 
-            //Rectangle playerCameraRectangle = new Rectangle(position.positionVector.x - currentCamera.viewportWidth / 2,
-            //        position.positionVector.y - currentCamera.viewportHeight / 2, currentCamera.viewportWidth, currentCamera.viewportHeight);
-
-            //System.out.println(cameraBorder.x);
-
-            //currentCamera.position.x = cameraBorder.x + currentCamera.viewportWidth / 2;
-            currentCamera.position.x = MathUtils.clamp(position.positionVector.x + playerTextureComponent.width / 2.0f, cameraBorder.x + currentCamera.viewportWidth / 2, cameraBorder.x + cameraBorder.width - currentCamera.viewportWidth / 2) ;
-            currentCamera.position.y = MathUtils.clamp(position.positionVector.y + playerTextureComponent.height / 2.0f, cameraBorder.y + currentCamera.viewportHeight / 2, cameraBorder.y + cameraBorder.height - currentCamera.viewportHeight / 2) ;
-
-            /*
-            float viewportWidth = currentCamera.viewportWidth;
-            float viewportHeight = currentCamera.viewportHeight;
-
-            float lengthToRightXEdge = viewportWidth - position.x;
-            float lengthToLeftXEdge = position.x - viewportWidth;
-
-            float lengthToClosestXEdge = Math.max(viewportWidth - position.x, position.x);
-
-            float lengthToClosestYEdge = Math.max(viewportHeight - position.y, position.y);
-
-            float lengthToTopYEdge = viewportHeight - position.y;
-            float lengthToBottomYEdge = position.y - viewportHeight;
-
-            Rectangle newCameraViewXRectangle = new Rectangle(position.x,
-                                                            position.y,
-                                                        viewportWidth,
-                                                        lengthToClosestYEdge);
-
-            Rectangle newCameraViewYRectangle = new Rectangle(position.x,
-                    position.y,
-                    lengthToClosestXEdge,
-                    viewportHeight);
-
-            if (true) {
-                //currentCamera.position.x = newCameraViewXRectangle.x + viewportWidth / 2;
-
-                //currentCamera.position.x = MathUtils.clamp(position.x + viewportWidth / 2, cameraBorder.x + viewportWidth, cameraBorder.x + cameraBorder.width - viewportWidth);
-
-                currentCamera.update();
-            }
-            if (true) {
-                currentCamera.position.y = position.y + viewportHeight / 2;
-               // currentCamera.position.y = MathUtils.clamp(position.y, cameraBorder.y + viewportHeight, cameraBorder.y + cameraBorder.height - viewportHeight);
-              //  currentCamera.update();
-            }
-            */
+            currentCamera.position.x = MathUtils.clamp(
+                    position.positionVector.x + playerTextureComponent.width / 2.0f,
+                    cameraBorder.x + currentCamera.viewportWidth / 2,
+                    cameraBorder.x + cameraBorder.width - currentCamera.viewportWidth / 2
+            );
+            currentCamera.position.y = MathUtils.clamp(
+                    position.positionVector.y + playerTextureComponent.height / 2.0f,
+                    cameraBorder.y + currentCamera.viewportHeight / 2,
+                    cameraBorder.y + cameraBorder.height - currentCamera.viewportHeight / 2
+            );
         }
     }
 }

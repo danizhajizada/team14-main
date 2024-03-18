@@ -22,15 +22,12 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 
 public class PlayScreen implements Screen {
-    //may be worth having reference to game engine rather than having to fetch it from game object each time
     ENGGame game;
     ECSEngine engine;
     Map map;
     SpriteBatch batch;
-
     Entity player;
     ArrayList<Entity> buildings;
-
     Entity energyBar;
     Entity timeUI;
     Entity dayCounter;
@@ -48,21 +45,22 @@ public class PlayScreen implements Screen {
 
         player = createPlayer(100, 100, 50, 50);
 
+        // Find building objects from the map, then create entities for them and add ti the engine.
         buildings = new ArrayList<>();
         for(RectangleMapObject building : map.getBuildingObjects()) {
             buildings.add(createBuilding(building));
         }
 
+        // Update relevant systems with the map that has just been loaded.
         engine.getSystem(PlayerMovementSystem.class).updateMap(map);
         engine.getSystem(PlayerCameraSystem.class).updateCamera(map.getCamera());
-
         engine.getSystem(PlayerCameraSystem.class).updateCameraBorder(map.getCameraBorder());
 
         map.getCamera().setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        //building = createBuilding(100, 100, 50, 50);
 
         game.getAudioManager().playMusic("audio/bgmusic.mp3");
 
+        // Create UI entities
         energyBar = createStatBar(50, Gdx.graphics.getHeight() - 100, 150, 50);
         timeUI = createUIClock(300, Gdx.graphics.getHeight() - 100, 150, 50);
         dayCounter = createUIDayCounter(500, Gdx.graphics.getHeight() - 100, 150, 50);
@@ -262,7 +260,6 @@ public class PlayScreen implements Screen {
         }
         building.add(activityComponent);
 
-        //unsure if this is needed so commented out
         GameObjectComponent gameObjectComponent = engine.createComponent(GameObjectComponent.class);
         gameObjectComponent.type = ObjectType.BUILDING;
         building.add(gameObjectComponent);
@@ -338,20 +335,29 @@ public class PlayScreen implements Screen {
         //float xRenderPosition = camera.viewportWidth / 2;
         //float yRenderPosition = camera.viewportHeight / 2;
 
-        float cameraXCenter = camera.position.x - camera.viewportWidth / 2;
+        //float cameraXCenter = camera.position.x - camera.viewportWidth / 2;
 
         if (playerPosition.positionVector.x < map.getCameraBorder().x + camera.viewportWidth / 2) {
-            xRenderPosition -= map.getCameraBorder().x + camera.viewportWidth / 2 - playerPosition.positionVector.x - playerTexture.width / 2.0f;
+            xRenderPosition -= map.getCameraBorder().x
+                    + camera.viewportWidth / 2
+                    - playerPosition.positionVector.x
+                    - playerTexture.width / 2.0f;
         }
         if (playerPosition.positionVector.x > map.getCameraBorder().width - camera.viewportWidth / 2) {
-            xRenderPosition += playerPosition.positionVector.x - (map.getCameraBorder().width - camera.viewportWidth / 2) + playerTexture.width / 2.0f;
+            xRenderPosition += playerPosition.positionVector.x
+                    - (map.getCameraBorder().width - camera.viewportWidth / 2)
+                    + playerTexture.width / 2.0f;
         }
-
         if (playerPosition.positionVector.y < map.getCameraBorder().x + camera.viewportHeight / 2) {
-            yRenderPosition -= map.getCameraBorder().x + camera.viewportHeight / 2 - playerPosition.positionVector.y - playerTexture.width / 2.0f;
+            yRenderPosition -= map.getCameraBorder().x
+                    + camera.viewportHeight / 2
+                    - playerPosition.positionVector.y
+                    - playerTexture.width / 2.0f;
         }
         if (playerPosition.positionVector.y > map.getCameraBorder().height - camera.viewportHeight / 2) {
-            yRenderPosition += playerPosition.positionVector.y - (map.getCameraBorder().height - camera.viewportHeight / 2) + playerTexture.width / 2.0f;
+            yRenderPosition += playerPosition.positionVector.y
+                    - (map.getCameraBorder().height - camera.viewportHeight / 2)
+                    + playerTexture.width / 2.0f;
         }
 
         //System.out.println(camera.position.x + map.getCameraBorder().width - camera.viewportWidth / 2);
@@ -359,9 +365,7 @@ public class PlayScreen implements Screen {
 
 
         energyBar.getComponent(StatBarComponent.class).progress = player.getComponent(PlayerComponent.class).energy / 100f;
-
-        timeUI.getComponent(UITimeComponent.class).currentHour = engine.getSystem(GameSystem.class).getHour();
-
+        timeUI.getComponent(UITimeComponent.class).currentHour = engine.getSystem(GameSystem.class).getHour() + 7;
         dayCounter.getComponent(UIDayComponent.class).currentDay = engine.getSystem(GameSystem.class).getDay();
 
         //energyBar.getComponent(TextureComponent.class).width++;
