@@ -33,6 +33,7 @@ public class PlayScreen implements Screen {
 
     Entity energyBar;
     Entity timeUI;
+    Entity dayCounter;
 
     public PlayScreen(ENGGame game) {
         this.game = game;
@@ -64,6 +65,49 @@ public class PlayScreen implements Screen {
 
         energyBar = createStatBar(50, Gdx.graphics.getHeight() - 100, 150, 50);
         timeUI = createUIClock(300, Gdx.graphics.getHeight() - 100, 150, 50);
+        dayCounter = createUIDayCounter(500, Gdx.graphics.getHeight() - 100, 150, 50);
+    }
+
+    private Entity createUIDayCounter(int renderX, int renderY, int width, int height) {
+        Entity dayCounter = new Entity();
+
+        UIComponent uiComponent = engine.createComponent(UIComponent.class);
+        uiComponent.type = UIComponentType.DAY;
+        dayCounter.add(uiComponent);
+
+        TextureComponent textureComponent = engine.createComponent(TextureComponent.class);
+        textureComponent.texture = new Texture("stats.png");
+        textureComponent.srcStartX = 0;
+        textureComponent.srcStartY = 74;
+        textureComponent.width = width;
+        textureComponent.height = height;
+        dayCounter.add(textureComponent);
+
+        UIDayComponent uiDayComponent = engine.createComponent(UIDayComponent.class);
+        uiDayComponent.outerPartSrcX = 0;
+        uiDayComponent.outerPartSrcY = 74;
+        uiDayComponent.outerPartSrcWidth = 31;
+        uiDayComponent.outerPartSrcHeight = 11;
+
+        uiDayComponent.numbersSrcX = 0;
+        uiDayComponent.numbersSrcY = 50;
+        uiDayComponent.numbersSrcWidth = 5;
+        uiDayComponent.numbersSrcHeight = 7;
+
+        uiDayComponent.numberXOffset = 24;
+        uiDayComponent.numberYOffset = 2;
+
+        uiDayComponent.currentDay = 0;
+        dayCounter.add(uiDayComponent);
+
+        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
+        positionComponent.positionVector.x = renderX;
+        positionComponent.positionVector.y = renderY;
+        dayCounter.add(positionComponent);
+
+        engine.addEntity(dayCounter);
+
+        return dayCounter;
     }
 
     private Entity createUIClock(int renderX, int renderY, int width, int height) {
@@ -317,6 +361,8 @@ public class PlayScreen implements Screen {
         energyBar.getComponent(StatBarComponent.class).progress = player.getComponent(PlayerComponent.class).energy / 100f;
 
         timeUI.getComponent(UITimeComponent.class).currentHour = engine.getSystem(GameSystem.class).getHour();
+
+        dayCounter.getComponent(UIDayComponent.class).currentDay = engine.getSystem(GameSystem.class).getDay();
 
         //energyBar.getComponent(TextureComponent.class).width++;
         //energyBar.getComponent(TextureComponent.class).height++;

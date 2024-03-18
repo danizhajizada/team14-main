@@ -24,6 +24,10 @@ public class GameSystem extends EntitySystem {
         return hour;
     }
 
+    public int getDay() {
+        return day;
+    }
+
     public void update(float deltaTime) {
         for (Entity entity : entities) {
             PlayerComponent playerComponent = ComponentMappers.player.get(entity);

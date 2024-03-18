@@ -28,6 +28,9 @@ public class UIRenderSystem extends EntitySystem {
             PositionComponent positionComponent = ComponentMappers.position.get(entity);
             Texture texture = textureComponent.texture;
 
+            int renderLocationX = (int)positionComponent.positionVector.x;
+            int renderLocationY = (int)positionComponent.positionVector.y;
+
             int renderWidth = textureComponent.width;
             int renderHeight = textureComponent.height;
 
@@ -56,9 +59,6 @@ public class UIRenderSystem extends EntitySystem {
                  */
 
 
-
-                int renderLocationX = (int)positionComponent.positionVector.x;
-                int renderLocationY = (int)positionComponent.positionVector.y;
 
                 int outerSrcX = statBarComponent.outerPartSrcX;
                 int outerSrcY = statBarComponent.outerPartSrcY;
@@ -91,8 +91,7 @@ public class UIRenderSystem extends EntitySystem {
             } else if (uiComponent.type == UIComponentType.TIME) {
                 UITimeComponent uiTimeComponent = ComponentMappers.time.get(entity);
 
-                int renderLocationX = (int)positionComponent.positionVector.x;
-                int renderLocationY = (int)positionComponent.positionVector.y;
+
 
                 int outerSrcX = uiTimeComponent.outerPartSrcX;
                 int outerSrcY = uiTimeComponent.outerPartSrcY;
@@ -160,6 +159,39 @@ public class UIRenderSystem extends EntitySystem {
                     //Draw pm
                     batch.draw(texture, renderLocationX + ampmXOffset, renderLocationY + numbersYOffset, pmRenderWidth, pmRenderHeight, pmSrcX, pmSrcY, pmSrcWidth, pmSrcHeight, false, false);
                 }
+            } else if (uiComponent.type == UIComponentType.DAY) {
+                UIDayComponent uiDayComponent = ComponentMappers.day.get(entity);
+
+                int currentDay = uiDayComponent.currentDay;
+
+                int outerSrcX = uiDayComponent.outerPartSrcX;
+                int outerSrcY = uiDayComponent.outerPartSrcY;
+
+                int outerSrcWidth = uiDayComponent.outerPartSrcWidth;
+                int outerSrcHeight = uiDayComponent.outerPartSrcHeight;
+
+                int numbersSrcX = uiDayComponent.numbersSrcX;
+                int numbersSrcY = uiDayComponent.numbersSrcY;
+
+                int numbersSrcWidth = uiDayComponent.numbersSrcWidth;
+                int numbersSrcHeight = uiDayComponent.numbersSrcHeight;
+
+                float totalWidthRatio = textureComponent.width / (float)outerSrcWidth;
+                float totalHeightRatio = textureComponent.height / (float)outerSrcHeight;
+
+                int numberXOffset = Math.round(uiDayComponent.numberXOffset * totalWidthRatio);
+                int numberYOffset = Math.round(uiDayComponent.numberYOffset * totalHeightRatio);
+
+                // Draw outer
+                batch.draw(texture, renderLocationX, renderLocationY, renderWidth, renderHeight, outerSrcX, outerSrcY, outerSrcWidth, outerSrcHeight, false, false);
+
+                int numberRenderWidth = Math.round(numbersSrcWidth * totalWidthRatio);
+                int numberRenderHeight = Math.round(numbersSrcHeight * totalHeightRatio);
+
+                int numberSrcX = uiDayComponent.numbersSrcX + ((numbersSrcWidth + 1) * currentDay);
+
+                // Draw number
+                batch.draw(texture, renderLocationX + numberXOffset, renderLocationY + numberYOffset, numberRenderWidth, numberRenderHeight, numberSrcX, numbersSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
             }
         }
     }

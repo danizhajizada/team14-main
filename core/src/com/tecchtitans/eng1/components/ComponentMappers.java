@@ -15,4 +15,5 @@ public class ComponentMappers {
     public static final ComponentMapper<UIComponent> ui = ComponentMapper.getFor(UIComponent.class);
     public static final ComponentMapper<StatBarComponent> statBar = ComponentMapper.getFor(StatBarComponent.class);
     public static final ComponentMapper<UITimeComponent> time = ComponentMapper.getFor(UITimeComponent.class);
+    public static final ComponentMapper<UIDayComponent> day = ComponentMapper.getFor(UIDayComponent.class);
 }
