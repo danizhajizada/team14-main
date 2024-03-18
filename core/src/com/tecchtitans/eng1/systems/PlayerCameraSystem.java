@@ -41,8 +41,8 @@ public class PlayerCameraSystem extends EntitySystem {
 
             TextureComponent playerTextureComponent = ComponentMappers.texture.get(entity);
 
-            Rectangle playerCameraRectangle = new Rectangle(position.positionVector.x - currentCamera.viewportWidth / 2,
-                    position.positionVector.y - currentCamera.viewportHeight / 2, currentCamera.viewportWidth, currentCamera.viewportHeight);
+            //Rectangle playerCameraRectangle = new Rectangle(position.positionVector.x - currentCamera.viewportWidth / 2,
+            //        position.positionVector.y - currentCamera.viewportHeight / 2, currentCamera.viewportWidth, currentCamera.viewportHeight);
 
             //System.out.println(cameraBorder.x);
 

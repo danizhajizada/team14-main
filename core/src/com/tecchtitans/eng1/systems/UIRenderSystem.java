@@ -2,6 +2,7 @@ package com.tecchtitans.eng1.systems;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -14,7 +15,7 @@ public class UIRenderSystem extends EntitySystem {
 
     public void addedToEngine(Engine engine)
     {
-        entities = engine.getEntitiesFor(Family.all(TextureComponent.class, UIComponent.class, PositionComponent.class).get());
+        entities = engine.getEntitiesFor(Family.all(TextureComponent.class, UIComponent.class, PositionComponent.class, StatBarComponent.class).get());
     }
 
     public void render(SpriteBatch batch) {
@@ -32,15 +33,16 @@ public class UIRenderSystem extends EntitySystem {
                 int renderWidth = textureComponent.width;
                 int renderHeight = textureComponent.height;
 
-
-
                 batch.draw(texture, positionComponent.positionVector.x, positionComponent.positionVector.y,
-                        textureComponent.width, textureComponent.height, statBarComponent.outerPartSrcX, statBarComponent.outerPartSrcY,
+                        renderWidth, renderHeight, statBarComponent.outerPartSrcX, statBarComponent.outerPartSrcY,
                         statBarComponent.outerPartSrcWidth, statBarComponent.outerPartSrcHeight, false, false);
 
-                batch.draw(texture, positionComponent.positionVector.x, positionComponent.positionVector.y,
-                        textureComponent.width, textureComponent.height, statBarComponent.outerPartSrcX, statBarComponent.outerPartSrcY,
-                        statBarComponent.outerPartSrcWidth, statBarComponent.outerPartSrcHeight, false, false);
+                batch.draw(texture, positionComponent.positionVector.x + statBarComponent.intersectSrcX, positionComponent.positionVector.y - statBarComponent.intersectSrcY,
+                        100, 0, renderWidth, renderHeight, 1, 1, 0, statBarComponent.innerPartSrcX, statBarComponent.innerPartSrcY,
+                        statBarComponent.innerPartSrcWidth, statBarComponent.innerPartSrcHeight - 5, false, false);
+
+                
+
             }
         }
     }
