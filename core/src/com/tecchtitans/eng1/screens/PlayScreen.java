@@ -13,6 +13,7 @@ import com.badlogic.ashley.core.Entity;
 import com.tecchtitans.eng1.components.GameObjectComponent.ObjectType;
 import com.tecchtitans.eng1.systems.PlayerCameraSystem;
 import com.tecchtitans.eng1.systems.PlayerMovementSystem;
+import com.tecchtitans.eng1.systems.UIRenderSystem;
 
 import java.io.ObjectInput;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class PlayScreen implements Screen {
     Entity player;
     ArrayList<Entity> buildings;
 
-    float level;
+    Entity energyBar;
 
     public PlayScreen(ENGGame game) {
         this.game = game;
@@ -57,7 +58,48 @@ public class PlayScreen implements Screen {
         //building = createBuilding(100, 100, 50, 50);
 
         game.getAudioManager().playMusic("audio/bgmusic.mp3");
-        level = 0.5f;
+
+        energyBar = createStatBar();
+    }
+
+    private Entity createStatBar() {
+        Entity statBar = new Entity();
+
+        UIComponent uiComponent = engine.createComponent(UIComponent.class);
+        uiComponent.type = UIComponentType.STATBAR;
+        statBar.add(uiComponent);
+
+        TextureComponent textureComponent = engine.createComponent(TextureComponent.class);
+        textureComponent.texture = new Texture("stats.png");
+        textureComponent.srcStartX = 0;
+        textureComponent.srcStartY = 0;
+        textureComponent.width = 200;
+        textureComponent.height = 19;
+        statBar.add(textureComponent);
+
+        StatBarComponent statBarComponent = engine.createComponent(StatBarComponent.class);
+        statBarComponent.outerPartSrcX = 0;
+        statBarComponent.outerPartSrcY = 0;
+        statBarComponent.outerPartSrcWidth = 109;
+        statBarComponent.outerPartSrcHeight = 19;
+
+        statBarComponent.innerPartSrcX = 0;
+        statBarComponent.innerPartSrcY = 20;
+        statBarComponent.innerPartSrcWidth = 94;
+        statBarComponent.innerPartSrcHeight = 17;
+
+        statBarComponent.intersectSrcX = 14;
+        statBarComponent.intersectSrcY = 1;
+        statBar.add(statBarComponent);
+
+        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
+        positionComponent.positionVector.x = 50;
+        positionComponent.positionVector.y = 50;
+        statBar.add(positionComponent);
+
+        engine.addEntity(statBar);
+
+        return statBar;
     }
 
     private Entity createBuilding(int spawnX, int spawnY, int width, int height) {
@@ -208,25 +250,20 @@ public class PlayScreen implements Screen {
             yRenderPosition += playerPosition.positionVector.y - (map.getCameraBorder().height - camera.viewportHeight / 2) + playerTexture.width / 2.0f;
         }
 
-        Texture barTexture = new Texture("greenbar.png");
-
         //System.out.println(camera.position.x + map.getCameraBorder().width - camera.viewportWidth / 2);
         //System.out.println(playerPosition.positionVector.x);
+
+
 
 
         batch.begin();
         batch.draw(playerTexture.texture, xRenderPosition, yRenderPosition, playerTexture.srcStartX, playerTexture.srcStartY,
                    playerTexture.width, playerTexture.height);
-        batch.draw(barTexture, 10, Gdx.graphics.getHeight() - 50, (int)(200 * level), 20, 10, 22, 8 + (int)(99 * level), 8, false, false);
+        //batch.draw(statsTexure, 10, 10, 200, 200, 0, 0, 109, 56, false, false);
+        engine.getSystem(UIRenderSystem.class).render(batch);
         batch.end();
 
-        if (level < 1) { level += 0.001f; }
-
         engine.update(v);
-    }
-
-    private void renderStatBar(Texture statTexture) {
-
     }
 
     @Override

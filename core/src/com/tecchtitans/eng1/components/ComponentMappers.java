@@ -12,4 +12,6 @@ public class ComponentMappers {
     public static final ComponentMapper<GameObjectComponent> gameObject = ComponentMapper.getFor(GameObjectComponent.class);
     public static final ComponentMapper<ActivityComponent> activity = ComponentMapper.getFor(ActivityComponent.class);
     public static final ComponentMapper<TextureComponent> texture = ComponentMapper.getFor(TextureComponent.class);
+    public static final ComponentMapper<UIComponent> ui = ComponentMapper.getFor(UIComponent.class);
+    public static final ComponentMapper<StatBarComponent> statBar = ComponentMapper.getFor(StatBarComponent.class);
 }
