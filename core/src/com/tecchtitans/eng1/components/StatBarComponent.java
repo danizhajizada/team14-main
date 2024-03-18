@@ -14,4 +14,7 @@ public class StatBarComponent implements Component {
     public int innerPartSrcX, innerPartSrcY;
     public int innerPartSrcWidth, innerPartSrcHeight;
     public int intersectSrcX, intersectSrcY;
+
+    // A number from 0 to 1
+    public float progress;
 }

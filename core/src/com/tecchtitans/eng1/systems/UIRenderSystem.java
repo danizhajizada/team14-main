@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.tecchtitans.eng1.components.*;
 
 public class UIRenderSystem extends EntitySystem {
@@ -15,7 +16,7 @@ public class UIRenderSystem extends EntitySystem {
 
     public void addedToEngine(Engine engine)
     {
-        entities = engine.getEntitiesFor(Family.all(TextureComponent.class, UIComponent.class, PositionComponent.class, StatBarComponent.class).get());
+        entities = engine.getEntitiesFor(Family.all(TextureComponent.class, UIComponent.class, PositionComponent.class).get());
     }
 
     public void render(SpriteBatch batch) {
@@ -33,16 +34,21 @@ public class UIRenderSystem extends EntitySystem {
                 int renderWidth = textureComponent.width;
                 int renderHeight = textureComponent.height;
 
+                int innerSrcWidth = (int)(statBarComponent.innerPartSrcWidth * statBarComponent.progress);
+                int innerRenderWidth = (int)(renderWidth * statBarComponent.progress);
+
                 batch.draw(texture, positionComponent.positionVector.x, positionComponent.positionVector.y,
                         renderWidth, renderHeight, statBarComponent.outerPartSrcX, statBarComponent.outerPartSrcY,
-                        statBarComponent.outerPartSrcWidth, statBarComponent.outerPartSrcHeight, false, false);
+                        statBarComponent.outerPartSrcWidth, statBarComponent.outerPartSrcHeight,
+                        false, false);
 
-                batch.draw(texture, positionComponent.positionVector.x + statBarComponent.intersectSrcX, positionComponent.positionVector.y - statBarComponent.intersectSrcY,
-                        100, 0, renderWidth, renderHeight, 1, 1, 0, statBarComponent.innerPartSrcX, statBarComponent.innerPartSrcY,
-                        statBarComponent.innerPartSrcWidth, statBarComponent.innerPartSrcHeight - 5, false, false);
+                batch.draw(texture, positionComponent.positionVector.x + statBarComponent.intersectSrcX,
+                        positionComponent.positionVector.y - statBarComponent.intersectSrcY, innerRenderWidth, renderHeight,
+                        statBarComponent.innerPartSrcX, statBarComponent.innerPartSrcY,
+                        innerSrcWidth, statBarComponent.innerPartSrcHeight,
+                        false, false);
 
                 
-
             }
         }
     }

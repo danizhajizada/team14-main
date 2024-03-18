@@ -254,7 +254,7 @@ public class PlayScreen implements Screen {
         //System.out.println(playerPosition.positionVector.x);
 
 
-
+        energyBar.getComponent(StatBarComponent.class).progress = player.getComponent(PlayerComponent.class).energy / 100f;
 
         batch.begin();
         batch.draw(playerTexture.texture, xRenderPosition, yRenderPosition, playerTexture.srcStartX, playerTexture.srcStartY,
