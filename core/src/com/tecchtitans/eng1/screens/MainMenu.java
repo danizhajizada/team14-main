@@ -22,6 +22,7 @@ public class MainMenu extends GameScreen {
 
     @Override
     public void show() {
+
         map = new Map("mainmenu_sample.tmx", 2288, 1200);
     }
 
@@ -78,7 +79,7 @@ public class MainMenu extends GameScreen {
 
     @Override
     public void hide() {
-
+        game.getAudioManager().stopMusic();
     }
 
     @Override
