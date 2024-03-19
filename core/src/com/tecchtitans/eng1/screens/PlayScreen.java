@@ -381,13 +381,13 @@ public class PlayScreen implements Screen {
 
         Camera camera = map.getCamera();
 
-        float xRenderPosition = camera.viewportWidth / 2 - playerTexture.width / 2.0f;
-        float yRenderPosition = camera.viewportHeight / 2 - playerTexture.height / 2.0f;
+        float playerXRenderPosition = camera.viewportWidth / 2.0f - playerTexture.width / 2.0f;
+        float playerYRenderPosition = camera.viewportHeight / 2.0f - playerTexture.height / 2.0f;
         //float xRenderPosition = camera.viewportWidth / 2;
         //float yRenderPosition = camera.viewportHeight / 2;
 
         //float cameraXCenter = camera.position.x - camera.viewportWidth / 2;
-
+        /*
         if (playerPosition.positionVector.x < map.getCameraBorder().x + camera.viewportWidth / 2) {
             xRenderPosition -= map.getCameraBorder().x
                     + camera.viewportWidth / 2
@@ -411,6 +411,42 @@ public class PlayScreen implements Screen {
                     + playerTexture.width / 2.0f;
         }
 
+
+         */
+
+        PlayerCameraSystem playerCameraSystem = engine.getSystem(PlayerCameraSystem.class);
+
+        if (playerCameraSystem.isCameraAtLeftBorder()) {
+            float cameraCentreX = map.getCameraBorder().x + camera.viewportWidth / 2.0f;
+
+            float playerXDifference = cameraCentreX - playerPosition.positionVector.x;
+
+            playerXRenderPosition = cameraCentreX - playerXDifference;
+        }
+        if (playerCameraSystem.isCameraAtRightBorder()) {
+            float cameraCentreX = map.getCameraBorder().x + map.getCameraBorder().width - camera.viewportWidth / 2.0f;
+
+            float playerXDifference = playerPosition.positionVector.x - cameraCentreX;
+
+            playerXRenderPosition = playerXRenderPosition + playerXDifference + playerTexture.width / 2.0f;
+        }
+
+        if (playerCameraSystem.isCameraAtBottomBorder()) {
+            float cameraCentreY = map.getCameraBorder().y + camera.viewportHeight / 2.0f;
+
+            float playerYDifference = cameraCentreY - playerPosition.positionVector.y;
+
+            playerYRenderPosition = cameraCentreY - playerYDifference;
+        }
+        if (playerCameraSystem.isCameraAtTopBorder()) {
+            float cameraCentreY = map.getCameraBorder().y + map.getCameraBorder().height - camera.viewportHeight / 2.0f;
+
+            float playerYDifference = playerPosition.positionVector.y - cameraCentreY;
+
+            playerYRenderPosition = playerYRenderPosition + playerYDifference + playerTexture.height / 2.0f;
+        }
+
+
         //System.out.println(camera.position.x + map.getCameraBorder().width - camera.viewportWidth / 2);
         //System.out.println(playerPosition.positionVector.x);
 
@@ -429,7 +465,7 @@ public class PlayScreen implements Screen {
         //energyBar.getComponent(TextureComponent.class).height++;
 
         batch.begin();
-        batch.draw(playerTexture.texture, xRenderPosition, yRenderPosition, playerTexture.srcStartX, playerTexture.srcStartY,
+        batch.draw(playerTexture.texture, playerXRenderPosition, playerYRenderPosition, playerTexture.srcStartX, playerTexture.srcStartY,
                    playerTexture.width, playerTexture.height);
         //batch.draw(statsTexure, 10, 10, 200, 200, 0, 0, 109, 56, false, false);
         engine.getSystem(UIRenderSystem.class).render(batch);
@@ -440,10 +476,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void resize(int i, int i1) {
-        if (i < map.getWidth() && i1 < map.getHeight()) {
-            map.getCamera().setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            //map.getCamera().update();
-        }
+
     }
 
     @Override

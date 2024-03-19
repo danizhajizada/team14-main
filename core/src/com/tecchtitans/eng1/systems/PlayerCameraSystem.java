@@ -18,7 +18,12 @@ public class PlayerCameraSystem extends EntitySystem {
 
     private Rectangle cameraBorder;
 
-    public PlayerCameraSystem() {};
+    private boolean cameraAtLeftBorder, cameraAtRightBorder;
+    private boolean cameraAtTopBorder, cameraAtBottomBorder;
+
+    public PlayerCameraSystem() {
+        cameraAtLeftBorder = cameraAtRightBorder = cameraAtTopBorder = cameraAtBottomBorder = false;
+    };
 
     public void addedToEngine(Engine engine)
     {
@@ -38,19 +43,50 @@ public class PlayerCameraSystem extends EntitySystem {
             Entity entity = entities.get(i);
 
             PositionComponent position = ComponentMappers.position.get(entity);
-
             TextureComponent playerTextureComponent = ComponentMappers.texture.get(entity);
 
+            float playerCentreX = position.positionVector.x + playerTextureComponent.width / 2.0f;
+            float playerCentreY = position.positionVector.y + playerTextureComponent.height / 2.0f;
+
+            float minCameraXPosition = cameraBorder.x + currentCamera.viewportWidth / 2.0f;
+            float maxCameraXPosition = cameraBorder.x + cameraBorder.width - currentCamera.viewportWidth / 2.0f;
+
+            float minCameraYPosition = cameraBorder.y + currentCamera.viewportHeight / 2.0f;
+            float maxCameraYPosition = cameraBorder.y + cameraBorder.height - currentCamera.viewportHeight / 2.0f;
+
             currentCamera.position.x = MathUtils.clamp(
-                    position.positionVector.x + playerTextureComponent.width / 2.0f,
-                    cameraBorder.x + currentCamera.viewportWidth / 2,
-                    cameraBorder.x + cameraBorder.width - currentCamera.viewportWidth / 2
+                    playerCentreX,
+                    minCameraXPosition,
+                    maxCameraXPosition
             );
+
             currentCamera.position.y = MathUtils.clamp(
-                    position.positionVector.y + playerTextureComponent.height / 2.0f,
-                    cameraBorder.y + currentCamera.viewportHeight / 2,
-                    cameraBorder.y + cameraBorder.height - currentCamera.viewportHeight / 2
+                    playerCentreY,
+                    minCameraYPosition,
+                    maxCameraYPosition
             );
+
+            cameraAtLeftBorder = currentCamera.position.x <= minCameraXPosition;
+            cameraAtRightBorder = currentCamera.position.x >= maxCameraXPosition;
+
+            cameraAtBottomBorder = currentCamera.position.y <= minCameraYPosition;
+            cameraAtTopBorder = currentCamera.position.y >= maxCameraYPosition;
         }
+    }
+
+    public boolean isCameraAtLeftBorder() {
+        return cameraAtLeftBorder;
+    }
+
+    public boolean isCameraAtRightBorder() {
+        return cameraAtRightBorder;
+    }
+
+    public boolean isCameraAtTopBorder() {
+        return cameraAtTopBorder;
+    }
+
+    public boolean isCameraAtBottomBorder() {
+        return cameraAtBottomBorder;
     }
 }
