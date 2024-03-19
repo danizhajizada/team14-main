@@ -45,7 +45,7 @@ public class MainMenu extends GameScreen {
                 if (button.getRectangle().contains(relMouseLoc.x, relMouseLoc.y)) {
                     switch (button.getName()) {
                         case "start":
-                            game.setScreen(new PlayScreen(game));
+                            game.switchToPlayScreen();
                             break;
                         case "options":
                             break;

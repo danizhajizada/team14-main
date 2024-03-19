@@ -20,6 +20,10 @@ public class GameSystem extends EntitySystem {
         entities = engine.getEntitiesFor(Family.all(PlayerComponent.class).get());
     }
 
+    public boolean isGameComplete() {
+        return gameComplete;
+    }
+
     public int getHour() {
         return hour;
     }

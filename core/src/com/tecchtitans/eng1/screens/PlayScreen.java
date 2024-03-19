@@ -21,10 +21,8 @@ import java.io.ObjectInput;
 import java.util.ArrayList;
 import java.util.EnumMap;
 
-public class PlayScreen implements Screen {
-    ENGGame game;
+public class PlayScreen extends GameScreen {
     ECSEngine engine;
-    Map map;
     SpriteBatch batch;
     Entity player;
     ArrayList<Entity> buildings;
@@ -472,6 +470,10 @@ public class PlayScreen implements Screen {
         batch.end();
 
         engine.update(v);
+
+        if (engine.getSystem(GameSystem.class).isGameComplete()) {
+            game.switchToGameOverScreen();
+        }
     }
 
     @Override

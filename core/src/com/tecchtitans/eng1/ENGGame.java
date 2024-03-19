@@ -18,12 +18,18 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.tecchtitans.eng1.screens.GameOverScreen;
 import com.tecchtitans.eng1.screens.MainMenu;
+import com.tecchtitans.eng1.screens.PlayScreen;
 import com.tecchtitans.eng1.systems.*;
 
 public class ENGGame extends Game {
 	ECSEngine engine;
 	AudioManager audioManager;
+
+	MainMenu mainMenu;
+	PlayScreen playScreen;
+	GameOverScreen gameOverScreen;
 
 	public ECSEngine getEngine()
 	{
@@ -31,8 +37,49 @@ public class ENGGame extends Game {
 	}
 	public AudioManager getAudioManager() { return audioManager; }
 
+	public void switchToMainMenu() {
+		setScreen(mainMenu);
+	}
+
+	public void switchToPlayScreen() {
+		setScreen(playScreen);
+	}
+
+	public void switchToGameOverScreen() {
+		setScreen(gameOverScreen);
+	}
+
 	@Override
 	public void create () {
+		setupEngine();
+
+		//initialize audio manager
+
+		audioManager = new AudioManager();
+
+		//player = createPlayer();
+
+		//setScreen(new MainMenu(this));
+
+		//camera = new OrthographicCamera();
+		//camera.setToOrtho(false, 2268, 1200);
+
+		//map = new TmxMapLoader().load("mainmenu_sample.tmx");
+
+		//renderer = new OrthogonalTiledMapRenderer(map);
+
+		//mapRenderer.setView(camera);
+
+		mainMenu = new MainMenu(this);
+		playScreen = new PlayScreen(this);
+		gameOverScreen = new GameOverScreen(this);
+
+		switchToMainMenu();
+
+		//Gdx.graphics.wait();
+	}
+
+	public void setupEngine() {
 		engine = new ECSEngine();
 
 		//MovementSystem movementSystem = new MovementSystem();
@@ -60,27 +107,21 @@ public class ENGGame extends Game {
 
 		GameSystem gameSystem = new GameSystem();
 		engine.addSystem(gameSystem);
+	}
 
-		//initialize audio manager
+	public void reset() {
+		mainMenu.dispose();
+		playScreen.dispose();
+		gameOverScreen.dispose();
 
-		audioManager = new AudioManager();
+		setupEngine();
 
-		//player = createPlayer();
+		//audioManager = new AudioManager();
+		audioManager.stopMusic();
 
-		//setScreen(new MainMenu(this));
-
-		//camera = new OrthographicCamera();
-		//camera.setToOrtho(false, 2268, 1200);
-
-		//map = new TmxMapLoader().load("mainmenu_sample.tmx");
-
-		//renderer = new OrthogonalTiledMapRenderer(map);
-
-		//mapRenderer.setView(camera);
-
-		setScreen(new MainMenu(this));
-
-		//Gdx.graphics.wait();
+		mainMenu = new MainMenu(this);
+		playScreen = new PlayScreen(this);
+		gameOverScreen = new GameOverScreen(this);
 	}
 
 	@Override

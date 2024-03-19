@@ -23,7 +23,7 @@ public class Map {
     OrthogonalTiledMapRenderer mapRenderer;
     Rectangle worldBorder;
     Rectangle cameraBorder;
-    ArrayList<RectangleMapObject> buildingObjects = new ArrayList<>();
+    ArrayList<RectangleMapObject> buildingObjects;
 
     int width, height;
 
@@ -36,6 +36,8 @@ public class Map {
 
         map = new TmxMapLoader().load(path);
         mapRenderer = new OrthogonalTiledMapRenderer(map);
+
+        buildingObjects = new ArrayList<RectangleMapObject>();
 
         processCollisionLayer();
         processCameraLayer();
