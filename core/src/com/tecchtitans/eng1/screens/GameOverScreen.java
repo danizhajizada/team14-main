@@ -44,7 +44,7 @@ public class GameOverScreen extends GameScreen {
                     if (button.getRectangle().contains(relMouseLoc.x, relMouseLoc.y)) {
                         if (button.getName().equals("playAgain")) {
                             game.reset();
-                            game.switchToPlayScreen();
+                            game.switchToMainMenu();
                         }
                     }
                 }
