@@ -79,7 +79,7 @@ public class MainMenu extends GameScreen {
 
     @Override
     public void hide() {
-        game.getAudioManager().stopMusic();
+        //game.getAudioManager().stopMusic();
     }
 
     @Override
