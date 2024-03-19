@@ -7,4 +7,6 @@ import com.tecchtitans.eng1.Map;
 public abstract class GameScreen implements Screen {
     ENGGame game;
     Map map;
+
+    // could add hide method to stop music for every screen when hidden.
 }
