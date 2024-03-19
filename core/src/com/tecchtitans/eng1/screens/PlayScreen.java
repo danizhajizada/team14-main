@@ -452,7 +452,7 @@ public class PlayScreen implements Screen {
 
 
         energyBar.getComponent(StatBarComponent.class).progress = player.getComponent(PlayerComponent.class).energy / 100f;
-        timeUI.getComponent(UITimeComponent.class).currentHour = engine.getSystem(GameSystem.class).getHour() + 7;
+        timeUI.getComponent(UITimeComponent.class).currentHour = engine.getSystem(GameSystem.class).getHour() + 9;
         dayCounter.getComponent(UIDayComponent.class).currentDay = engine.getSystem(GameSystem.class).getDay();
 
         activityCounter.getComponent(UIActivityCountComponent.class).sleepCount = player.getComponent(PlayerComponent.class).activityCount.get(ActivityType.SLEEP);

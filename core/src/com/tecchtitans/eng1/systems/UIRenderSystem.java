@@ -103,6 +103,14 @@ public class UIRenderSystem extends EntitySystem {
                 batch.draw(texture, renderLocationX, renderLocationY, renderWidth, renderHeight, outerSrcX, outerSrcY, outerSrcWidth, outerSrcHeight, false, false);
 
                 int currentHour = uiTimeComponent.currentHour;
+
+                boolean isAM = (currentHour / 12) % 2 == 0;
+
+                currentHour %= 12;
+                if(currentHour == 0) {
+                    currentHour = 12;
+                }
+
                 int hourFirstNum = currentHour / 10;
                 int hourSecondNum = currentHour % 10;
 
@@ -134,7 +142,7 @@ public class UIRenderSystem extends EntitySystem {
 
                 int ampmXOffset = Math.round((uiTimeComponent.numbersXOffset + (numbersSrcWidth + 1) * 2) * totalWidthRatio);
 
-                if (currentHour < 12) {
+                if (isAM) {
                     int amRenderWidth = Math.round(uiTimeComponent.amSrcWidth * totalWidthRatio);
                     int amRenderHeight = Math.round(uiTimeComponent.amSrcHeight * totalHeightRatio);
 
