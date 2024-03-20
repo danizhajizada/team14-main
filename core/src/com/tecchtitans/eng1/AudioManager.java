@@ -33,7 +33,9 @@ public class AudioManager {
      * Stops the currently playing music, if there is any.
      */
     public void stopMusic() {
-        currentMusic.stop();
+        if(currentMusic != null){
+            currentMusic.stop();
+        }
     }
 
     /**
