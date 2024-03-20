@@ -38,7 +38,7 @@ public class GameOverScreen extends GameScreen {
      * Renders the game over map on the screen. This code continually loops while the screen is being shown.
      * Continually checks for user input on the buttons on screen. Once a button is clicked, the proper
      * respective operations are performed.
-     * @param v - ???
+     * @param v - Time passed since last frame in seconds. (delta time)
      */
     @Override
     public void render(float v) {

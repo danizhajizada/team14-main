@@ -39,7 +39,7 @@ public class MainMenu extends GameScreen {
     /**
      * Renders the main menu map on the screen. Checks for user input on the screen's button
      * and performs the correct operation based upon the button pressed.
-     * @param v - ???
+     * @param v - Time passed since last frame in seconds. (delta time)
      */
     @Override
     public void render(float v) {
