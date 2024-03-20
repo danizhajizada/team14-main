@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.tecchtitans.eng1.components.*;
 
 /**
- * Player camera system.
+ * A system that handles updates to a maps camera based on player position.
  */
 public class PlayerCameraSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
@@ -34,7 +34,7 @@ public class PlayerCameraSystem extends EntitySystem {
 
     /**
      * Once a system is added to an engine, all the entities in that engine
-     * with an PositionComponent are added to the system in an array.
+     * with a PlayerComponent and PositionComponent are added to the system in an array.
      * @param engine - The engine the system was added to.
      */
     public void addedToEngine(Engine engine)
@@ -59,8 +59,9 @@ public class PlayerCameraSystem extends EntitySystem {
     }
 
     /**
-     * Called every tick. Checks if camera is at the border based upon the players position.
-     * !!! WRITE IN MORE DETAIL !!!
+     * Called every tick. Changes the cameras position so the player is at the centre.
+     * If the player goes beyond the camera border so it no longer can be centred around the player,
+     * the appropriate field is changed to indicate which side of the border has been passed.
      * @param deltaTime - Time passed in seconds since last frame.
      */
     public void update(float deltaTime) {

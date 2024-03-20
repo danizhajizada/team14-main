@@ -5,5 +5,5 @@ package com.tecchtitans.eng1;
  * sleeping, eating, or recreational activities.
  */
 public enum ActivityType {
-    SLEEP, STUDY, EAT, REC
+    NONE, SLEEP, STUDY, EAT, REC
 }

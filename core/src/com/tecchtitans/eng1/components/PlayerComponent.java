@@ -8,11 +8,24 @@ import java.util.Dictionary;
 import java.util.EnumMap;
 import java.util.HashMap;
 
+/**
+ * A component that stores relevant information about a player.
+ */
 public class PlayerComponent implements Component {
-    public int energy;
-    public int study;
-    //not sure whether an enummap or an array is more appropriate here
-    //public EnumMap<ActivityType, Integer> activityCount;
+    /**
+     * Stores the amount of energy the player has.
+     */
+    public int energy = 0;
+    /**
+     * Stores the study score the player has.
+     */
+    public int study = 0;
+    /**
+     * An enum map that maps an activity type to the amount of times it has been performed by the player.
+     */
     public EnumMap<ActivityType, Integer> activityCount;
-    public ActivityComponent currentActivity;
+    /**
+     * Stores the current activity that is to be performed.
+     */
+    public ActivityComponent currentActivity = null;
 }
