@@ -21,10 +21,10 @@ public class AudioManager {
     /**
      * Plays the desired music from a given internal file path, and sets the music to
      * loop indefinitely.
-     * @param name - Internal file path of music to be played, given as a String.
+     * @param path - Internal file path of music to be played, given as a String.
      */
-    public void playMusic(String name) {
-        currentMusic = Gdx.audio.newMusic(Gdx.files.internal(name));
+    public void playMusic(String path) {
+        currentMusic = Gdx.audio.newMusic(Gdx.files.internal(path));
         currentMusic.setLooping(true);
         currentMusic.play();
     }
@@ -40,10 +40,10 @@ public class AudioManager {
 
     /**
      * Plays desired sound effect from a given internal file path.
-     * @param name - Internal file path of sound to be played, given as a String.
+     * @param path - Internal file path of sound to be played, given as a String.
      */
-    public void playSound(String name) {
-        Sound soundEffect = Gdx.audio.newSound(Gdx.files.internal(name));
+    public void playSound(String path) {
+        Sound soundEffect = Gdx.audio.newSound(Gdx.files.internal(path));
         soundEffect.play();
     }
 }
