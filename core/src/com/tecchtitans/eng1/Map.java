@@ -9,7 +9,9 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Class that is used for storing information about a map that can be displayed
@@ -23,6 +25,7 @@ public class Map {
     Rectangle worldBorder;
     Rectangle cameraBorder;
     ArrayList<RectangleMapObject> buildingObjects;
+    ArrayList<RectangleMapObject> solidObjects;
 
     int width, height;
 
@@ -48,6 +51,7 @@ public class Map {
         mapRenderer = new OrthogonalTiledMapRenderer(map);
 
         buildingObjects = new ArrayList<RectangleMapObject>();
+        solidObjects = new ArrayList<RectangleMapObject>();
 
         processCollisionLayer();
         processCameraLayer();
@@ -68,7 +72,6 @@ public class Map {
         for (MapObject obj : buildingLayer.getObjects()) {
             if(obj instanceof RectangleMapObject){
                 buildingObjects.add((RectangleMapObject) obj);
-                //System.out.println(((RectangleMapObject)obj).getProperties().get("type"));
             }
         }
     }
@@ -81,6 +84,8 @@ public class Map {
     private void processCollisionLayer() {
         RectangleMapObject worldBorderObject = getRectangleObjectFromLayer("collisionLayer", "worldBorder");
         if(worldBorderObject != null) { worldBorder = worldBorderObject.getRectangle(); }
+
+        solidObjects = getRectangleObjectsFromLayerByClass("collisionLayer", "SOLID");
     }
 
     /**
@@ -108,7 +113,6 @@ public class Map {
         }
 
         for (MapObject obj : mapLayer.getObjects()) {
-            //System.out.println(obj.getOpacity());
             if (obj.getName().equals(objectName)) {
                 if (obj instanceof RectangleMapObject) {
                     return (RectangleMapObject) obj;
@@ -117,6 +121,37 @@ public class Map {
         }
 
         return null;
+    }
+
+    /**
+     * Checks for objects with the given class name and return all objects if they are a rectangle object.
+     * @param layerName Name of desired layer to search from the map, given as a String.
+     * @param className Name of the desired rectangle object class name, given as a String.
+     * @return A list of rectangle objects that have desired class name.
+     */
+    private ArrayList<RectangleMapObject> getRectangleObjectsFromLayerByClass(String layerName, String className) {
+        ArrayList<RectangleMapObject> objects = new ArrayList<>();
+        MapLayer mapLayer = map.getLayers().get(layerName);
+
+        if (mapLayer == null) {
+            return objects;
+        }
+
+        for (MapObject obj : mapLayer.getObjects()) {
+            String objectClass;
+            try { objectClass = obj.getProperties().get("type").toString(); }
+            catch (Exception e) {
+                continue;
+            }
+
+            if (objectClass.equals(className)) {
+                if (obj instanceof RectangleMapObject) {
+                    objects.add((RectangleMapObject) obj);
+                }
+            }
+        }
+
+        return objects;
     }
 
     /**
@@ -141,6 +176,12 @@ public class Map {
      //* @see RectangleMapObject
      */
     public ArrayList<RectangleMapObject> getBuildingObjects() { return buildingObjects; }
+
+    /**
+     * Returns the building objects found in the map.
+     * @return solid objects as an array of RectangleMapObjects.
+     */
+    public ArrayList<RectangleMapObject> getSolidObjects() { return solidObjects; }
 
     /**
      * Returns the camera's display border.
