@@ -16,7 +16,7 @@ public class ECSEngine extends Engine {
     Map currentMap;
 
     /**
-     * Instantiates an ECS
+     * Instantiates an ECS engine
      */
     public ECSEngine() {
         super();
@@ -30,6 +30,14 @@ public class ECSEngine extends Engine {
         this.currentMap = map;
     }
 
+    /**
+     * 
+     * @param renderX
+     * @param renderY
+     * @param width
+     * @param height
+     * @return
+     */
     public Entity createUIActivityCounter(int renderX, int renderY, int width, int height) {
         Entity activityCounter = new Entity();
 
@@ -215,27 +223,6 @@ public class ECSEngine extends Engine {
         addEntity(statBar);
 
         return statBar;
-    }
-
-    public Entity createBuilding(int spawnX, int spawnY, int width, int height) {
-        Entity building = createEntity();
-
-        building.add(createComponent(PositionComponent.class));
-
-        CollisionComponent collisionComponent = createComponent(CollisionComponent.class);
-        collisionComponent.collisionRectangle.x = spawnX;
-        collisionComponent.collisionRectangle.y = spawnY;
-        collisionComponent.collisionRectangle.width = width;
-        collisionComponent.collisionRectangle.height = height;
-        building.add(collisionComponent);
-
-        GameObjectComponent gameObjectComponent = createComponent(GameObjectComponent.class);
-        gameObjectComponent.type = GameObjectComponent.ObjectType.BUILDING;
-        building.add(gameObjectComponent);
-
-        addEntity(building);
-
-        return building;
     }
 
     // adding entity assuming building already on map

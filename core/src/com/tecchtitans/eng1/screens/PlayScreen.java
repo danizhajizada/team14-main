@@ -95,36 +95,6 @@ public class PlayScreen extends GameScreen {
 
         float playerXRenderPosition = camera.viewportWidth / 2.0f - playerTexture.width / 2.0f;
         float playerYRenderPosition = camera.viewportHeight / 2.0f - playerTexture.height / 2.0f;
-        //float xRenderPosition = camera.viewportWidth / 2;
-        //float yRenderPosition = camera.viewportHeight / 2;
-
-        //float cameraXCenter = camera.position.x - camera.viewportWidth / 2;
-        /*
-        if (playerPosition.positionVector.x < map.getCameraBorder().x + camera.viewportWidth / 2) {
-            xRenderPosition -= map.getCameraBorder().x
-                    + camera.viewportWidth / 2
-                    - playerPosition.positionVector.x
-                    - playerTexture.width / 2.0f;
-        }
-        if (playerPosition.positionVector.x > map.getCameraBorder().width - camera.viewportWidth / 2) {
-            xRenderPosition += playerPosition.positionVector.x
-                    - (map.getCameraBorder().width - camera.viewportWidth / 2)
-                    + playerTexture.width / 2.0f;
-        }
-        if (playerPosition.positionVector.y < map.getCameraBorder().x + camera.viewportHeight / 2) {
-            yRenderPosition -= map.getCameraBorder().x
-                    + camera.viewportHeight / 2
-                    - playerPosition.positionVector.y
-                    - playerTexture.width / 2.0f;
-        }
-        if (playerPosition.positionVector.y > map.getCameraBorder().height - camera.viewportHeight / 2) {
-            yRenderPosition += playerPosition.positionVector.y
-                    - (map.getCameraBorder().height - camera.viewportHeight / 2)
-                    + playerTexture.width / 2.0f;
-        }
-
-
-         */
 
         PlayerCameraSystem playerCameraSystem = engine.getSystem(PlayerCameraSystem.class);
 
@@ -159,10 +129,6 @@ public class PlayScreen extends GameScreen {
         }
 
 
-        //System.out.println(camera.position.x + map.getCameraBorder().width - camera.viewportWidth / 2);
-        //System.out.println(playerPosition.positionVector.x);
-
-
         energyBar.getComponent(StatBarComponent.class).progress = player.getComponent(PlayerComponent.class).energy / 100f;
         timeUI.getComponent(UITimeComponent.class).currentHour = engine.getSystem(GameSystem.class).getHour() + 9;
         dayCounter.getComponent(UIDayComponent.class).currentDay = engine.getSystem(GameSystem.class).getDay();
@@ -172,14 +138,9 @@ public class PlayScreen extends GameScreen {
         activityCounter.getComponent(UIActivityCountComponent.class).eatCount = player.getComponent(PlayerComponent.class).activityCount.get(ActivityType.EAT);
         activityCounter.getComponent(UIActivityCountComponent.class).recCount = player.getComponent(PlayerComponent.class).activityCount.get(ActivityType.REC);
 
-
-        //energyBar.getComponent(TextureComponent.class).width++;
-        //energyBar.getComponent(TextureComponent.class).height++;
-
         batch.begin();
         batch.draw(playerTexture.texture, playerXRenderPosition, playerYRenderPosition, playerTexture.srcStartX, playerTexture.srcStartY,
                    playerTexture.width, playerTexture.height);
-        //batch.draw(statsTexure, 10, 10, 200, 200, 0, 0, 109, 56, false, false);
         engine.getSystem(UIRenderSystem.class).render(batch);
         batch.end();
 
