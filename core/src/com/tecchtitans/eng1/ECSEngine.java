@@ -320,9 +320,9 @@ public class ECSEngine extends Engine {
         player.add(createComponent(InputComponent.class));
 
         TextureComponent playerTexture = createComponent(TextureComponent.class);
-        playerTexture.texture = new Texture("spacesoldier.png");
-        playerTexture.srcStartX = 8;
-        playerTexture.srcStartY = 11;
+        playerTexture.texture = new Texture("character4.png");
+        playerTexture.srcStartX = 0;
+        playerTexture.srcStartY = 0;
         playerTexture.width = width;
         playerTexture.height = height;
 
