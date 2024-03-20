@@ -15,12 +15,19 @@ import com.tecchtitans.eng1.systems.GameSystem;
 import com.tecchtitans.eng1.systems.PlayerCameraSystem;
 import com.tecchtitans.eng1.systems.PlayerMovementSystem;
 import com.tecchtitans.eng1.systems.UIRenderSystem;
-import sun.jvm.hotspot.debugger.cdbg.EnumType;
 
 import java.io.ObjectInput;
 import java.util.ArrayList;
 import java.util.EnumMap;
 
+/**
+ * PlayScreen is the screen that will be displayed during gameplay. It allows for
+ * a user designed map to be displayed and can create entities for buildings
+ * that can be interacted so long as they are identified in the map file. A
+ * player entity is added on the map that can interact with the aforementioned
+ * buildings, along with implementing UI entities that display useful information
+ * about the currently running game to the player.
+ */
 public class PlayScreen extends GameScreen {
     ECSEngine engine;
     SpriteBatch batch;
@@ -31,10 +38,16 @@ public class PlayScreen extends GameScreen {
     Entity dayCounter;
     Entity activityCounter;
 
+    /**
+     * Instantiates a play screen with the currently running game instance, along with
+     * the ECS engine contained within the game.
+     * @param game
+     */
     public PlayScreen(ENGGame game) {
         this.game = game;
         this.engine = game.getEngine();
     }
+
 
     @Override
     public void show() {

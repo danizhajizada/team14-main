@@ -12,22 +12,42 @@ import com.tecchtitans.eng1.components.*;
 
 import java.awt.*;
 
+/**
+ * System that handles moving a player around a map. Ensures that a player cannot
+ * walk outside the bounds of a map by checking for a collision ????(not sure if this is true)
+ */
 public class PlayerMovementSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
 
     private Map currentMap;
 
+    /**
+     * Instantiates an empty PlayerMovementSystem.
+     */
     public PlayerMovementSystem() {};
 
+    /**
+     * Once a system is added to an engine, all the entities in that engine
+     * with a PlayerComponent and CollisionComponent are added to the system in an array.
+     * @param engine - The engine the system was added to.
+     */
     public void addedToEngine(Engine engine)
     {
         entities = engine.getEntitiesFor(Family.all(PlayerComponent.class, CollisionComponent.class).get());
     }
 
+    /**
+     * Updates the current map the player is on with a desired map.
+     * @param map - Desired Map instance for the play to be on.
+     */
     public void updateMap(Map map) {
         this.currentMap = map;
     }
 
+    /**
+     * Called every tick. Write about how it works.
+     * @param deltaTime - Time passed since last frame in seconds.
+     */
     public void update(float deltaTime) {
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);

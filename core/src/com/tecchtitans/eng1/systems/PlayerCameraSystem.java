@@ -11,6 +11,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.tecchtitans.eng1.components.*;
 
+/**
+ * Player camera system.
+ */
 public class PlayerCameraSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
 
@@ -21,23 +24,45 @@ public class PlayerCameraSystem extends EntitySystem {
     private boolean cameraAtLeftBorder, cameraAtRightBorder;
     private boolean cameraAtTopBorder, cameraAtBottomBorder;
 
+    /**
+     * Instantiates PlayerCameraSystem by setting the boolean values for the camera being at
+     * any given border to false.
+     */
     public PlayerCameraSystem() {
         cameraAtLeftBorder = cameraAtRightBorder = cameraAtTopBorder = cameraAtBottomBorder = false;
     };
 
+    /**
+     * Once a system is added to an engine, all the entities in that engine
+     * with an PositionComponent are added to the system in an array.
+     * @param engine - The engine the system was added to.
+     */
     public void addedToEngine(Engine engine)
     {
         entities = engine.getEntitiesFor(Family.all(PlayerComponent.class, PositionComponent.class).get());
     }
 
+    /**
+     * Sets camera to the desired camera.
+     * @param camera - Desired camera.
+     */
     public void updateCamera(OrthographicCamera camera) {
         this.currentCamera = camera;
     }
 
+    /**
+     * Updates the camera border to the desired cameraBorder.
+     * @param cameraBorder - Rectangle that represents the bounds of the camera.
+     */
     public void updateCameraBorder(Rectangle cameraBorder) {
         this.cameraBorder = cameraBorder;
     }
 
+    /**
+     * Called every tick. Checks if camera is at the border based upon the players position.
+     * !!! WRITE IN MORE DETAIL !!!
+     * @param deltaTime - Time passed in seconds since last frame.
+     */
     public void update(float deltaTime) {
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
@@ -74,18 +99,38 @@ public class PlayerCameraSystem extends EntitySystem {
         }
     }
 
+    /**
+     * Returns a boolean value which denotes whether the camera is at
+     * the left border or not.
+     * @return true if camera is at left border, false otherwise.
+     */
     public boolean isCameraAtLeftBorder() {
         return cameraAtLeftBorder;
     }
 
+    /**
+     * Returns a boolean value which denotes whether the camera is at
+     * the right border or not.
+     * @return true if camera is at right border, false otherwise.
+     */
     public boolean isCameraAtRightBorder() {
         return cameraAtRightBorder;
     }
 
+    /**
+     * Returns a boolean value which denotes whether the camera is at
+     * the top border or not.
+     * @return true if camera is at top border, false otherwise.
+     */
     public boolean isCameraAtTopBorder() {
         return cameraAtTopBorder;
     }
 
+    /**
+     * Returns a boolean value which denotes whether the camera is at
+     * the bottom border or not.
+     * @return true if camera is at bottom border, false otherwise.
+     */
     public boolean isCameraAtBottomBorder() {
         return cameraAtBottomBorder;
     }

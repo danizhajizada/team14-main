@@ -15,17 +15,32 @@ import com.badlogic.gdx.utils.Array;
 import com.tecchtitans.eng1.ENGGame;
 import com.tecchtitans.eng1.Map;
 
+/**
+ * Initial main menu screen that can be used to exit the game or start a new game.
+ */
 public class MainMenu extends GameScreen {
+    /**
+     * Initialises the main menu screen with a reference to the current game instance.
+     * @param game - Currently running game instance.
+     */
     public MainMenu(ENGGame game) {
         this.game = game;
     }
 
+    /**
+     * Code that runs upon the map being initially shown. Sets the map to be shown
+     * and any potential game audio if desired.
+     */
     @Override
     public void show() {
-
         map = new Map("mainmenu_sample.tmx", 2288, 1200);
     }
 
+    /**
+     * Renders the main menu map on the screen. Checks for user input on the screen's button
+     * and performs the correct operation based upon the button pressed.
+     * @param v - ???
+     */
     @Override
     public void render(float v) {
         Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -77,9 +92,13 @@ public class MainMenu extends GameScreen {
 
     }
 
+    /**
+     * Runs when the screen is hidden. Ensures that the currently playing background
+     * music for this screen is stopped.
+     */
     @Override
     public void hide() {
-        game.getAudioManager().stopMusic();
+        //game.getAudioManager().stopMusic();
     }
 
     @Override

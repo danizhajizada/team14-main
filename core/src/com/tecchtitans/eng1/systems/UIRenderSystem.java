@@ -9,16 +9,32 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.tecchtitans.eng1.components.*;
 
+/**
+ * UI Rendering System. Write detail here
+ */
 public class UIRenderSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
 
+    /**
+     * Instantiates an empty UIRenderSystem.
+     */
     public UIRenderSystem() {};
 
+    /**
+     * Once a system is added to an engine, all the player entities in that engine
+     * with a TextureComponent, UIComponent, and PositionComponent are added to
+     * the system in an array.
+     * @param engine - The engine the system was added to.
+     */
     public void addedToEngine(Engine engine)
     {
         entities = engine.getEntitiesFor(Family.all(TextureComponent.class, UIComponent.class, PositionComponent.class).get());
     }
 
+    /**
+     * Renders UI on screen. Write more detail here
+     * @param batch - ???
+     */
     public void render(SpriteBatch batch) {
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);

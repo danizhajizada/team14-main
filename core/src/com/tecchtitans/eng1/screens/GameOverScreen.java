@@ -9,12 +9,23 @@ import com.badlogic.gdx.utils.Array;
 import com.tecchtitans.eng1.ENGGame;
 import com.tecchtitans.eng1.Map;
 
+/**
+ * Screen that displays once 7 days have passed and the game has completed.
+ */
 public class GameOverScreen extends GameScreen {
 
+    /**
+     * Initialises the game over screen with a reference to the current game instance.
+     * @param game - Currently running game instance.
+     */
     public GameOverScreen(ENGGame game) {
         this.game = game;
     }
 
+    /**
+     * Code that runs upon the map being initially shown. Sets the map to be shown
+     * and any potential game audio if desired.
+     */
     @Override
     public void show() {
         map = new Map("gameover.tmx", 1280, 960);
@@ -23,6 +34,12 @@ public class GameOverScreen extends GameScreen {
         game.getAudioManager().playMusic("audio/snoring.mp3");
     }
 
+    /**
+     * Renders the game over map on the screen. This code continually loops while the screen is being shown.
+     * Continually checks for user input on the buttons on screen. Once a button is clicked, the proper
+     * respective operations are performed.
+     * @param v - ???
+     */
     @Override
     public void render(float v) {
         Gdx.gl.glClearColor(1, 0, 0, 1);

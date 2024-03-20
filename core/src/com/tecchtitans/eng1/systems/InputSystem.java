@@ -12,15 +12,36 @@ import com.tecchtitans.eng1.components.ComponentMappers;
 import com.tecchtitans.eng1.components.InputComponent;
 
 //checks for key input
+
+/**
+ * System that checks for game-relevant keys input by the user. Can detect multiple
+ * keys being input at once. Checks for arrow keys input and the space bar.
+ */
 public class InputSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
 
+    /**
+     * Instantiates an empty InputSystem.
+     */
     public InputSystem() {};
 
+    /**
+     * Once a system is added to an engine, all the entities in that engine
+     * with an InputComponent are added to the system in an array.
+     * @param engine - The engine the system was added to.
+     */
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(InputComponent.class).get());
     }
 
+    /**
+     * Called every tick. Resets each entity in the system to have no keys currently pressed.
+     * Checks if the up, down, left, right, or space keys are pressed respectively. Space bar
+     * must have just been pressed this tick, other keys may have been pressed prior but still
+     * be depressed to be detected. This prevents interactions being repeated while space is
+     * being held down.
+     * @param deltaTime - Time passed since last frame in seconds.
+     */
     public void update(float deltaTime) {
         for (int i = 0; i < entities.size(); i++) {
             Entity entity = entities.get(i);
@@ -42,8 +63,6 @@ public class InputSystem extends EntitySystem {
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 input.keysPressed |= InputKeys.SPACE;
             }
-
-            //System.out.println(input.keysPressed);
         }
     }
 }

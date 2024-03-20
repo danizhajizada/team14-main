@@ -8,11 +8,24 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.tecchtitans.eng1.ActivityType;
 import com.tecchtitans.eng1.components.*;
 
+/**
+ * System that handles all logic required with the function of the game, such as the
+ * current day or time. Handles the appropriate actions to make to a player and the
+ * game once a certain activity is performed, for instance progressing the time/day
+ * and reducing the player's energy level.
+ */
 public class GameSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
     private int hour;
     private int day;
     private boolean gameComplete;
+
+    /**
+     * When the system is added to the engine, the hours passed in the day is set to 0,
+     * the current day is set to 1, and gameComplete is set to false. All player entities
+     * in the engine are added to the system.
+     * @param engine - The Engine this system was added to.
+     */
     public void addedToEngine(Engine engine) {
         hour = 0;
         day = 1;
@@ -20,18 +33,43 @@ public class GameSystem extends EntitySystem {
         entities = engine.getEntitiesFor(Family.all(PlayerComponent.class).get());
     }
 
+    /**
+     * Returns the boolean value determining whether the game has complete.
+     * @return boolean where true represents the game being complete, and false where
+     *         it is not.
+     */
     public boolean isGameComplete() {
         return gameComplete;
     }
 
+    /**
+     * Retrieves how many hours have passed since the start of the day.
+     * @return integer value of number of hours passed.
+     */
     public int getHour() {
         return hour;
     }
 
+    /**
+     * Retrieves the current day.
+     * @return integer value of the current day in the game.
+     */
     public int getDay() {
         return day;
     }
 
+    /**
+     * This is called every tick. This checks every player entity in the system if
+     * they have an activity to be performed. If they do, the activity type to be
+     * performed is checked and the correct actions are made to the PlayerComponent
+     * for the player entity, and the day and hour in this game instance are progressed
+     * as determined by the activity in the ActivityComponent. For instance, a STUDY
+     * activity would reduce the player entity's energy level, progress the time by the
+     * time change decided in ActivityComponent, but not progress to the next day.
+     * <p>
+     * If the game is complete, no activity will be performed no matter what.
+     * @param deltaTime - Time in seconds passed since the last frame.
+     */
     public void update(float deltaTime) {
         for (Entity entity : entities) {
             PlayerComponent playerComponent = ComponentMappers.player.get(entity);
