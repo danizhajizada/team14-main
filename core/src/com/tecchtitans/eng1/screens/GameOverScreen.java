@@ -30,7 +30,6 @@ public class GameOverScreen extends GameScreen {
     public void show() {
         map = new Map("gameover.tmx", 1280, 960);
 
-        //game.getAudioManager().playSound("audio/snoring.mp3");
         game.getAudioManager().playMusic("audio/snoring.mp3");
     }
 

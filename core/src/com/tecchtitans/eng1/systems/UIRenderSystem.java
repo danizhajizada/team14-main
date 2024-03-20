@@ -284,10 +284,29 @@ public class UIRenderSystem extends EntitySystem {
                 int sleepNumberRenderHeight = Math.round(numbersSrcHeight * totalHeightRatio);
 
                 // Draw sleep numbers
-                batch.draw(texture, renderLocationX + sleepFirstNumberXOffset, renderLocationY + sleepFirstNumberYOffset, sleepNumberRenderWidth, sleepNumberRenderHeight, sleepFirstNumberSrcX, sleepFirstNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
-                batch.draw(texture, renderLocationX + sleepSecondNumberXOffset, renderLocationY + sleepSecondNumberYOffset, sleepNumberRenderWidth, sleepNumberRenderHeight, sleepSecondNumberSrcX, sleepSecondNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
+                batch.draw(texture,
+                        renderLocationX + sleepFirstNumberXOffset,
+                        renderLocationY + sleepFirstNumberYOffset,
+                        sleepNumberRenderWidth,
+                        sleepNumberRenderHeight,
+                        sleepFirstNumberSrcX,
+                        sleepFirstNumberSrcY,
+                        numbersSrcWidth,
+                        numbersSrcHeight,
+                        false,
+                        false);
 
-
+                batch.draw(texture,
+                        renderLocationX + sleepSecondNumberXOffset,
+                        renderLocationY + sleepSecondNumberYOffset,
+                        sleepNumberRenderWidth,
+                        sleepNumberRenderHeight,
+                        sleepSecondNumberSrcX,
+                        sleepSecondNumberSrcY,
+                        numbersSrcWidth,
+                        numbersSrcHeight,
+                        false,
+                        false);
 
                 int studyFirstNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * studyCountFirstNum);
                 int studyFirstNumberSrcY = uiActivityCountComponent.numbersSrcY;
@@ -305,10 +324,29 @@ public class UIRenderSystem extends EntitySystem {
                 int studyNumberRenderHeight = Math.round(numbersSrcHeight * totalHeightRatio);
 
                 // Draw study numbers
-                batch.draw(texture, renderLocationX + studyFirstNumberXOffset, renderLocationY + studyFirstNumberYOffset, studyNumberRenderWidth, studyNumberRenderHeight, studyFirstNumberSrcX, studyFirstNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
-                batch.draw(texture, renderLocationX + studySecondNumberXOffset, renderLocationY + studySecondNumberYOffset, studyNumberRenderWidth, studyNumberRenderHeight, studySecondNumberSrcX, studySecondNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
+                batch.draw(texture,
+                        renderLocationX + studyFirstNumberXOffset,
+                        renderLocationY + studyFirstNumberYOffset,
+                        studyNumberRenderWidth,
+                        studyNumberRenderHeight,
+                        studyFirstNumberSrcX,
+                        studyFirstNumberSrcY,
+                        numbersSrcWidth,
+                        numbersSrcHeight,
+                        false,
+                        false);
 
-
+                batch.draw(texture,
+                        renderLocationX + studySecondNumberXOffset,
+                        renderLocationY + studySecondNumberYOffset,
+                        studyNumberRenderWidth,
+                        studyNumberRenderHeight,
+                        studySecondNumberSrcX,
+                        studySecondNumberSrcY,
+                        numbersSrcWidth,
+                        numbersSrcHeight,
+                        false,
+                        false);
 
                 int eatFirstNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * eatCountFirstNum);
                 int eatFirstNumberSrcY = uiActivityCountComponent.numbersSrcY;
@@ -326,10 +364,29 @@ public class UIRenderSystem extends EntitySystem {
                 int eatNumberRenderHeight = Math.round(numbersSrcHeight * totalHeightRatio);
 
                 // Draw eat numbers
-                batch.draw(texture, renderLocationX + eatFirstNumberXOffset, renderLocationY + eatFirstNumberYOffset, eatNumberRenderWidth, eatNumberRenderHeight, eatFirstNumberSrcX, eatFirstNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
-                batch.draw(texture, renderLocationX + eatSecondNumberXOffset, renderLocationY + eatSecondNumberYOffset, eatNumberRenderWidth, eatNumberRenderHeight, eatSecondNumberSrcX, eatSecondNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
+                batch.draw(texture,
+                        renderLocationX + eatFirstNumberXOffset,
+                        renderLocationY + eatFirstNumberYOffset,
+                        eatNumberRenderWidth,
+                        eatNumberRenderHeight,
+                        eatFirstNumberSrcX,
+                        eatFirstNumberSrcY,
+                        numbersSrcWidth,
+                        numbersSrcHeight,
+                        false,
+                        false);
 
-
+                batch.draw(texture,
+                        renderLocationX + eatSecondNumberXOffset,
+                        renderLocationY + eatSecondNumberYOffset,
+                        eatNumberRenderWidth,
+                        eatNumberRenderHeight,
+                        eatSecondNumberSrcX,
+                        eatSecondNumberSrcY,
+                        numbersSrcWidth,
+                        numbersSrcHeight,
+                        false,
+                        false);
 
                 int recFirstNumberSrcX = uiActivityCountComponent.numbersSrcX + ((numbersSrcWidth + 1) * recCountFirstNum);
                 int recFirstNumberSrcY = uiActivityCountComponent.numbersSrcY;
@@ -347,8 +404,29 @@ public class UIRenderSystem extends EntitySystem {
                 int recNumberRenderHeight = Math.round(numbersSrcHeight * totalHeightRatio);
 
                 // Draw rec numbers
-                batch.draw(texture, renderLocationX + recFirstNumberXOffset, renderLocationY + recFirstNumberYOffset, recNumberRenderWidth, recNumberRenderHeight, recFirstNumberSrcX, recFirstNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
-                batch.draw(texture, renderLocationX + recSecondNumberXOffset, renderLocationY + recSecondNumberYOffset, recNumberRenderWidth, recNumberRenderHeight, recSecondNumberSrcX, recSecondNumberSrcY, numbersSrcWidth, numbersSrcHeight, false, false);
+                batch.draw(texture,
+                        renderLocationX + recFirstNumberXOffset,
+                        renderLocationY + recFirstNumberYOffset,
+                        recNumberRenderWidth,
+                        recNumberRenderHeight,
+                        recFirstNumberSrcX,
+                        recFirstNumberSrcY,
+                        numbersSrcWidth,
+                        numbersSrcHeight,
+                        false,
+                        false);
+
+                batch.draw(texture,
+                        renderLocationX + recSecondNumberXOffset,
+                        renderLocationY + recSecondNumberYOffset,
+                        recNumberRenderWidth,
+                        recNumberRenderHeight,
+                        recSecondNumberSrcX,
+                        recSecondNumberSrcY,
+                        numbersSrcWidth,
+                        numbersSrcHeight,
+                        false,
+                        false);
             }
         }
     }

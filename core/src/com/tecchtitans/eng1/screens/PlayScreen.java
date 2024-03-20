@@ -85,6 +85,7 @@ public class PlayScreen extends GameScreen {
         Gdx.gl.glBlendFunc(Gdx.gl20.GL_SRC_ALPHA, Gdx.gl20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(Gdx.gl20.GL_COLOR_BUFFER_BIT);
 
+        // Render map
         map.render();
 
         // Draw player
@@ -98,6 +99,8 @@ public class PlayScreen extends GameScreen {
 
         PlayerCameraSystem playerCameraSystem = engine.getSystem(PlayerCameraSystem.class);
 
+        // If the player extends the camera border
+        // then calculate offsets and render player location accordingly
         if (playerCameraSystem.isCameraAtLeftBorder()) {
             float cameraCentreX = map.getCameraBorder().x + camera.viewportWidth / 2.0f;
 
@@ -128,7 +131,7 @@ public class PlayScreen extends GameScreen {
             playerYRenderPosition = playerYRenderPosition + playerYDifference + playerTexture.height / 2.0f;
         }
 
-
+        // Set UI entity values
         energyBar.getComponent(StatBarComponent.class).progress = player.getComponent(PlayerComponent.class).energy / 100f;
         timeUI.getComponent(UITimeComponent.class).currentHour = engine.getSystem(GameSystem.class).getHour() + 9;
         dayCounter.getComponent(UIDayComponent.class).currentDay = engine.getSystem(GameSystem.class).getDay();
@@ -138,6 +141,7 @@ public class PlayScreen extends GameScreen {
         activityCounter.getComponent(UIActivityCountComponent.class).eatCount = player.getComponent(PlayerComponent.class).activityCount.get(ActivityType.EAT);
         activityCounter.getComponent(UIActivityCountComponent.class).recCount = player.getComponent(PlayerComponent.class).activityCount.get(ActivityType.REC);
 
+        // Render player and UI components
         batch.begin();
         batch.draw(playerTexture.texture, playerXRenderPosition, playerYRenderPosition, playerTexture.srcStartX, playerTexture.srcStartY,
                    playerTexture.width, playerTexture.height);
