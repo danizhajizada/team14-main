@@ -79,7 +79,7 @@ public class PlayerMovementSystem extends EntitySystem {
 
             boolean doesTouchSolid = false;
             for (RectangleMapObject obj : solidObjects) {
-                if (obj.getRectangle().contains(newCollisionRectangle)) {
+                if (newCollisionRectangle.overlaps(obj.getRectangle())) {
                     doesTouchSolid = true;
                 }
             }
