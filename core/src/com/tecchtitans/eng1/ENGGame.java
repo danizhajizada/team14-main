@@ -81,32 +81,12 @@ public class ENGGame extends Game {
 	 */
 	@Override
 	public void create () {
-		setupEngine();
 
 		//initialize audio manager
-
 		audioManager = new AudioManager();
-
-		//player = createPlayer();
-
-		//setScreen(new MainMenu(this));
-
-		//camera = new OrthographicCamera();
-		//camera.setToOrtho(false, 2268, 1200);
-
-		//map = new TmxMapLoader().load("mainmenu_sample.tmx");
-
-		//renderer = new OrthogonalTiledMapRenderer(map);
-
-		//mapRenderer.setView(camera);
-
-		mainMenu = new MainMenu(this);
-		playScreen = new PlayScreen(this);
-		gameOverScreen = new GameOverScreen(this);
+		reset();
 
 		switchToMainMenu();
-
-		//Gdx.graphics.wait();
 	}
 
 	/**
@@ -116,9 +96,6 @@ public class ENGGame extends Game {
 	 */
 	public void setupEngine() {
 		engine = new ECSEngine();
-
-		//MovementSystem movementSystem = new MovementSystem();
-		//engine.addSystem(movementSystem);
 
 		InputSystem inputSystem = new InputSystem();
 		engine.addSystem(inputSystem);
@@ -135,7 +112,7 @@ public class ENGGame extends Game {
 		PlayerCameraSystem playerCameraSystem = new PlayerCameraSystem();
 		engine.addSystem(playerCameraSystem);
 
-		// This engine will be called when needed so processing is not needed.
+		// This system will be called when needed so processing is not needed.
 		UIRenderSystem uiRenderSystem = new UIRenderSystem();
 		uiRenderSystem.setProcessing(false);
 		engine.addSystem(uiRenderSystem);
@@ -149,13 +126,8 @@ public class ENGGame extends Game {
 	 * Also stops any music that may be playing in the audio manager.
 	 */
 	public void reset() {
-		mainMenu.dispose();
-		playScreen.dispose();
-		gameOverScreen.dispose();
-
 		setupEngine();
 
-		//audioManager = new AudioManager();
 		audioManager.stopMusic();
 
 		mainMenu = new MainMenu(this);
@@ -169,16 +141,7 @@ public class ENGGame extends Game {
 	 */
 	@Override
 	public void render () {
-		//Gdx.gl.glClearColor(1, 0, 0, 1);
-		//Gdx.gl.glBlendFunc(Gdx.gl20.GL_SRC_ALPHA, Gdx.gl20.GL_ONE_MINUS_SRC_ALPHA);
-		//Gdx.gl.glClear(Gdx.gl20.GL_COLOR_BUFFER_BIT);
-		//camera.update();
-		//renderer.setView(camera);
-		//renderer.render();
-
 		super.render();
-
-		//engine.update(Gdx.graphics.getDeltaTime());
 	}
 	
 	@Override

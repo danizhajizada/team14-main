@@ -488,29 +488,4 @@ public class PlayScreen extends GameScreen {
             game.switchToGameOverScreen();
         }
     }
-
-    @Override
-    public void resize(int i, int i1) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-        game.getAudioManager().stopMusic();
-    }
-
-    @Override
-    public void dispose() {
-
-    }
 }

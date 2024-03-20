@@ -1,19 +1,13 @@
 package com.tecchtitans.eng1;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.PolygonMapObject;
-import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Polyline;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
 
@@ -40,8 +34,8 @@ public class Map {
      * from the map are processed to set the world border, camera border, and
      * building objects respectively.
      * @param path - String of an internal file path to a map in a .tmx format.
-     * @param width - maybe not needed.
-     * @param height - maybe not needed.
+     * @param width - Width of the map in pixels, represented as an Integer.
+     * @param height - Height of the map in pixels, represented as an Integer.
      */
     public Map(String path, int width, int height) {
         this.width = width;
@@ -72,7 +66,6 @@ public class Map {
         }
 
         for (MapObject obj : buildingLayer.getObjects()) {
-            // might be useless but keep just in case
             if(obj instanceof RectangleMapObject){
                 buildingObjects.add((RectangleMapObject) obj);
                 //System.out.println(((RectangleMapObject)obj).getProperties().get("type"));
@@ -80,33 +73,14 @@ public class Map {
         }
     }
 
-    //this function and one below can be made into one function maybe
-
     /**
      * Checks the collision layer for an instance of a worldBorder.
      * If found, the world border is set to the rectangle defined
      * in this object.
      */
     private void processCollisionLayer() {
-        MapLayer collisionLayer = map.getLayers().get("collisionLayer");
-
-        if (collisionLayer == null) {
-            return;
-        }
-
-        for (MapObject obj : collisionLayer.getObjects()) {
-            //System.out.println(obj.getOpacity());
-            if (obj.getName().equals("worldBorder")) {
-                if (obj instanceof RectangleMapObject) {
-
-                    // use classes in object properties to determine whether collision object is world border or not
-
-                    worldBorder = ((RectangleMapObject) obj).getRectangle();
-                    //RectangleMapObject test = ((RectangleMapObject) obj);
-                    //System.out.println("test");
-                }
-            }
-        }
+        RectangleMapObject worldBorderObject = getRectangleObjectFromLayer("collisionLayer", "worldBorder");
+        if(worldBorderObject != null) { worldBorder = worldBorderObject.getRectangle(); }
     }
 
     /**
@@ -115,20 +89,34 @@ public class Map {
      * in this object.
      */
     private void processCameraLayer() {
-        MapLayer cameraLayer = map.getLayers().get("cameraLayer");
+        RectangleMapObject cameraBorderObject = getRectangleObjectFromLayer("cameraLayer", "cameraBorder");
+        if(cameraBorderObject != null) { cameraBorder = cameraBorderObject.getRectangle(); }
+    }
 
-        if (cameraLayer == null) {
-            return;
+    /**
+     * Checks a specified map layer for an instance of a desired rectangle object.
+     * If found, the object is returned. Else, null is returned.
+     * @param layerName - Name of desired layer to search from the map, given as a String.
+     * @param objectName - Name of the desired rectangle object, given as a String.
+     * @return the desired object as a RectangleMapObject if found, else return null.
+     */
+    private RectangleMapObject getRectangleObjectFromLayer(String layerName, String objectName) {
+        MapLayer mapLayer = map.getLayers().get(layerName);
+
+        if (mapLayer == null) {
+            return null;
         }
 
-        for (MapObject obj : cameraLayer.getObjects()) {
+        for (MapObject obj : mapLayer.getObjects()) {
             //System.out.println(obj.getOpacity());
-            if (obj.getName().equals("cameraBorder")) {
+            if (obj.getName().equals(objectName)) {
                 if (obj instanceof RectangleMapObject) {
-                    cameraBorder = ((RectangleMapObject) obj).getRectangle();
+                    return (RectangleMapObject) obj;
                 }
             }
         }
+
+        return null;
     }
 
     /**

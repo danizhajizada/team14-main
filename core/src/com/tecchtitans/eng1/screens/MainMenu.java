@@ -76,33 +76,4 @@ public class MainMenu extends GameScreen {
             }
         }
     }
-
-    @Override
-    public void resize(int i, int i1) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    /**
-     * Runs when the screen is hidden. Ensures that the currently playing background
-     * music for this screen is stopped.
-     */
-    @Override
-    public void hide() {
-        //game.getAudioManager().stopMusic();
-    }
-
-    @Override
-    public void dispose() {
-
-    }
 }

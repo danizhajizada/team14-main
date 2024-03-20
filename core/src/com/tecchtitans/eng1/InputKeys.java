@@ -3,7 +3,7 @@ package com.tecchtitans.eng1;
 /**
  * Each key that needs to be detected as an input is encoded as a static one-hot value.
  */
-public class InputKeys {
+public abstract class InputKeys {
     /**
      * One-hot encoding for no key input.
      */
