@@ -49,7 +49,9 @@ public class PlayScreen extends GameScreen {
         this.engine = game.getEngine();
     }
 
-
+    /**
+     * Runs when the screen is first shown. Initialises map and systems.
+     */
     @Override
     public void show() {
         map = new Map("testmap5.tmx", 1728, 1728);
@@ -80,6 +82,10 @@ public class PlayScreen extends GameScreen {
         activityCounter = engine.createUIActivityCounter(50, 50, 100, 100);
     }
 
+    /**
+     * Renders the map, the player and UI entities on the screen.
+     * @param v Time since last frame. (deltaTime)
+     */
     @Override
     public void render(float v) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
