@@ -66,12 +66,7 @@ public class CollisionSystem extends EntitySystem {
                 if (entity1CollisionRectangle.overlaps(entity2CollisionRectangle)) {
                     ComponentMappers.collision.get(entity1).currentCollision = entity2;
                     ComponentMappers.collision.get(entity2).currentCollision = entity1;
-
-                    //System.out.println("Collide!");
-                } /*else {
-                    ComponentMappers.collision.get(entity1).currentCollision = null;
-                    ComponentMappers.collision.get(entity2).currentCollision = null;
-                }*/
+                }
             }
         }
     }

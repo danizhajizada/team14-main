@@ -2,14 +2,16 @@ package com.tecchtitans.eng1.components;
 
 import com.badlogic.ashley.core.Component;
 
+/**
+ * Stores relevant information about statistic bars.
+ * Outer refers to the casing of the statistic
+ */
 public class StatBarComponent implements Component {
-
-    /*
-    This component stores values for drawing the stat bar.
-    Outer refers to the "casing" of the bar and inner refers to the actual bar itself.
+    /**
+     * Stores the starting X pixel for the outer
      */
-
-    public int outerPartSrcX, outerPartSrcY;
+    public int outerPartSrcX;
+    public int outerPartSrcY;
     public int outerPartSrcWidth, outerPartSrcHeight;
     public int innerPartSrcX, innerPartSrcY;
     public int innerPartSrcWidth, innerPartSrcHeight;

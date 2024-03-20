@@ -55,7 +55,6 @@ public class PlayerMovementSystem extends EntitySystem {
             CollisionComponent collisionComponent = ComponentMappers.collision.get(entity);
             VelocityComponent velocity = ComponentMappers.velocity.get(entity);
             PositionComponent position = ComponentMappers.position.get(entity);
-            PlayerComponent playerComponent = ComponentMappers.player.get(entity);
 
             Vector2 newVelocity = velocity.velocityUnitVector.scl(velocity.movementSpeed * deltaTime);
 
@@ -71,32 +70,16 @@ public class PlayerMovementSystem extends EntitySystem {
                     collisionComponent.collisionRectangle.height);
 
             if (currentMap.getWorldBorder().contains(newXCollisionRectangle)) {
-                //System.out.println(currentMap.getWorldBorder().width + " " + currentMap.getWorldBorder().height);
-                //System.out.println(collisionComponent.collisionRectangle.x + " " + collisionComponent.collisionRectangle.y);
-                //System.out.println(collisionComponent.collisionRectangle.width + " " + collisionComponent.collisionRectangle.height);
-                //System.out.println("out");
-
                 position.positionVector.x = newXPosition;
-                //position.y += velocity.y * deltaTime;
 
                 collisionComponent.collisionRectangle.x = position.positionVector.x;
-                //collisionComponent.collisionRectangle.y = position.y;
             }
 
             if (currentMap.getWorldBorder().contains(newYCollisionRectangle)) {
-                //System.out.println(currentMap.getWorldBorder().width + " " + currentMap.getWorldBorder().height);
-                //System.out.println(collisionComponent.collisionRectangle.x + " " + collisionComponent.collisionRectangle.y);
-                //System.out.println(collisionComponent.collisionRectangle.width + " " + collisionComponent.collisionRectangle.height);
-                //System.out.println("out");
-
-                //position.x += velocity.x * deltaTime;
                 position.positionVector.y = newYPosition;
 
-                //collisionComponent.collisionRectangle.x = position.x;
                 collisionComponent.collisionRectangle.y = position.positionVector.y;
             }
-
-            //System.out.println(position.positionVector.x + " " + position.positionVector.y);
         }
     }
 }
