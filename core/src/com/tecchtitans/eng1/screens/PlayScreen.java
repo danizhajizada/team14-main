@@ -33,6 +33,7 @@ public class PlayScreen extends GameScreen {
     SpriteBatch batch;
     Entity player;
     ArrayList<Entity> buildings;
+    ArrayList<Entity> collisionObjects;
     Entity energyBar;
     Entity timeUI;
     Entity dayCounter;

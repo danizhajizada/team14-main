@@ -5,12 +5,14 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.tecchtitans.eng1.Map;
 import com.tecchtitans.eng1.components.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * System that handles moving a player around a map. Ensures that a player cannot
@@ -68,6 +70,22 @@ public class PlayerMovementSystem extends EntitySystem {
             Rectangle newYCollisionRectangle = new Rectangle(position.positionVector.x, newYPosition,
                     collisionComponent.collisionRectangle.width,
                     collisionComponent.collisionRectangle.height);
+
+            Rectangle newCollisionRectangle = new Rectangle(newXPosition, newYPosition,
+                    collisionComponent.collisionRectangle.width,
+                    collisionComponent.collisionRectangle.height);
+
+            ArrayList<RectangleMapObject> solidObjects = currentMap.getSolidObjects();
+
+            boolean doesTouchSolid = false;
+            for (RectangleMapObject obj : solidObjects) {
+                if (obj.getRectangle().contains(newCollisionRectangle)) {
+                    doesTouchSolid = true;
+                }
+            }
+
+            // If player will touch a solid object then don't move.
+            if (doesTouchSolid) { continue; }
 
             if (currentMap.getWorldBorder().contains(newXCollisionRectangle)) {
                 position.positionVector.x = newXPosition;
