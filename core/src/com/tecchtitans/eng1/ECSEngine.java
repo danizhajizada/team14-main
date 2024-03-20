@@ -31,12 +31,13 @@ public class ECSEngine extends Engine {
     }
 
     /**
-     * 
-     * @param renderX
-     * @param renderY
-     * @param width
-     * @param height
-     * @return
+     * Creates an entity that will be used in the UI to display
+     * a count for the number of times each activity has been performed.
+     * @param renderX The X location in pixels where the UI entity will be rendered.
+     * @param renderY The Y location in pixels where the UI entity will be rendered.
+     * @param width The width in pixels at which the UI entity will be rendered.
+     * @param height The Height in pixels at which the UI entity will be rendered.
+     * @return The created UI entity that tracks activity frequency.
      */
     public Entity createUIActivityCounter(int renderX, int renderY, int width, int height) {
         Entity activityCounter = new Entity();
@@ -87,6 +88,14 @@ public class ECSEngine extends Engine {
         return activityCounter;
     }
 
+    /**
+     * Creates an entity that will be used in the UI to display the current day.
+     * @param renderX The X location in pixels where the UI entity will be rendered.
+     * @param renderY The Y location in pixels where the UI entity will be rendered.
+     * @param width The width in pixels at which the UI entity will be rendered.
+     * @param height The Height in pixels at which the UI entity will be rendered.
+     * @return The created UI entity the shows the current day.
+     */
     public Entity createUIDayCounter(int renderX, int renderY, int width, int height) {
         Entity dayCounter = new Entity();
 
@@ -129,6 +138,14 @@ public class ECSEngine extends Engine {
         return dayCounter;
     }
 
+    /**
+     * Creates an entity that will be used in the UI to display the current time.
+     * @param renderX The X location in pixels where the UI entity will be rendered.
+     * @param renderY The Y location in pixels where the UI entity will be rendered.
+     * @param width The width in pixels at which the UI entity will be rendered.
+     * @param height The Height in pixels at which the UI entity will be rendered.
+     * @return The created UI entity that shows the current time.
+     */
     public Entity createUIClock(int renderX, int renderY, int width, int height) {
         Entity clock = new Entity();
 
@@ -183,6 +200,14 @@ public class ECSEngine extends Engine {
         return clock;
     }
 
+    /**
+     * Creates an entity that will be used in the UI to show the progress of a property.
+     * @param renderX The X location in pixels where the UI entity will be rendered.
+     * @param renderY The Y location in pixels where the UI entity will be rendered.
+     * @param width The width in pixels at which the UI entity will be rendered.
+     * @param height The Height in pixels at which the UI entity will be rendered.
+     * @return The created UI entity that shows a statistic.
+     */
     public Entity createStatBar(int renderX, int renderY, int width, int height) {
         Entity statBar = new Entity();
 
@@ -225,7 +250,12 @@ public class ECSEngine extends Engine {
         return statBar;
     }
 
-    // adding entity assuming building already on map
+    /**
+     * Creates an entity that represent a building.
+     * @param buildingObject A rectangle map object that will be used
+     *                       as a guide to create the entity.
+     * @return The created building entity.
+     */
     public Entity createBuilding(RectangleMapObject buildingObject) {
         Entity building = createEntity();
 
@@ -234,7 +264,6 @@ public class ECSEngine extends Engine {
         building.add(collisionComponent);
 
         ActivityComponent activityComponent = createComponent(ActivityComponent.class);
-        String test = (String)buildingObject.getProperties().get("type");
         activityComponent.type = ActivityType.valueOf((String)buildingObject.getProperties().get("type"));
         switch(activityComponent.type) {
             case EAT:
@@ -269,6 +298,14 @@ public class ECSEngine extends Engine {
         return building;
     }
 
+    /**
+     * Creates an entity that represents a player.
+     * @param spawnX The X position where the player will start (relative to map).
+     * @param spawnY The Y position where the player will start (relative to map).
+     * @param width The width of the player in pixels.
+     * @param height The height of the player in pixels.
+     * @return The created player entity.
+     */
     public Entity createPlayer(int spawnX, int spawnY, int width, int height) {
         Entity player = new Entity();
 

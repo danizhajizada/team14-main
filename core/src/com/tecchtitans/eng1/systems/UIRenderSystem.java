@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.tecchtitans.eng1.components.*;
 
 /**
- * UI Rendering System. Write detail here
+ * A system that renders entities that are related to UI.
  */
 public class UIRenderSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
@@ -32,8 +32,8 @@ public class UIRenderSystem extends EntitySystem {
     }
 
     /**
-     * Renders UI on screen. Write more detail here
-     * @param batch - ???
+     * Renders all the entities that are related to UI.
+     * @param batch - The sprite batch where the entities are rendered to.
      */
     public void render(SpriteBatch batch) {
         for (int i = 0; i < entities.size(); i++) {
@@ -52,29 +52,6 @@ public class UIRenderSystem extends EntitySystem {
 
             if (uiComponent.type == UIComponentType.STATBAR) {
                 StatBarComponent statBarComponent = ComponentMappers.statBar.get(entity);
-                /*
-                float outerWidthRatio = renderWidth / (float)statBarComponent.outerPartSrcWidth;
-                float outerHeightRatio = renderHeight / (float)statBarComponent.outerPartSrcHeight;
-
-                int innerSrcWidth = (int)(statBarComponent.innerPartSrcWidth * statBarComponent.progress);
-                int innerRenderWidth = (int)(renderWidth * statBarComponent.progress);
-
-                batch.draw(texture, positionComponent.positionVector.x, positionComponent.positionVector.y,
-                        renderWidth, renderHeight, statBarComponent.outerPartSrcX, statBarComponent.outerPartSrcY,
-                        statBarComponent.outerPartSrcWidth, statBarComponent.outerPartSrcHeight,
-                        false, false);
-
-                batch.draw(texture, positionComponent.positionVector.x + statBarComponent.innerPartXOffset,
-                        positionComponent.positionVector.y + statBarComponent.innerPartYOffset, innerRenderWidth * outerWidthRatio - statBarComponent.innerPartXOffset - 1, statBarComponent.innerPartSrcHeight,
-                        statBarComponent.innerPartSrcX, statBarComponent.innerPartSrcY,
-                        innerSrcWidth, statBarComponent.innerPartSrcHeight,
-                        false, false);
-
-
-
-                 */
-
-
 
                 int outerSrcX = statBarComponent.outerPartSrcX;
                 int outerSrcY = statBarComponent.outerPartSrcY;
@@ -107,8 +84,6 @@ public class UIRenderSystem extends EntitySystem {
             } else if (uiComponent.type == UIComponentType.TIME) {
                 UITimeComponent uiTimeComponent = ComponentMappers.time.get(entity);
 
-
-
                 int outerSrcX = uiTimeComponent.outerPartSrcX;
                 int outerSrcY = uiTimeComponent.outerPartSrcY;
 
@@ -123,6 +98,8 @@ public class UIRenderSystem extends EntitySystem {
                 boolean isAM = (currentHour / 12) % 2 == 0;
 
                 currentHour %= 12;
+
+                // If time is 12 am or 12 pm make sure the hour shown is 12 and not 0
                 if(currentHour == 0) {
                     currentHour = 12;
                 }
@@ -276,9 +253,17 @@ public class UIRenderSystem extends EntitySystem {
                 float totalHeightRatio = textureComponent.height / (float)outerSrcHeight;
 
                 // Draw outer part
-                batch.draw(texture, renderLocationX, renderLocationY, renderWidth, renderHeight, outerSrcX, outerSrcY, outerSrcWidth, outerSrcHeight, false, false);
-
-
+                batch.draw(texture,
+                           renderLocationX,
+                           renderLocationY,
+                           renderWidth,
+                           renderHeight,
+                           outerSrcX,
+                           outerSrcY,
+                           outerSrcWidth,
+                           outerSrcHeight,
+                        false,
+                        false);
 
                 int numbersSrcWidth = uiActivityCountComponent.numbersSrcWidth;
                 int numbersSrcHeight = uiActivityCountComponent.numbersSrcHeight;
