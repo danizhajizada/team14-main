@@ -33,7 +33,7 @@ public class MainMenu extends GameScreen {
      */
     @Override
     public void show() {
-        map = new Map("mainmenu_sample.tmx", 2288, 1200);
+        map = new Map("mainmenu_final.tmx", 2288, 1200);
     }
 
     /**
@@ -49,7 +49,7 @@ public class MainMenu extends GameScreen {
 
         map.render();
 
-        MapLayer buttonLayer = map.getTiledMap().getLayers().get("button");
+        MapLayer buttonLayer = map.getTiledMap().getLayers().get("buttons");
 
         Array<RectangleMapObject> buttons = buttonLayer.getObjects().getByType(RectangleMapObject.class);
 
@@ -63,7 +63,7 @@ public class MainMenu extends GameScreen {
                         case "start":
                             game.switchToPlayScreen();
                             break;
-                        case "options":
+                        case "instructions":
                             break;
                         case "exit":
                             Gdx.app.exit();
