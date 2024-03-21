@@ -108,9 +108,9 @@ public class PlayScreen extends GameScreen {
         // If the player extends the camera border
         // then calculate offsets and render player location accordingly
         if (playerCameraSystem.isCameraAtLeftBorder()) {
-            float cameraCentreX = map.getCameraBorder().x + camera.viewportWidth / 2.0f;
+            float cameraCentreX = camera.viewportWidth / 2.0f;
 
-            float playerXDifference = cameraCentreX - playerPosition.positionVector.x;
+            float playerXDifference = map.getCameraBorder().x + cameraCentreX - playerPosition.positionVector.x;
 
             playerXRenderPosition = cameraCentreX - playerXDifference;
         }
@@ -123,9 +123,9 @@ public class PlayScreen extends GameScreen {
         }
 
         if (playerCameraSystem.isCameraAtBottomBorder()) {
-            float cameraCentreY = map.getCameraBorder().y + camera.viewportHeight / 2.0f;
+            float cameraCentreY = camera.viewportHeight / 2.0f;
 
-            float playerYDifference = cameraCentreY - playerPosition.positionVector.y;
+            float playerYDifference = map.getCameraBorder().y + cameraCentreY - playerPosition.positionVector.y;
 
             playerYRenderPosition = cameraCentreY - playerYDifference;
         }
