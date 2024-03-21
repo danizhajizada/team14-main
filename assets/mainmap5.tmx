@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="300" height="200" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="10">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="300" height="200" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="15">
  <tileset firstgid="1" name="TinyFarm_Tiles16px" tilewidth="16" tileheight="16" tilecount="60" columns="10">
   <image source="TinyFarm_Tiles16px.png" width="160" height="96"/>
   <tile id="0" probability="0.085"/>
@@ -624,16 +624,21 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="6" name="cameraLayer">
+ <objectgroup id="6" name="cameraLayer" visible="0">
   <object id="2" name="cameraBorder" x="900" y="830" width="3288" height="1444"/>
  </objectgroup>
- <objectgroup id="7" name="collisionLayer">
+ <objectgroup id="7" name="collisionLayer" visible="0">
   <object id="9" name="worldBorder" x="900" y="830" width="3288" height="1444"/>
  </objectgroup>
- <objectgroup id="9" name="spawnLayer">
+ <objectgroup id="9" name="spawnLayer" visible="0">
   <object id="6" name="playerSpawn" x="3144" y="1576">
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="8" name="buildingLayer"/>
+ <objectgroup id="8" name="buildingLayer">
+  <object id="11" name="compSci" type="STUDY" x="1856" y="1904" width="208" height="240"/>
+  <object id="12" name="glasshouse" type="REC" x="2720" y="1648" width="160" height="128"/>
+  <object id="13" name="constantine" type="SLEEP" x="3280" y="1680" width="400" height="336"/>
+  <object id="14" name="piazza" type="EAT" x="2576" y="1808" width="240" height="192"/>
+ </objectgroup>
 </map>
