@@ -10,8 +10,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.tecchtitans.eng1.Map;
 import com.tecchtitans.eng1.components.*;
-
-import java.awt.*;
 import java.util.ArrayList;
 
 /**

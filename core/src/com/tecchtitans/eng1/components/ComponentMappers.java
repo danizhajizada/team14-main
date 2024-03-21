@@ -1,7 +1,6 @@
 package com.tecchtitans.eng1.components;
 
 import com.badlogic.ashley.core.ComponentMapper;
-import org.w3c.dom.Text;
 
 /**
  * An abstract class that stores component maps to efficiently receive an entities components.

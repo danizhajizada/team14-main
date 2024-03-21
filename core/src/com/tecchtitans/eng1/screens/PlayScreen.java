@@ -1,24 +1,17 @@
 package com.tecchtitans.eng1.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.tecchtitans.eng1.*;
 import com.tecchtitans.eng1.components.*;
 import com.badlogic.ashley.core.Entity;
-import com.tecchtitans.eng1.components.GameObjectComponent.ObjectType;
 import com.tecchtitans.eng1.systems.GameSystem;
 import com.tecchtitans.eng1.systems.PlayerCameraSystem;
 import com.tecchtitans.eng1.systems.PlayerMovementSystem;
 import com.tecchtitans.eng1.systems.UIRenderSystem;
-
-import java.io.ObjectInput;
 import java.util.ArrayList;
-import java.util.EnumMap;
 
 /**
  * PlayScreen is the screen that will be displayed during gameplay. It allows for
