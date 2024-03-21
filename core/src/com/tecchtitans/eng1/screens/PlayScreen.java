@@ -52,7 +52,7 @@ public class PlayScreen extends GameScreen {
 
     @Override
     public void show() {
-        map = new Map("mainmap4.tmx", 4800, 3200);
+        map = new Map("mainmap5.tmx", 4800, 3200);
 
         batch = new SpriteBatch();
 
