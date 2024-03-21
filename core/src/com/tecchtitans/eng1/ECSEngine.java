@@ -47,7 +47,7 @@ public class ECSEngine extends Engine {
         activityCounter.add(uiComponent);
 
         TextureComponent textureComponent = createComponent(TextureComponent.class);
-        textureComponent.texture = new Texture("stats.png");
+        textureComponent.texture = new Texture("images/UI.png");
         textureComponent.srcStartX = 0;
         textureComponent.srcStartY = 86;
         textureComponent.width = width;
@@ -104,7 +104,7 @@ public class ECSEngine extends Engine {
         dayCounter.add(uiComponent);
 
         TextureComponent textureComponent = createComponent(TextureComponent.class);
-        textureComponent.texture = new Texture("stats.png");
+        textureComponent.texture = new Texture("images/UI.png");
         textureComponent.srcStartX = 0;
         textureComponent.srcStartY = 74;
         textureComponent.width = width;
@@ -154,7 +154,7 @@ public class ECSEngine extends Engine {
         clock.add(uiComponent);
 
         TextureComponent textureComponent = createComponent(TextureComponent.class);
-        textureComponent.texture = new Texture("stats.png");
+        textureComponent.texture = new Texture("images/UI.png");
         textureComponent.srcStartX = 0;
         textureComponent.srcStartY = 38;
         textureComponent.width = width;
@@ -216,7 +216,7 @@ public class ECSEngine extends Engine {
         statBar.add(uiComponent);
 
         TextureComponent textureComponent = createComponent(TextureComponent.class);
-        textureComponent.texture = new Texture("stats.png");
+        textureComponent.texture = new Texture("images/UI.png");
         textureComponent.srcStartX = 0;
         textureComponent.srcStartY = 0;
         textureComponent.width = width;
@@ -320,7 +320,7 @@ public class ECSEngine extends Engine {
         player.add(createComponent(InputComponent.class));
 
         TextureComponent playerTexture = createComponent(TextureComponent.class);
-        playerTexture.texture = new Texture("character4.png");
+        playerTexture.texture = new Texture("images/character4.png");
         playerTexture.srcStartX = 0;
         playerTexture.srcStartY = 0;
         playerTexture.width = width;

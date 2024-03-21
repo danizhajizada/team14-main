@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="145" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="4">
- <tileset firstgid="1" source="Teksturi/6.tsx"/>
- <tileset firstgid="11665" source="Teksturi/pxArt.tsx"/>
- <tileset firstgid="14255" source="Teksturi/box.tsx"/>
- <tileset firstgid="14291" source="Teksturi/output-onlinepngtools.tsx"/>
- <tileset firstgid="14309" source="Teksturi/EXIT and OPTIONS.tsx"/>
- <tileset firstgid="14360" source="Teksturi/instructions_text.tsx"/>
+ <tileset firstgid="1" source="tilemaps/6.tsx"/>
+ <tileset firstgid="11665" source="tilemaps/pxArt.tsx"/>
+ <tileset firstgid="14255" source="tilemaps/box.tsx"/>
+ <tileset firstgid="14291" source="tilemaps/output-onlinepngtools.tsx"/>
+ <tileset firstgid="14309" source="tilemaps/EXIT and OPTIONS.tsx"/>
+ <tileset firstgid="14360" source="tilemaps/instructions_text.tsx"/>
  <layer id="1" name="Tile Layer 1" width="145" height="80" offsetx="-32" offsety="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
