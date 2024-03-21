@@ -3,11 +3,13 @@ package com.tecchtitans.eng1;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class Map {
     Rectangle cameraBorder;
     ArrayList<RectangleMapObject> buildingObjects;
     ArrayList<RectangleMapObject> solidObjects;
+    Vector2 playerSpawnPoint;
 
     int width, height;
 
@@ -53,9 +56,34 @@ public class Map {
         buildingObjects = new ArrayList<RectangleMapObject>();
         solidObjects = new ArrayList<RectangleMapObject>();
 
+        playerSpawnPoint = new Vector2();
+
         processCollisionLayer();
         processCameraLayer();
         processBuildingLayer();
+        processSpawnLayer();
+    }
+
+    /**
+     * Checks for the player spawn point from the spawnLayer on the map.
+     * If it exists it stores the player spawn point.
+     */
+    private void processSpawnLayer() {
+        MapLayer spawnLayer = map.getLayers().get("spawnLayer");
+
+        if (spawnLayer == null) {
+            return;
+        }
+
+        for (MapObject obj : spawnLayer.getObjects()) {
+            if (obj instanceof RectangleMapObject) {
+                RectangleMapObject spawnObject = (RectangleMapObject) obj;
+                Rectangle spawnRectangle = spawnObject.getRectangle();
+
+                playerSpawnPoint.x = spawnRectangle.x;
+                playerSpawnPoint.y = spawnRectangle.y;
+            }
+        }
     }
 
     /**
@@ -153,6 +181,12 @@ public class Map {
 
         return objects;
     }
+
+    /**
+     * Returns the player spawn point.
+     * @return A Vector2 holding the players spawn point.
+     */
+    public Vector2 getPlayerSpawnPoint() { return playerSpawnPoint; }
 
     /**
      * Returns the map's width.

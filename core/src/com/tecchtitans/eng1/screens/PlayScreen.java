@@ -58,9 +58,9 @@ public class PlayScreen extends GameScreen {
 
         batch = new SpriteBatch();
 
-        player = engine.createPlayer(Gdx.graphics.getWidth() / 2 , Gdx.graphics.getHeight() / 2, 26, 44);
+        player = engine.createPlayer((int)map.getPlayerSpawnPoint().x , (int)map.getPlayerSpawnPoint().y, 26, 44);
 
-        // Find building objects from the map, then create entities for them and add ti the engine.
+        // Find building objects from the map, then create entities for them and add to the engine.
         buildings = new ArrayList<>();
         for(RectangleMapObject building : map.getBuildingObjects()) {
             buildings.add(engine.createBuilding(building));
