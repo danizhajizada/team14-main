@@ -54,11 +54,11 @@ public class PlayScreen extends GameScreen {
      */
     @Override
     public void show() {
-        map = new Map("testmap5.tmx", 1728, 1728);
+        map = new Map("mainmap5.tmx", 4800, 3200);
 
         batch = new SpriteBatch();
 
-        player = engine.createPlayer(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 50, 50);
+        player = engine.createPlayer(Gdx.graphics.getWidth() / 2 , Gdx.graphics.getHeight() / 2, 26, 44);
 
         // Find building objects from the map, then create entities for them and add ti the engine.
         buildings = new ArrayList<>();
